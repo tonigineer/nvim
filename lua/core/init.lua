@@ -11,16 +11,17 @@ g.transparency = config.ui.transparency
 -------------------------------------- options ------------------------------------------
 opt.laststatus = 3 -- global statusline
 opt.showmode = false
+vim.wo.relativenumber = true
 
 opt.clipboard = "unnamedplus"
 opt.cursorline = true
 
 -- Indenting
 opt.expandtab = true
-opt.shiftwidth = 2
+opt.shiftwidth = 4
 opt.smartindent = true
-opt.tabstop = 2
-opt.softtabstop = 2
+opt.tabstop = 4
+opt.softtabstop = 4
 
 opt.fillchars = { eob = " " }
 opt.ignorecase = true
@@ -30,7 +31,7 @@ opt.mouse = "a"
 -- Numbers
 opt.number = true
 opt.numberwidth = 2
-opt.ruler = false
+opt.ruler = true
 
 -- disable nvim intro
 opt.shortmess:append "sI"
@@ -41,8 +42,10 @@ opt.splitright = true
 opt.termguicolors = true
 opt.timeoutlen = 400
 opt.undofile = true
+opt.scrolloff = 10
 
 -- interval for writing swap file to disk, also used by gitsigns
+opt.swapfile = false
 opt.updatetime = 250
 
 -- go to previous/next line with h,l,left arrow and right arrow

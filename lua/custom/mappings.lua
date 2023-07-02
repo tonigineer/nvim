@@ -1,3 +1,4 @@
+local builtin = require('telescope.builtin')
 local M = {}
 
 M.dap = {
@@ -15,6 +16,32 @@ M.dap_python = {
         require('dap-python').test_method()
       end
     }
+  }
+}
+
+-- Custom mappings
+M.toni = {
+  v = {
+    ["<C-z>"] = { ":u<Return>", "Undo (Old habits)" , opts = { silent = true }},
+    ["<C-y>"] = { "<C-R><Return>", "Redo (Old habits)" , opts = { silent = true }},
+    ["<C-s>"] = { ":w!<Return>", "Save (Old habits)" , opts = { silent = true }},
+  },
+
+  n = {
+    ["<C-z>"] = { ":u<Return>", "Undo (Old habits)" , opts = { silent = true }},
+    ["<C-y>"] = { "<C-R><Return>", "Redo (Old habits)" , opts = { silent = true }},
+    ["<C-s>"] = { ":w!<Return>", "Save (Old habits)" , opts = { silent = true }},
+    ["<C-a>"] = { "gg<S-v>G", "Select all (Old habits)"},
+    ["<leader>pf"] = { builtin.find_files, "Telescope (Files)", opts = { }},
+    ["<leader>pg"] = { builtin.git_files, "Telescope (Git files)", opts = { }},
+  },
+
+  i = {
+    ["jk"] = { "<ESC>", "escape insert mode" , opts = { nowait = true }},
+    ["kj"] = { "<ESC>", "escape insert mode" , opts = { nowait = true }},
+    ["<C-z>"] = { "<Esc>:u<Return>", "Undo (Old habits)" , opts = { silent = true }},
+    ["<C-y>"] = { "<C-R><Return>", "Redo (Old habits)" , opts = { silent = true }},
+    ["<C-s>"] = { "<Esc>:w!<Return>", "Save (Old habits)" , opts = { silent = true }},
   }
 }
 
