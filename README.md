@@ -14,7 +14,7 @@ tar xzvf nvim-linux64.tar.gz
 sudo mv nvim-linux64 /opt
 
 echo "alias nvim=/opt/nvim-linux64/bin/nvim" >> ~/.bashrc
-echo "alais v=nvim" >> ~/.bashrc
+echo "alias v=nvim" >> ~/.bashrc
 
 rm -rf nvim-linux64 nvim-linux64.tar.gz
 ```
