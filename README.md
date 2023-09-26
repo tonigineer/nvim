@@ -14,7 +14,7 @@ tar xzvf nvim-linux64.tar.gz
 sudo mv nvim-linux64 /opt
 
 echo "alias nvim=/opt/nvim-linux64/bin/nvim" >> ~/.bashrc
-echo "alias v=nvim" >> ~/.bashrc
+echo "alais v=nvim" >> ~/.bashrc
 
 rm -rf nvim-linux64 nvim-linux64.tar.gz
 ```
@@ -46,11 +46,11 @@ fc-cache -fv
 
 ## Get configuration
 
-Clone configuration to system
+Run the following script from the repository:
 
 ```sh
-cd ~/.config
-git clone https://github.com/tonigineer/nvim.git
+util/install_nvim.sh
+# Dependencies are installed without question!
 ```
 
 Run `nvim` and see the result.
