@@ -1,56 +1,41 @@
 # Neovim configuration
 
-Simple [Neovim](https://github.com/neovim) configuration, based on [NVChad](https://nvchad.com/)
+Simple customization of my [Neovim](https://github.com/neovim) setup.
 
-## Install Neovim
+<kbd><img alt="gif of nvim workflow" src="./assets/preview.gif" style="width: 600px;"/></kbd>
 
-Exemplary installation of [Neovim](https://github.com/neovim) on [Ubuntu](https://ubuntu.com/download):
-
-```sh
-cd ~/Downloads
-wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
-tar xzvf nvim-linux64.tar.gz
-
-sudo mv nvim-linux64 /opt
-
-echo "alias nvim=/opt/nvim-linux64/bin/nvim" >> ~/.bashrc
-echo "alais v=nvim" >> ~/.bashrc
-
-rm -rf nvim-linux64 nvim-linux64.tar.gz
-```
-
-Find stable release [here](https://github.com/neovim/neovim/releases/tag/stable).
+> [!NOTE]
+> [Here](https://github.com/tonigineer/.dotfiles), you can find all of my [Hyprland](https://hyprland.org/) configuration.
 
 ## Dependencies
 
-Ubuntu
+Not all dependencies are essential, but needed to get rid of all warnings within [Neovim](https://github.com/neovim) `checkhealth`:
 
 ```sh
-sudo apt install npm python3-pip python3-venv npm zip
+sudo pacman -S cargo \
+    fd \
+    npm \
+    python-neovim \
+    ripgrep
 
-cd ~/Downloads
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Terminus.zip
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/JetBrainsMono.zip
-wget https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/CascadiaCode.zip
-
-unzip CascadiaCode.zip
-unzip JetBrainsMono.zip
-unzip Terminus.zip
-rm *.zip
-
-mkdir -p ~/.local/share/fonts
-mv *.ttf ~/.local/share/fonts
-
-fc-cache -fv
+sudo npm install -g neovim yarn tree-sitter
+cargo install tree-sitter-cli
 ```
 
-## Get configuration
-
-Run the following script from the repository:
+Make sure to have a [NerdFont](https://www.nerdfonts.com/font-downloads) installed:
 
 ```sh
-util/install_nvim.sh
-# Dependencies are installed without question!
+wget -P ~/Downloads https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/CascadiaCode.zip
+unzip ~/Downloads/CascadiaCode.zip -d ~/.fonts
+
+fc-cache -v
+fc-list | grep Cas*  # check if it worked
 ```
 
-Run `nvim` and see the result.
+## Installation
+
+Simply clone this repository into your user config folder:
+
+```sh
+git clone https://github.com/tonigineer/nvim.git ~/.config/nvim
+```
