@@ -3,4 +3,5 @@ local function config(module)
 end
 
 config("colors")
+config("global")
 config("theme")

@@ -2,14 +2,11 @@ local function set(mode, lhs, rhs, options)
     vim.keymap.set(mode, lhs, rhs, options)
 end
 
-
-
 -- [[ Normal mode ]]
 set("n", "<C-z>", ":u<Return>", { silent = true })              --[[Undo]]
 set("n", "<C-y>", "<C-R><Return>", { silent = true })           --[[Redo]]
 set("n", "<C-s>", ":w!<Return>", { silent = true })             --[[Save]]
 set("n", "<C-a>", "gg<S-v>G", { silent = true })                --[[Select all]]
-
 
 -- [[ Insert mode ]]
 set("i", "jk", "<ESC>", { nowait = true })                      --[[Get back to normal mode]]

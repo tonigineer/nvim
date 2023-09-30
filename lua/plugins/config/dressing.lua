@@ -3,3 +3,4 @@ require("dressing").setup {
         telescope = require("telescope.themes").get_cursor({})
     }
 }
+

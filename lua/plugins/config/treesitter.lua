@@ -22,9 +22,7 @@ require("nvim-treesitter.configs").setup {
         "rust",
         "yaml",
         "json",
-
         "toml",
-
         "bash"
     },
     highlight = {
