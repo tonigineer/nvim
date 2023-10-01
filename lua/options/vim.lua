@@ -22,16 +22,15 @@ vim.cmd([[
     autocmd FileType netrw setl bufhidden=delete
 ]])
 
-global.netrw_banner=0
-global.netrw_liststyle=3
-global.netrw_bufsettings="noma nomod nu nobl nowrap ro"
+global.netrw_banner = 0
+global.netrw_liststyle = 3
+global.netrw_bufsettings = "noma nomod nu nobl nowrap ro"
 
 -- [[ Filetypes ]]
 options.encoding = "utf8"
 
 -- [[ Mouse ]]
 options.mouse = ""
-
 
 -- [[ Search ]]
 options.ignorecase = true
@@ -56,4 +55,12 @@ options.expandtab = true
 options.shiftwidth = 4
 options.softtabstop = 4
 options.tabstop = 4
-options.fillchars:append { eob = "󰣙" }
+options.fillchars:append({ eob = "󰣇" }) -- 󰣙
+
+options.list = true
+-- options.listchars:append "space:⋅"      -- ␣
+-- options.listchars:append "eol:¬"        -- ↵
+options.listchars:append("tab:⋅⋅")
+options.listchars:append("trail:~")
+options.listchars:append("extends:>")
+options.listchars:append("precedes:<")

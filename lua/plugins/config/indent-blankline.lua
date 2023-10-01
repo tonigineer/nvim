@@ -20,15 +20,5 @@ hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
     end
 end)
 
-require("ibl").setup { indent = { highlight = highlight } }
-
--- Set list characters
-local options = vim.opt
-
-options.list = true
--- options.listchars:append "space:⋅"      -- ␣
--- options.listchars:append "eol:¬"        -- ↵
--- options.listchars:append "tab:⋅⋅"
-options.listchars:append "trail:~"
-options.listchars:append "extends:>"
-options.listchars:append "precedes:<"
+-- Giving scope values avoid ugly yellow highlighting for scope
+require("ibl").setup { indent = { highlight = highlight }, scope = { highlight = highlight }}

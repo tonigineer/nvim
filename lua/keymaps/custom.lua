@@ -24,7 +24,3 @@ set("n", "<leader>k", ":wincmd k<CR>", options)
 set("n", "<leader>h", ":wincmd h<CR>", options)
 set("n", "<leader>l", ":wincmd l<CR>", options)
 
--- [[ Debugging ]]
-set("n", "<leader>dt", ':DapToggleBreakpoint<CR>', options)
-set("n", "<leader>dx", ':DapTerminate<CR>', options)
-set("n", "<leader>dr", ':DapContinue<CR>', options)

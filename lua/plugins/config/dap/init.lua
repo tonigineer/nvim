@@ -4,74 +4,65 @@ local daptext = require("nvim-dap-virtual-text")
 local fun = vim.fn
 
 local function adapter(name)
-    return require("plugins.config.dap."..name)
+    return require("plugins.config.dap." .. name)
 end
 
 adapter("clang")
 adapter("rust")
 adapter("ui")
 
-fun.sign_define (
-    "DapBreakpoint",
-    {
-        text =        "●",
-        texthl =    "",
-        linehl =    "debugBreakpoint",
-        numhl =        "debugBreakpoint"
-    }
-)
+fun.sign_define("DapBreakpoint", {
+    text = "●",
+    texthl = "",
+    linehl = "debugBreakpoint",
+    numhl = "debugBreakpoint",
+})
 
-fun.sign_define (
-    "DapBreakpointCondition",
-    {
-        text =        "◆",
-        texthl =    "",
-        linehl =    "debugBreakpoint",
-        numhl =        "debugBreakpoint"
-    }
-)
+fun.sign_define("DapBreakpointCondition", {
+    text = "◆",
+    texthl = "",
+    linehl = "debugBreakpoint",
+    numhl = "debugBreakpoint",
+})
 
-fun.sign_define (
-    "DapStopped",
-    {
-        text = "▶",
-        texthl = "",
-        linehl = "debugPC",
-        numhl = "debugPC"
-    }
-)
+fun.sign_define("DapStopped", {
+    text = "▶",
+    texthl = "",
+    linehl = "debugPC",
+    numhl = "debugPC",
+})
 
 dap.defaults.fallback.force_external_terminal = true
 
-daptext.setup {}
+daptext.setup({})
 
-dapui.setup {
+dapui.setup({
     layouts = {
         {
             elements = {
                 {
                     id = "watches",
-                    size = 0.33
+                    size = 0.33,
                 },
                 {
                     id = "scopes",
-                    size = 0.33
+                    size = 0.33,
                 },
                 {
                     id = "repl",
-                    size = 0.34
-                }
+                    size = 0.34,
+                },
             },
             size = 40,
-            position = "left"
+            position = "left",
         },
         {
             elements = {
-                "console"
+                "console",
             },
             size = 0.25,
-            position = "bottom"
-        }
+            position = "bottom",
+        },
     },
     controls = {
         enabled = true,
@@ -85,9 +76,9 @@ dapui.setup {
             step_back = "",
             run_last = "",
             terminate = "",
-        }
-    }
-}
+        },
+    },
+})
 
 local rt = require("rust-tools")
 
@@ -97,7 +88,6 @@ local rt = require("rust-tools")
 -- local extension_path = codelldb:get_install_path() .. "/extension/"
 -- local codelldb_path = extension_path .. "adapter/codelldb"
 -- local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
-
 
 -- local mason_registry = require("mason-registry")
 

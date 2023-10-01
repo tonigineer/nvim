@@ -5,18 +5,20 @@ local selectOptions = { behavior = cmp.SelectBehavior.Select }
 require("luasnip.loaders.from_vscode").lazy_load()
 
 cmp.setup {
+    completion = {
+        completeopt = "menu,menuone,preview,noselect",
+    },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
         end
     },
     sources = {
-        {name = "path"},
         {name = "nvim_lsp" },
-        {name = "buffer" },
         {name = "luasnip" },
+        {name = "path"},
         {name = "crates"},
-        {name = ""}
+        {name = "buffer" },
 
     },
     formatting = {
@@ -45,8 +47,8 @@ cmp.setup {
         },
     },
     window = {
-        documentation     = cmp.config.window.bordered(),
-        completion     = cmp.config.window.bordered()
+        documentation = cmp.config.window.bordered(),
+        completion = cmp.config.window.bordered()
     },
     mapping = {
         ['<CR>'] = cmp.mapping.confirm({select = false}),
@@ -55,7 +57,7 @@ cmp.setup {
         ['<C-u>'] = cmp.mapping.scroll_docs(-4),
         ['<C-d>'] = cmp.mapping.scroll_docs(4),
         ['<C-e>'] = cmp.mapping.abort(),
-        ['<C-y>'] = cmp.mapping.confirm({select = true}),
+        -- ['<C-y>'] = cmp.mapping.confirm({select = true}),
         ['<Tab>'] = cmp.mapping(function(fallback)
             local col = vim.fn.col('.') - 1
 
