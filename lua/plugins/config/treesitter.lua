@@ -1,5 +1,4 @@
----@diagnostic disable: missing-fields
--- require("nvim-dap-repl-highlights").setup()
+require("nvim-dap-repl-highlights").setup()
 
 require("nvim-treesitter.configs").setup {
     ensure_installed = {
@@ -23,7 +22,8 @@ require("nvim-treesitter.configs").setup {
         "yaml",
         "json",
         "toml",
-        "bash"
+        "bash",
+        "dap_repl"
     },
     highlight = {
         enable = true,
