@@ -18,9 +18,12 @@ require("lazy").setup {
     -- ======================
     --         VANITY
     -- ======================
-        --[[ Rose Pine theme ]] { "rose-pine/neovim" },
+        --[[ Delimiters ]]      { "hiphish/rainbow-delimiters.nvim" },
         --[[ Highlight colors ]]{ "brenoprata10/nvim-highlight-colors" },
         --[[ Indent blankline ]]{ "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+        --[[ Noice & Notify ]]  { "folke/noice.nvim", event = "VeryLazy", opts = {}, dependencies = {"MunifTanjim/nui.nvim", "rcarriga/nvim-notify" } },
+        --[[ Rose Pine theme ]] { "rose-pine/neovim" },
+        --[[ Startup Screen ]]  { "startup-nvim/startup.nvim" }
     },
     -- options
     {

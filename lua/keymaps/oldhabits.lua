@@ -15,3 +15,4 @@ set("i", "kj", "<ESC>", { nowait = true })
 set("i", "<C-z>", "<Esc>:u<Return>", { silent = true })         --[[Undo]]
 set("i", "<C-y>", "<C-R><Return>", { silent = true })           --[[Redo]]
 set("i", "<C-s>", "<Esc>:w!<Return>", { silent = true })        --[[Save]]
+

@@ -15,7 +15,7 @@ local function set_color(color_name, color_code)
 end
 
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-    for k, v in pairs(require("options.colors").rosepineColors) do
+    for k, v in pairs(require("options.colors").currentColors) do
         set_color(k, v.color)
     end
 end)

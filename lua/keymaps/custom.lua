@@ -22,3 +22,4 @@ set("n", "<leader>j", ":wincmd j<CR>", options)
 set("n", "<leader>k", ":wincmd k<CR>", options)
 set("n", "<leader>h", ":wincmd h<CR>", options)
 set("n", "<leader>l", ":wincmd l<CR>", options)
+

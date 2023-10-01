@@ -20,4 +20,6 @@ M.rainbowColors = {
     ["Cyan"]    = {color = "#56B6C2", id = 7}
 }
 
+M.currentColors = M.rosepineColors
+
 return M

@@ -9,3 +9,4 @@ set("<leader>ff", ':lua require"telescope.builtin".find_files({ hidden = true })
 set("<leader>fg", builtin.live_grep)
 set("<leader>fb", builtin.buffers)
 set("<leader>fh", builtin.help_tags)
+
