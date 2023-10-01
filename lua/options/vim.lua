@@ -30,7 +30,7 @@ global.netrw_bufsettings = "noma nomod nu nobl nowrap ro"
 options.encoding = "utf8"
 
 -- [[ Mouse ]]
-options.mouse = ""
+-- options.mouse = ""
 
 -- [[ Search ]]
 options.ignorecase = true
