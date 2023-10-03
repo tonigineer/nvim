@@ -1,24 +1,26 @@
 -- [[ 2. LSP]]
 require("mason-lspconfig").setup({
-    ensure_installed = { "lua_ls", "rust_analyzer", "clangd", "pyright" },
     automatic_installation = true,
+    ensure_installed = { "lua_ls", "rust_analyzer", "clangd", "pyright" },
 })
 
 -- [[ 3. DAP]]
 require("mason-nvim-dap").setup({
-    ensure_installed = { "codelldb" },
+    automatic_installation = true,
+    ensure_installed = { "codelldb", "debugpy" },
 })
 
 -- [[ 4. Linter and 5. Formatter]]
 require("mason-null-ls").setup({
+    automatic_installation = true,
     ensure_installed = {
-        "pylint",
-        "isort",
         "black",
         "cpplint",
         "stylua",
         "clang-format",
         "rustfmt",
+        "mypy",
+        "ruff",
     },
 })
 

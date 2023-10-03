@@ -45,11 +45,11 @@ local settings = {
         title = "Basic Commands",
         margin = default_margin,
         content = {
-            { " 󰇙 Files", "Telescope find_files", "<leader>ff" },
-            { " 󰇙 Oil", "lua require('oil').open_float(nil)", "<leader>of" },
-            { " 󰇙 Words", "Telescope live_grep", "<leader>fl" },
-            { " 󰇙 Recent", "Telescope oldfiles", "<leader>fo" },
-            { " 󰇙 New", "lua require'startup'.new_file()", "<leader>nf" },
+            { "  󰇙 Files", "Telescope find_files", "<leader>ff" },
+            { "  󰇙 Oil", "lua require('oil').open_float(nil)", "<leader>of" },
+            { "  󰇙 Words", "Telescope live_grep", "<leader>fg" },
+            { "  󰇙 Recent", "Telescope oldfiles", "<leader>fo" },
+            { "  󰇙 New", "lua require'startup'.new_file()", "<leader>nf" },
         },
         highlight = "String",
         default_color = "",
@@ -68,12 +68,27 @@ local settings = {
         oldfiles_amount = 0,
     },
 
+    clock = {
+        type = "text",
+        content = function()
+            return {"  " .. os.date("%H:%M") ..  " Uhr  --    " .. os.date("%A, %d.%m.%y")}
+        end,
+        oldfiles_directory = false,
+        align = "center",
+        fold_section = false,
+        title = "",
+        margin = 0,
+        highlight = "TSString",
+        default_color = "#FFFFFF",
+        oldfiles_amount = 10,
+    },
+
     options = {
         mapping_keys = true,
-        cursor_column = 2,
+        cursor_column = 0.5,
         empty_lines_between_mappings = true,
         disable_statuslines = true,
-        paddings = { 1, 0, 2, 0 },
+        paddings = { 1, 0, 2, 2, 0 },
     },
     mappings = {
         execute_command = "<CR>",
@@ -86,7 +101,7 @@ local settings = {
         background = "#6e6a86",
         folded_section = "#3e8fb0",
     },
-    parts = { "header", "body", "footer" },
+    parts = { "header", "body",  "clock", "footer",},
 }
 
 require("startup").setup(settings)

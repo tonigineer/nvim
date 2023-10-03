@@ -1,6 +1,6 @@
 local options = { silent = true, noremap = true }
-local function set(mode, lhs, rhs, options)
-    vim.keymap.set(mode, lhs, rhs, options)
+local function set(mode, lhs, rhs, opts)
+    vim.keymap.set(mode, lhs, rhs, opts)
 end
 
 -- [[ Globals ]]
@@ -19,8 +19,9 @@ set("v", "K", ":move -2<CR>", options)
 set("v", "J", ":move +1<CR>", options)
 
 -- [[ Move between spilts ]]
-set("n", "<leader>j", ":wincmd j<CR>", options)
-set("n", "<leader>k", ":wincmd k<CR>", options)
-set("n", "<leader>h", ":wincmd h<CR>", options)
-set("n", "<leader>l", ":wincmd l<CR>", options)
-
+set("n", "<leader>wj", ":wincmd j<CR>", options)
+set("n", "<leader>wk", ":wincmd k<CR>", options)
+set("n", "<leader>wh", ":wincmd h<CR>", options)
+set("n", "<leader>wl", ":wincmd l<CR>", options)
+set("n", "<leader>ws", ":sp l<CR>", options)
+set("n", "<leader>wv", ":vsp l<CR>", options)

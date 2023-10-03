@@ -5,21 +5,27 @@ require("lazy").setup({
         --       ESSENTIALS
         -- ======================
         --[[ Auto pair ]]
-        { "windwp/nvim-autopairs", event = "InsertEnter" },
+        { "windwp/nvim-autopairs",         event = "InsertEnter" },
         --[[ Auto tags ]]
-        { "windwp/nvim-ts-autotag", event = "InsertEnter" },
+        { "windwp/nvim-ts-autotag",        event = "InsertEnter" },
         --[[ Comments ]]
-        { "numToStr/Comment.nvim", opts = {}, lazy = false },
+        { "numToStr/Comment.nvim",         opts = {},                                 lazy = false },
         --[[ Fuzzy finder ]]
         { "nvim-telescope/telescope.nvim", dependencies = { "nvim-lua/plenary.nvim" } },
         --[[ Illuminate ]]
         { "RRethy/vim-illuminate" },
         --[[ Statusbar ]]
-        { "nvim-lualine/lualine.nvim", dependencies = { "rose-pine/neovim" } },
+        { "nvim-lualine/lualine.nvim",     dependencies = { "rose-pine/neovim" } },
         --[[ Lsp UI ]]
         { "stevearc/dressing.nvim" },
         --[[ Oil ]]
-        { "stevearc/oil.nvim", opts = {}, dependencies = { "nvim-tree/nvim-web-devicons" } },
+        {
+            "stevearc/oil.nvim",
+            opts = {},
+            dependencies = {
+                "nvim-tree/nvim-web-devicons",
+            },
+        },
         --[[ Plenary ]]
         { "nvim-lua/plenary.nvim" },
         --[[ Treesitter ]]
@@ -29,6 +35,12 @@ require("lazy").setup({
                 vim.cmd(":TSUpdate")
             end,
         },
+        --[[ Floaterm ]]
+        { "voldikss/vim-floaterm" },
+        --[[ Bufferline ]]
+        { "akinsho/bufferline.nvim",             version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
+        --[[ Nvim tree ]]
+        { "nvim-tree/nvim-tree.lua" },
 
         -- ======================
         --         VANITY
@@ -38,7 +50,7 @@ require("lazy").setup({
         --[[ Highlight colors ]]
         { "brenoprata10/nvim-highlight-colors" },
         --[[Indent blankline ]]
-        { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
+        { "lukas-reineke/indent-blankline.nvim", main = "ibl",  opts = {} },
         --[[ Noice & Notify ]]
         {
             "folke/noice.nvim",
@@ -48,6 +60,8 @@ require("lazy").setup({
         },
         --[[ Rose Pine theme ]]
         { "rose-pine/neovim" },
+        --[[ Tokyo Night ]]
+        { "folke/tokyonight.nvim" },
         --[[ Startup Screen ]]
         { "startup-nvim/startup.nvim" },
 
@@ -99,20 +113,22 @@ require("lazy").setup({
             opts = { handlers = {} },
             dependencies = { "williamboman/mason.nvim", "mfussenegger/nvim-dap" },
         },
-        --[[ Ui ]]
-        { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
+        --[[ UI ]]
+        { "rcarriga/nvim-dap-ui",           dependencies = { "mfussenegger/nvim-dap" } },
         --[[ Inline Hints ]]
         { "theHamsta/nvim-dap-virtual-text" },
         --[[ REPL Cmp ]]
         { "rcarriga/cmp-dap" },
         --[[ REPL Highlig.]]
         { "LiadOz/nvim-dap-repl-highlights" },
+        --[[ Python ]]
+        { "mfussenegger/nvim-dap-python",   dependencies = { "mfussenegger/nvim-dap-python" } },
 
         -- ==================
         --      Linting
         -- ==================
         --[[ Nvim Lint ]]
-        { "mfussenegger/nvim-lint", event = { "BufReadPre", "BufNewFile" } },
+        { "mfussenegger/nvim-lint",         event = { "BufReadPre", "BufNewFile" } },
     },
     -- options
     {},

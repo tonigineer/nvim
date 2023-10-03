@@ -1,8 +1,9 @@
 local function config(module)
-    return require("plugins.config."..module)
+    return require("plugins.config." .. module)
 end
 
 config("autopairs")
+config("bufferline")
 config("completion")
 config("delimiters")
 config("dressing")
@@ -14,6 +15,7 @@ config("linting")
 config("lualine")
 config("noice")
 config("notify")
+config("nvimtree")
 config("oil")
 config("startup")
 config("telescope")
