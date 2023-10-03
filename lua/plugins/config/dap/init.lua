@@ -4,7 +4,7 @@ local function adapter(name)
     return require("plugins.config.dap." .. name)
 end
 
--- [[ Set adapter ]]
+-- [[ Set adapters ]]
 local mason_registry = require("mason-registry")
 
 local codelldb = mason_registry.get_package("codelldb")
@@ -21,6 +21,16 @@ dap.adapters.codelldb = {
         args = { "--port", "${port}" },
     },
 }
+
+-- local debugpy = mason_registry.get_package("debugpy")
+
+-- dap.adapters.python = {
+--     python = {
+--         type = "executable",
+--         command = debugpy:get_install_path() .. "/venv/bin/python",
+--         args = { "-m", "debugpy.adapter" },
+--     },
+-- }
 
 -- [[ Load configurations for each language ]]
 adapter("clang")

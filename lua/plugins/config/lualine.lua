@@ -238,9 +238,11 @@ require("lualine").setup {
         section_separators = { left = '', right = '' },
         component_separators = { left = '', right = '' },
         disabled_filetypes = {
-            startup = {},
-            oil = {},
-            TelescopePrompt = {}
+            "NvimTree", "startup", "oil", "TelescopePrompt"
+            -- startup = {},
+            -- oil = {},
+            -- TelescopePrompt = {},
+            -- NvimTree = {},
         },
     }
 }

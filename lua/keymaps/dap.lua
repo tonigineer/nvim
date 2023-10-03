@@ -5,10 +5,10 @@ local function key(lhs, rhs)
     vim.keymap.set("n", lhs, rhs, defaults)
 end
 
-key("<leader>ds", function()
+key("<leader>dr", function()
     dap.continue()
 end)
-key("<leader>dS", function()
+key("<leader>dq", function()
     dap.repl.close()
     dap.terminate()
     dapui.close()

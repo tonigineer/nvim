@@ -12,6 +12,7 @@ local settings = {
         content = {
             "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
             "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
+            "⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
             "⠀⠀⠀⠀⠀⠀⠀⠀⢀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⡀⢀⠄⠂⢄⠀⠀⠀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⣀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀⠀",
             "⠀⠀⠀⠀⠀⠀⠀⠀⡏⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⢩⡇⠀⠀⠀⠑⢄⡏⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⠉⡇⠀⠀⠀⠀⠀⠀⠀⠀⠀",
             "⠀⠀⠀⠀⠀⠀⠀⠀⠣⠤⡄⠀⠀⠀⠀⠀⠀⠀⣤⣤⣾⠇⠀⠀⠀⠀⠀⠣⣤⠄⠀⠀⠀⠀⠀⠀⠀⢀⣠⡶⠃⠀⠀⠀⠀⠀⠀⠀⠀⠀",
@@ -71,7 +72,7 @@ local settings = {
     clock = {
         type = "text",
         content = function()
-            return {"  " .. os.date("%H:%M") ..  " Uhr  --    " .. os.date("%A, %d.%m.%y")}
+            return { "  " .. os.date("%H:%M") .. " Uhr  --    " .. os.date("%A, %d.%m.%y") }
         end,
         oldfiles_directory = false,
         align = "center",
@@ -79,7 +80,7 @@ local settings = {
         title = "",
         margin = 0,
         highlight = "TSString",
-        default_color = "#FFFFFF",
+        default_color = "",
         oldfiles_amount = 10,
     },
 
@@ -101,7 +102,7 @@ local settings = {
         background = "#6e6a86",
         folded_section = "#3e8fb0",
     },
-    parts = { "header", "body",  "clock", "footer",},
+    parts = { "header", "body", "clock", "footer", },
 }
 
 require("startup").setup(settings)

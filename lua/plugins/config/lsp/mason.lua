@@ -19,7 +19,6 @@ require("mason-null-ls").setup({
         "stylua",
         "clang-format",
         "rustfmt",
-        "mypy",
         "ruff",
     },
 })
@@ -31,6 +30,9 @@ require("mason").setup({
             package_pending = "➜",
             package_uninstalled = "✗",
         },
+        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        width = 0.5,
+        height = 0.5
     },
     pip = {
         upgrade_pip = true,

@@ -1,4 +1,4 @@
-require("lazy").setup({
+require("lazy").setup(
     -- plugins
     {
         -- ======================
@@ -38,9 +38,30 @@ require("lazy").setup({
         --[[ Floaterm ]]
         { "voldikss/vim-floaterm" },
         --[[ Bufferline ]]
-        { "akinsho/bufferline.nvim",             version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
+        { "akinsho/bufferline.nvim", version = "*", dependencies = "nvim-tree/nvim-web-devicons" },
         --[[ Nvim tree ]]
         { "nvim-tree/nvim-tree.lua" },
+        --[[ Barbecue ]]
+        {
+            "utilyre/barbecue.nvim",
+            name = "barbecue",
+            version = "*",
+            dependencies = {
+                "SmiteshP/nvim-navic",
+                "nvim-tree/nvim-web-devicons",
+            },
+        },
+        --[[ Git signs ]]
+        { "lewis6991/gitsigns.nvim" },
+        --[[ Symbols outline ]]
+        { "simrat39/symbols-outline.nvim" },
+        --[[ GoTo Preview ]]
+        { "rmagatti/goto-preview" },
+        --[[ ToDo comments ]]
+        {
+            "folke/todo-comments.nvim",
+            dependencies = { "nvim-lua/plenary.nvim" }
+        },
 
         -- ======================
         --         VANITY
@@ -50,7 +71,7 @@ require("lazy").setup({
         --[[ Highlight colors ]]
         { "brenoprata10/nvim-highlight-colors" },
         --[[Indent blankline ]]
-        { "lukas-reineke/indent-blankline.nvim", main = "ibl",  opts = {} },
+        { "lukas-reineke/indent-blankline.nvim", main = "ibl", opts = {} },
         --[[ Noice & Notify ]]
         {
             "folke/noice.nvim",
@@ -131,7 +152,40 @@ require("lazy").setup({
         { "mfussenegger/nvim-lint",         event = { "BufReadPre", "BufNewFile" } },
     },
     -- options
-    {},
-})
+    {
+        install = {     missing = true,colorscheme = { "tokyonight" } },
+        defaults = { lazy = true },
+        ui = {
+            size = { width = 0.5, height = 0.5 },
+            wrap = true,
+            border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+            icons = {
+              cmd = " ",
+              config = "",
+              event = "",
+              ft = " ",
+              init = " ",
+              import = " ",
+              keys = " ",
+              lazy = "󰒲 ",
+              loaded = "●",
+              not_loaded = "○",
+              plugin = " ",
+              runtime = " ",
+              source = " ",
+              start = "",
+              task = "✔ ",
+              list = {
+                "●",
+                "➜",
+                "★",
+                "‒",
+              },
+            },
+        checker = { enabled = true },
+        debug = false,
+    }
+}
+)
 
 require("plugins.config")

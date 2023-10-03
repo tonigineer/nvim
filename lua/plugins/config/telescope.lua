@@ -50,14 +50,14 @@ telescope.setup({
             "code%-other/",
         },
         layout_config = {
-            vertical = {
-                height = 0.9,
+            horizontal = {
+                height = 0.5,
                 preview_cutoff = 40,
                 prompt_position = "bottom",
-                width = 0.8,
+                width = 0.75
             },
         },
-        prompt_prefix = "🔍  ",
+        prompt_prefix = "  ",
         initial_mode = "insert",
         border = true,
         path_display = { "truncate" },
