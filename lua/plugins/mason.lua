@@ -5,46 +5,47 @@ local M = {
 
 
 }
-  
-  local settings = {
+
+local settings = {
     ui = {
-      icons = {
-          package_installed = "✓",
-          package_pending = "➜",
-          package_uninstalled = "✗",
-      },
-      border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
-      width = 0.5,
-      height = 0.5
-  },
+        icons = {
+            package_installed = "✓",
+            package_pending = "➜",
+            package_uninstalled = "✗",
+        },
+        border = { "╭", "─", "╮", "│", "╯", "─", "╰", "│" },
+        width = 0.5,
+        height = 0.5
+    },
     log_level = vim.log.levels.INFO,
     max_concurrent_installers = 10,
-  }
- 
+}
 
-  function M.config()
+
+function M.config()
     require("mason").setup(settings)
 
     require("mason-lspconfig").setup {
-      ensure_installed = {
-          "lua_ls"
+        ensure_installed = {
+            "lua_ls"
         },
-      automatic_installation = true,
+        automatic_installation = true,
     }
 
-  --   require("mason-nvim-dap").setup({
-  --     automatic_installation = true,
-  --     -- ensure_installed = { "codelldb", "debugpy" },
-  -- })
+    --   require("mason-nvim-dap").setup({
+    --     automatic_installation = true,
+    --     -- ensure_installed = { "codelldb", "debugpy" },
+    -- })
 
-  require("mason-null-ls").setup({
-    automatic_installation = true,
-    ensure_installed = {
+    require("mason-null-ls").setup({
+        automatic_installation = true,
+        ensure_installed = {
 
-      "stylua",
+            "stylua",
 
-    },
-})
-  end
-  
-  return M
+        },
+    })
+end
+
+return M
+

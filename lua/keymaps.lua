@@ -1,7 +1,19 @@
 local function apply_mappings(mappings)
+    local wk_found, wk = pcall(require, "which-key")
+
     for mode, subset in pairs(mappings) do
         for keys, cfg in pairs(subset) do
-            vim.keymap.set(mode, keys, cfg.cmd, cfg.opts)
+            -- Add an actual key mapping
+            if cfg.cmd then
+                vim.keymap.set(mode, keys, cfg.cmd, cfg.opts)
+            end
+
+            -- Add a label to which key
+            if wk_found then
+                if string.find(keys, "<leader>") and cfg.desc then
+                    wk.register({ [keys] = { cfg.desc } })
+                end
+            end
         end
     end
 end
@@ -11,19 +23,83 @@ for _, mode in ipairs { "", "n", "v", "x", "s", "o", "!", "i", "l", "c", "t" } d
     mappings[mode] = {}
 end
 
+local opts               = {}
+
+-- [[ Comments ]]
+opts                     = { silent = true }
+mappings.n["<leader>/"]  = {
+    cmd = "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>",
+    opts = opts,
+    desc = "Toggle comment line"
+}
+mappings.v["<leader>/"]  = {
+    cmd = "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+    opts = opts,
+    desc = "Toggle comment line"
+}
+
+-- [[ Customs ]]
+opts                     = { nowait = true, silent = true }
+mappings.i["jk"]         = { cmd = "<C-[>", opts = opts, desc = "Move lines up" }
+mappings.i["kj"]         = { cmd = "<C-[>", opts = opts, desc = "Move lines up" }
+
+-- [[ Indent lines ]]
+-- Stay in indent mode
+opts                     = { silent = true }
+mappings.v["<"]          = { cmd = "<gv", opts = opts, desc = "Indent to the left" }
+mappings.v[">"]          = { cmd = ">gv", opts = opts, desc = "Indent to the right" }
+
 -- [[ Leader ]]
 -- INFO: forced by lazy to be set within lazy-vim.lua
 -- global.mapleader = " "
 -- global.maplocalleader = " "
 
+-- [[ Move lines with K and J ]]
+opts                     = { silent = true }
+mappings.n["K"]          = { cmd = ":move -2<CR>", opts = opts, desc = "Move lines up" }
+mappings.n["J"]          = { cmd = ":move +1<CR>", opts = opts, desc = "Move lines down" }
+mappings.v["K"]          = { cmd = "move -2<CR>", opts = opts, desc = "Move lines up" }
+mappings.v["J"]          = { cmd = ":move +1<CR>", opts = opts, desc = "Move lines down" }
+
+-- [[ NvimTree ]]
+opts                     = { silent = true }
+mappings.n["<leader>e"]  = { cmd = "<cmd>NvimTreeToggle<cr>", opts = opts, desc = "Toggle NvimTree" }
+
+-- [[ Old habits ]]
+opts                     = { silent = true }
+mappings.n["<C-z>"]      = { cmd = ":u<Return>", opts = opts, desc = "Undo changes" }
+mappings.v["<C-z>"]      = { cmd = ":u<Return>", opts = opts, desc = "Undo changes" }
+mappings.i["<C-z>"]      = { cmd = "<Esc>:u<Return>i", opts = opts, desc = "Undo changes" }
+mappings.n["<C-y>"]      = { cmd = "<C-R><Return>", opts = opts, desc = "Redo changes" }
+mappings.v["<C-y>"]      = { cmd = "<C-R><Return>", opts = opts, desc = "Redo changes" }
+mappings.i["<C-y>"]      = { cmd = "<Esc><C-R><Return>i", opts = opts, desc = "Redo changes" }
+mappings.n["<C-s>"]      = { cmd = ":w!<Return>", opts = opts, desc = "Save files" }
+mappings.v["<C-s>"]      = { cmd = ":w!<Return>", opts = opts, desc = "Save files" }
+mappings.i["<C-s>"]      = { cmd = "<Esc>:w!<Return>", opts = opts, desc = "Save files" }
+mappings.n["<C-a>"]      = { cmd = "gg<S-v>G", opts = opts, desc = "Select all" }
+mappings.v["<C-a>"]      = { cmd = "gg<S-v>G", opts = opts, desc = "Select all" }
+
 -- [[ Splits ]]
-mappings.n["<C-h>"] = { cmd = "<C-w>h", opts = {}, desc = "Navigate to the left split" }
-mappings.n["<C-j>"] = { cmd = "<C-w>j", opts = {}, desc = "Navigate to the bottom split" }
-mappings.n["<C-k>"] = { cmd = "<C-w>k", opts = {}, desc = "Navigate to the top split" }
-mappings.n["<C-l>"] = { cmd = "<C-w>l", opts = {}, desc = "Navigate to the right split" }
+opts                     = { silent = true }
+mappings.n["<leader>w"]  = { desc = " Splits" }
+mappings.n["<leader>wh"] = { cmd = ":wincmd h<CR>", opts = {}, desc = "Move left" }
+mappings.n["<leader>wj"] = { cmd = ":wincmd j<CR>", opts = {}, desc = "Move down" }
+mappings.n["<leader>wk"] = { cmd = ":wincmd k<CR>", opts = {}, desc = "Move up" }
+mappings.n["<leader>wl"] = { cmd = ":wincmd l<CR>", opts = {}, desc = "Move right" }
+mappings.n["<leader>ws"] = { cmd = ":sp l<CR>", opts = {}, desc = "Split horizonal " }
+mappings.n["<leader>wv"] = { cmd = ":vsp l<CR>", opts = {}, desc = "Split vertical " }
+
+-- [[ Telescope ]]
+-- set("<leader>ff", ':lua require"telescope.builtin".find_files({ hidden = true })<CR>')
+-- set("<leader>fg", builtin.live_grep)
+-- set("<leader>fb", builtin.buffers)
+-- set("<leader>fh", builtin.help_tags)
+
+-- mappings.n["<leader>ff"] = { cmd = ":lua require"telescope.builtin".find_files({ hidden = true })<CR>", opts = {}, desc = "Find files" }
+-- mappings.n["<leader>fg"] = { cmd = ":lua require"telescope.builtin".find_files({ hidden = true })<CR>", opts = {}, desc = "Find files" }
+-- mappings.n["<leader>fb"] = { cmd = ":lua require"telescope.builtin".find_files({ hidden = true })<CR>", opts = {}, desc = "Find files" }
+-- mappings.n["<leader>fh"] = { cmd = ":lua require"telescope.builtin".find_files({ hidden = true })<CR>", opts = {}, desc = "Find files" }
+
+
 
 apply_mappings(mappings)
-
-
-
-
