@@ -90,16 +90,11 @@ mappings.n["<leader>ws"] = { cmd = ":sp l<CR>", opts = {}, desc = "Split horizon
 mappings.n["<leader>wv"] = { cmd = ":vsp l<CR>", opts = {}, desc = "Split vertical " }
 
 -- [[ Telescope ]]
--- set("<leader>ff", ':lua require"telescope.builtin".find_files({ hidden = true })<CR>')
--- set("<leader>fg", builtin.live_grep)
--- set("<leader>fb", builtin.buffers)
--- set("<leader>fh", builtin.help_tags)
-
--- mappings.n["<leader>ff"] = { cmd = ":lua require"telescope.builtin".find_files({ hidden = true })<CR>", opts = {}, desc = "Find files" }
--- mappings.n["<leader>fg"] = { cmd = ":lua require"telescope.builtin".find_files({ hidden = true })<CR>", opts = {}, desc = "Find files" }
--- mappings.n["<leader>fb"] = { cmd = ":lua require"telescope.builtin".find_files({ hidden = true })<CR>", opts = {}, desc = "Find files" }
--- mappings.n["<leader>fh"] = { cmd = ":lua require"telescope.builtin".find_files({ hidden = true })<CR>", opts = {}, desc = "Find files" }
-
-
+local builtin = require("telescope.builtin")
+mappings.n["<leader>f"]  = { desc = " Telescope" }
+mappings.n["<leader>ff"] = { cmd = ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', opts = {}, desc = "Find files" }
+mappings.n["<leader>fg"] = { cmd = ':lua require"telescope.builtin".live_grep()', opts = {}, desc = "Grep text in files" }
+mappings.n["<leader>fo"] = { cmd = ':lua require"telescope.builtin".oldfiles()', opts = {}, desc = "Browse old files" }
+mappings.n["<leader>fn"] = { cmd = ':lua require"startup".new_file()', opts = {}, desc = "Create new file" }
 
 apply_mappings(mappings)

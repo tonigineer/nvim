@@ -10,7 +10,7 @@ local M = {
 function M.config()
     local augroup = vim.api.nvim_create_augroup("LspFormatting", {})
     local null_ls = require("null-ls")
-    
+
     null_ls.setup({
         -- Enable/Disable here
         sources = {
