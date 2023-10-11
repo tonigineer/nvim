@@ -89,10 +89,17 @@ mappings.n["<leader>wl"] = { cmd = ":wincmd l<CR>", opts = {}, desc = "Move righ
 mappings.n["<leader>ws"] = { cmd = ":sp l<CR>", opts = {}, desc = "Split horizonal " }
 mappings.n["<leader>wv"] = { cmd = ":vsp l<CR>", opts = {}, desc = "Split vertical " }
 
+-- [[ Symbols outline ]]
+mappings.n["<leader>o"]  = { cmd = ":SymbolsOutline<CR>", opts = {}, desc = "Toggle Symbols Outline" }
+
 -- [[ Telescope ]]
-local builtin = require("telescope.builtin")
+local builtin            = require("telescope.builtin")
 mappings.n["<leader>f"]  = { desc = " Telescope" }
-mappings.n["<leader>ff"] = { cmd = ':lua require"telescope.builtin".find_files({ hidden = true })<CR>', opts = {}, desc = "Find files" }
+mappings.n["<leader>ff"] = {
+    cmd = ':lua require"telescope.builtin".find_files({ hidden = true })<CR>',
+    opts = {},
+    desc = "Find files"
+}
 mappings.n["<leader>fg"] = { cmd = ':lua require"telescope.builtin".live_grep()', opts = {}, desc = "Grep text in files" }
 mappings.n["<leader>fo"] = { cmd = ':lua require"telescope.builtin".oldfiles()', opts = {}, desc = "Browse old files" }
 mappings.n["<leader>fn"] = { cmd = ':lua require"startup".new_file()', opts = {}, desc = "Create new file" }

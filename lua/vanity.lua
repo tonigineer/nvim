@@ -13,6 +13,17 @@ return {
         orange = "#ebbcba",
         green = "#56bf9f",
         violet = "#c4a7e7",
-        cyan = "#3e8fb0"
-    }
+        cyan = "#3e8fb0",
+        highlighting = {
+            delimiters = {
+                Red = "#eb6f92",
+                Yellow = "#f6c177",
+                Blue = "#9ccfd8",
+                Orange = "#ebbcba",
+                Green = "#56bf9f",
+                Violet = "#c4a7e7",
+                Cyan = "#3e8fb0",
+            }
+        }
+    },
 }

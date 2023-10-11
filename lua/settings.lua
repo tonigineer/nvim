@@ -4,6 +4,10 @@ local global = vim.g
 -- [[ Checkhealth optionals ]]
 global.loaded_perl_provider = 0
 global.loaded_ruby_provider = 0
+global.loaded_node_provider = 0
+global.loaded_go_provider = 0
+global.loaded_java_provider = 0
+
 global.python3_host_prog = "/usr/bin/python"
 
 -- [[ Context ]]
@@ -88,4 +92,3 @@ options.formatoptions:remove { "c", "r", "o" } -- This is a sequence of letters 
 --    vim.opt.shell = os.getenv('SHELL')
 -- end
 vim.opt.shell = "/usr/bin/fish"
-

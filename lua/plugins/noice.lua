@@ -1,31 +1,32 @@
 return {
     "folke/noice.nvim",
     event = "VeryLazy",
+
     opts = {
-      -- add any options here
+        -- add any options here
     },
     dependencies = {
-      -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
-      "MunifTanjim/nui.nvim",
-      -- OPTIONAL:
-      --   `nvim-notify` is only needed, if you want to use the notification view.
-      --   If not available, we use `mini` as the fallback
-      "rcarriga/nvim-notify",
-      },
-      config = function()
+        -- if you lazy-load any plugin below, make sure to add proper `module="..."` entries
+        "MunifTanjim/nui.nvim",
+        -- OPTIONAL:
+        --   `nvim-notify` is only needed, if you want to use the notification view.
+        --   If not available, we use `mini` as the fallback
+        "rcarriga/nvim-notify",
+    },
+    config = function()
         require("noice").setup({
-            lsp = {
-              -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-              override = {
-                ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-                ["vim.lsp.util.stylize_markdown"] = true,
-                ["cmp.entry.get_documentation"] = true,
-              },
-            },
+            -- lsp = {
+            --     -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+            --     override = {
+            --         ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            --         ["vim.lsp.util.stylize_markdown"] = true,
+            --         ["cmp.entry.get_documentation"] = true,
+            --     },
+            -- },
             cmdline = {
-                enabled = true,         -- enables the Noice cmdline UI
-                view = "cmdline_popup", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
-                opts = {},              -- global options for the cmdline. See section on views
+                enabled = true,   -- enables the Noice cmdline UI
+                view = "cmdline", -- view for rendering the cmdline. Change to `cmdline` to get a classic cmdline at the bottom
+                opts = {},        -- global options for the cmdline. See section on views
                 -- @type table<string, CmdlineFormat>
                 format = {
                     -- conceal: (default=true) This will hide the text in the cmdline that matches the pattern.
@@ -219,6 +220,6 @@ return {
             status = {}, --- @see section on statusline components
             -- @type NoiceFormatOptions
             format = {}, --- @see section on formatting
-          })
-      end
-  }
+        })
+    end
+}

@@ -22,7 +22,7 @@ return {
         local configs = require "nvim-treesitter.configs"
 
         configs.setup {
-            ensure_installed = { "lua", "markdown", "markdown_inline", "bash", "python" },
+            ensure_installed = { "lua", "markdown", "markdown_inline", "bash", "python", "vim", "regex" },
             ignore_install = { "" },
             sync_install = false,
             highlight = {
