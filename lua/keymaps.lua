@@ -43,6 +43,15 @@ opts                     = { nowait = true, silent = true }
 mappings.i["jk"]         = { cmd = "<C-[>", opts = opts, desc = "Move lines up" }
 mappings.i["kj"]         = { cmd = "<C-[>", opts = opts, desc = "Move lines up" }
 
+-- [[ Goto preview ]]
+opts                     = { noremap = true }
+mappings.n["<leader>g"]  = { desc = "↖ Goto preview" }
+mappings.n["<leader>gp"] = {
+    cmd = "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
+    opts = opts,
+    desc = "Preview Definition"
+}
+
 -- [[ Indent lines ]]
 -- Stay in indent mode
 opts                     = { silent = true }

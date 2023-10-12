@@ -17,7 +17,6 @@ function M.config()
     local on_attach = function(client, bufnr)
         opts.buffer = bufnr
     end
-
     local capabilities = cmp_nvim_lsp.default_capabilities()
 
     lspconfig["lua_ls"].setup({
@@ -38,6 +37,18 @@ function M.config()
                 },
             },
         },
+    })
+
+    lspconfig["pyright"].setup({
+        capabilities = capabilities,
+        on_attach = on_attach,
+    })
+
+    local capabilities_edit = capabilities
+    capabilities_edit.offsetEncoding = { "utf-16" }
+    lspconfig["clangd"].setup({
+        capabilities = capabilities_edit,
+        on_attach = on_attach,
     })
 end
 

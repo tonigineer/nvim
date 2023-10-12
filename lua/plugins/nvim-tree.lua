@@ -5,6 +5,11 @@ return {
     config = function()
         -- local tree_cb = require("nvim-tree.config").nvim_tree_callback
         require("nvim-tree").setup {
+            filters = {
+                dotfiles = true,
+                custom = { ".git" },
+                exclude = { ".gitignore", ".env" },
+            },
             on_attach = function(bufnr)
                 local api = require "nvim-tree.api"
 
@@ -86,7 +91,7 @@ return {
                 add_trailing = false,
                 group_empty = false,
                 highlight_git = true,
-                root_folder_label = false,
+                root_folder_label = true,
                 highlight_opened_files = "none",
                 root_folder_modifier = ":t",
                 indent_markers = {
