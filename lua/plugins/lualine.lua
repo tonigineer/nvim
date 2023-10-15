@@ -10,26 +10,14 @@ return {
 
         -- Color table for highlights
         -- stylua: ignore
-        local colors = {
-            bg       = '#202328',
-            fg       = '#bbc2cf',
-            yellow   = '#ECBE7B',
-            cyan     = '#008080',
-            darkblue = '#081633',
-            green    = '#98be65',
-            orange   = '#FF8800',
-            violet   = '#a9a1e1',
-            magenta  = '#c678dd',
-            blue     = '#51afef',
-            red      = '#ec5f67',
-        }
+        local colors = require("lua.vanity").colors
 
         local conditions = {
             buffer_not_empty = function()
                 return vim.fn.empty(vim.fn.expand('%:t')) ~= 1
             end,
             hide_in_width = function()
-                return vim.fn.winwidth(0) > 80
+                return vim.fn.winwidth(0) > 120
             end,
             check_git_workspace = function()
                 local filepath = vim.fn.expand('%:p:h')
@@ -85,16 +73,16 @@ return {
 
         ins_left {
             function()
-                return '▊'
+                return ''
             end,
-            color = { fg = colors.blue },      -- Sets highlighting of component
-            padding = { left = 0, right = 1 }, -- We don't need space before this
+            color = { fg = colors.blue, gui = 'bold' }, -- Sets highlighting of component
+            padding = { left = 1, right = 1 },          -- We don't need space before this
         }
 
         ins_left {
             -- mode component
             function()
-                return ''
+                return '󰌓'
             end,
             color = function()
                 -- auto change color according to neovims mode
@@ -146,9 +134,9 @@ return {
             sources = { 'nvim_diagnostic' },
             symbols = { error = ' ', warn = ' ', info = ' ' },
             diagnostics_color = {
-                color_error = { fg = colors.red },
-                color_warn = { fg = colors.yellow },
-                color_info = { fg = colors.cyan },
+                color_error = { fg = colors.error },
+                color_warn = { fg = colors.warning },
+                color_info = { fg = colors.info },
             },
         }
 
@@ -177,25 +165,11 @@ return {
                 end
                 return msg
             end,
-            icon = ' LSP:',
-            color = { fg = '#ffffff', gui = 'bold' },
+            icon = ' LSP ',
+            color = { fg = "#FFFFFF", gui = 'bold' },
         }
 
         -- Add components to right sections
-        ins_right {
-            'o:encoding',       -- option component same as &encoding in viml
-            fmt = string.upper, -- I'm not sure why it's upper case either ;)
-            cond = conditions.hide_in_width,
-            color = { fg = colors.green, gui = 'bold' },
-        }
-
-        ins_right {
-            'fileformat',
-            fmt = string.upper,
-            icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-            color = { fg = colors.green, gui = 'bold' },
-        }
-
         ins_right {
             'branch',
             icon = '',
@@ -215,11 +189,30 @@ return {
         }
 
         ins_right {
+            'fileformat',
+            fmt = string.upper,
+            icons_enabled = false,
+            color = { fg = "#FFFFFF", gui = 'bold' },
+            symbols = {
+                unix = '', -- e712
+                dos = '', -- e70f
+                mac = '', -- e711
+            }
+        }
+
+        ins_right {
+            'o:encoding',       -- option component same as &encoding in viml
+            fmt = string.upper, -- I'm not sure why it's upper case either ;)
+            cond = conditions.hide_in_width,
+            color = { fg = "#FFFFFF", gui = 'bold' },
+        }
+
+        ins_right {
             function()
-                return '▊'
+                return ''
             end,
-            color = { fg = colors.blue },
-            padding = { left = 1 },
+            color = { fg = colors.blue, gui = 'bold' },
+            padding = { left = 1, right = 1 },
         }
 
         -- Now don't forget to initialize lualine

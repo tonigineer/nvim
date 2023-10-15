@@ -25,17 +25,29 @@ end
 
 local opts               = {}
 
+-- [[ Buffer ]]
+mappings.n["<C-h>"]      = {
+    cmd = "<cmd>bprev<CR>",
+    opts = opts,
+    desc = "Select previous buffer"
+}
+mappings.n["<C-l>"]      = {
+    cmd = "<cmd>bnext<CR>",
+    opts = opts,
+    desc = "Select next buffer"
+}
+
 -- [[ Comments ]]
 opts                     = { silent = true }
 mappings.n["<leader>/"]  = {
     cmd = "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>",
     opts = opts,
-    desc = "Toggle comment line"
+    desc = "󰆈 Comment line (toggle)"
 }
 mappings.v["<leader>/"]  = {
     cmd = "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
     opts = opts,
-    desc = "Toggle comment line"
+    desc = "󰆈 Comment line (toggle)"
 }
 
 -- [[ Customs ]]
@@ -43,9 +55,21 @@ opts                     = { nowait = true, silent = true }
 mappings.i["jk"]         = { cmd = "<C-[>", opts = opts, desc = "Move lines up" }
 mappings.i["kj"]         = { cmd = "<C-[>", opts = opts, desc = "Move lines up" }
 
+-- [[ Diagnostics ]]
+mappings.n["<leader>d"]  = { desc = " Diagnostic" }
+mappings.n["<leader>db"] = { desc = "● Set breakpoint" }
+mappings.n["<leader>dq"] = { desc = " Terminate debugging" }
+mappings.n["<leader>dc"] = { desc = " Clear breakpoints" }
+mappings.n["<leader>dn"] = { desc = " Step over" }
+mappings.n["<leader>di"] = { desc = " Step into" }
+mappings.n["<leader>do"] = { desc = " Step out" }
+mappings.n["<leader>dp"] = { desc = " Pause" }
+mappings.n["<leader>dh"] = { desc = "󰗧 Run to cursor" }
+mappings.n["<leader>dr"] = { desc = " Run" }
+
 -- [[ Goto preview ]]
 opts                     = { noremap = true }
-mappings.n["<leader>g"]  = { desc = "↖ Goto preview" }
+mappings.n["<leader>g"]  = { desc = " Goto preview" }
 mappings.n["<leader>gp"] = {
     cmd = "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
     opts = opts,
@@ -72,7 +96,7 @@ mappings.v["J"]          = { cmd = ":move +1<CR>", opts = opts, desc = "Move lin
 
 -- [[ NvimTree ]]
 opts                     = { silent = true }
-mappings.n["<leader>e"]  = { cmd = "<cmd>NvimTreeToggle<cr>", opts = opts, desc = "Toggle NvimTree" }
+mappings.n["<leader>e"]  = { cmd = "<cmd>NvimTreeToggle<cr>", opts = opts, desc = " NvimTree (toggle)" }
 
 -- [[ Old habits ]]
 opts                     = { silent = true }
@@ -99,18 +123,21 @@ mappings.n["<leader>ws"] = { cmd = ":sp l<CR>", opts = {}, desc = "Split horizon
 mappings.n["<leader>wv"] = { cmd = ":vsp l<CR>", opts = {}, desc = "Split vertical " }
 
 -- [[ Symbols outline ]]
-mappings.n["<leader>o"]  = { cmd = ":SymbolsOutline<CR>", opts = {}, desc = "Toggle Symbols Outline" }
+mappings.n["<leader>o"]  = { cmd = ":SymbolsOutline<CR>", opts = {}, desc = "󱔁 Symbols outline (toggle)" }
 
 -- [[ Telescope ]]
-local builtin            = require("telescope.builtin")
 mappings.n["<leader>f"]  = { desc = " Telescope" }
 mappings.n["<leader>ff"] = {
     cmd = ':lua require"telescope.builtin".find_files({ hidden = true })<CR>',
     opts = {},
     desc = "Find files"
 }
-mappings.n["<leader>fg"] = { cmd = ':lua require"telescope.builtin".live_grep()', opts = {}, desc = "Grep text in files" }
-mappings.n["<leader>fo"] = { cmd = ':lua require"telescope.builtin".oldfiles()', opts = {}, desc = "Browse old files" }
-mappings.n["<leader>fn"] = { cmd = ':lua require"startup".new_file()', opts = {}, desc = "Create new file" }
+mappings.n["<leader>fg"] = {
+    cmd = ':lua require"telescope.builtin".live_grep()<CR>',
+    opts = {},
+    desc = "Grep text in files"
+}
+mappings.n["<leader>fo"] = { cmd = ':lua require"telescope.builtin".oldfiles()<CR>', opts = {}, desc = "Browse old files" }
+mappings.n["<leader>fn"] = { cmd = ':lua require"startup".new_file()<CR>', opts = {}, desc = "Create new file" }
 
 apply_mappings(mappings)

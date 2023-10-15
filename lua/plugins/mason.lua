@@ -2,7 +2,6 @@ local M = {
     "williamboman/mason.nvim",
     cmd = "Mason",
     event = "BufReadPre",
-    dependencies = { "p00f/clangd_extensions.nvim" }
 }
 
 local settings = {
@@ -27,7 +26,8 @@ function M.config()
         ensure_installed = {
             "lua_ls",
             "pyright",
-            "clangd"
+            "clangd",
+            "rust_analyzer"
         },
         automatic_installation = true,
     }

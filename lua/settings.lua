@@ -4,14 +4,17 @@ local global = vim.g
 -- [[ Checkhealth optionals ]]
 global.loaded_perl_provider = 0
 global.loaded_ruby_provider = 0
-global.loaded_node_provider = 0
+global.loaded_node_provider = -1
 global.loaded_go_provider = 0
 global.loaded_java_provider = 0
 
 global.python3_host_prog = "/usr/bin/python"
 
+-- [[ Completion window ]]
+options.completeopt = "menuone,noinsert,noselect"
+
 -- [[ Context ]]
-options.colorcolumn = ""
+options.colorcolumn = '80'
 options.number = true
 options.relativenumber = true
 options.scrolloff = 8                  -- minimal number of screen lines to keep above and below the cursor
@@ -28,6 +31,7 @@ options.encoding = "utf8"
 
 -- [[ Mouse ]]
 options.mouse = "a"
+options.clipboard:append("unnamedplus")
 
 -- [[ Netrw ]]
 -- NOTE: disables by other plugins
@@ -57,7 +61,7 @@ options.writebackup = false -- if a file is being edited by another program (or 
 -- [[ Theme ]]
 options.syntax = "ON"
 options.termguicolors = true
-options.cursorline = true         -- highlight the current line
+options.cursorline = false        -- highlight the current line
 options.laststatus = 3            -- only the last window will always have a status line
 options.showcmd = false           -- hide (partial) command in the last line of the screen (for performance)
 options.ruler = true              -- hide the line and column number of the cursor position

@@ -1,6 +1,6 @@
 return {
     "startup-nvim/startup.nvim",
-    event = "VimEnter",
+    lazy = false,
 
     config = function()
         local default_margin = 10
@@ -107,4 +107,3 @@ return {
         require("startup").setup(settings)
     end
 }
-

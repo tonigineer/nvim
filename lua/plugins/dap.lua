@@ -20,9 +20,9 @@ return {
         local extension_path = codelldb:get_install_path() .. "/extension/"
         local codelldb_path = extension_path .. "adapter/codelldb"
         -- local liblldb_path = extension_path .. "lldb/lib/liblldb.dylib"
-
         dap.adapters.codelldb = {
             type = "server",
+
             port = "${port}",
             executable = {
                 -- command = '/usr/bin/codelldb',  -- install codelldb-bin with pacman
@@ -110,28 +110,58 @@ return {
         }
 
         dap.configurations.python = {
-                {
-                    type = "python",
-                    request = "launch",
-                    name = "Run file",
-                    program = "${file}",
-                    pythonPath = function()
-                        local cwd = vim.fn.getcwd()
-                        if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
-                            return cwd .. "/venv/bin/python"
-                        elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
-                            return cwd .. "/.venv/bin/python"
-                        else
-                            return "/usr/bin/python"
-                        end
-                    end,
-                },
+            {
+                type = "python",
+                request = "launch",
+                name = "Run file",
+                program = "${file}",
+                pythonPath = function()
+                    local cwd = vim.fn.getcwd()
+                    if vim.fn.executable(cwd .. "/venv/bin/python") == 1 then
+                        return cwd .. "/venv/bin/python"
+                    elseif vim.fn.executable(cwd .. "/.venv/bin/python") == 1 then
+                        return cwd .. "/.venv/bin/python"
+                    else
+                        return "/usr/bin/python"
+                    end
+                end,
+            }
+        }, require("dap-python").setup(debugpy:get_install_path() .. "/venv/bin/python")
+        -- Line above can be move down without , -- but then 5 options for debugging are shown
+        -- and not only the one defined above. WEIRD!
+
+        -- [[ ---------- Rust ---------- ]]
+        dap.configurations.rust = {
+            {
+                name = "Rust main.rs",
+                type = "codelldb",
+                request = "launch",
+                program = function()
+                    -- vim.fn.jobstart("cargo build")
+                    os.execute("cargo build")
+                    return vim.fn.getcwd() .. '/target/debug/main'
+                end,
+                cwd = '${workspaceFolder}',
+                stopOnEntry = false,
+                showDisassembly = "never",
             },
-        
-        require("dap-python").setup(debugpy:get_install_path() .. "/venv/bin/python")
+            {
+                name = "Rust enter binary",
+                type = "codelldb",
+                request = "launch",
+                program = function()
+                    -- vim.fn.jobstart("cargo build")
+                    os.execute("cargo build")
+                    return vim.fn.input('Path to executable: ', vim.fn.getcwd() .. '/target/debug/', 'file')
+                end,
+                cwd = '${workspaceFolder}',
+                stopOnEntry = false,
+                showDisassembly = "never",
+            },
+        }
 
         -- [[ ---------- UI ---------- ]]
-        -- local dap = require("dap")
+        local dap = require("dap")
         local dapui = require("dapui")
         local daptext = require("nvim-dap-virtual-text")
         local fun = vim.fn
@@ -175,7 +205,7 @@ return {
 
         dapui.setup({
             controls = {
-                element = "repl",
+                element = "console",
                 enabled = true,
                 icons = {
                     disconnect = "",
@@ -220,7 +250,7 @@ return {
                 },
                 {
                     elements = { {
-                        id = "repl",
+                        id = "console",
                         size = 1.0,
                     } },
                     position = "bottom",
@@ -242,8 +272,8 @@ return {
         })
 
         -- [[ ----------- KEYBINDS ---------- ]]
-        -- local dap = require("dap")
-        -- local dapui = require("dapui")
+        local dap = require("dap")
+        local dapui = require("dapui")
         local defaults = { noremap = true, silent = true, nowait = true }
         local function key(lhs, rhs)
             vim.keymap.set("n", lhs, rhs, defaults)

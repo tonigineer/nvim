@@ -7,8 +7,13 @@ return {
         require("nvim-tree").setup {
             filters = {
                 dotfiles = true,
-                custom = { ".git" },
-                exclude = { ".gitignore", ".env" },
+                -- custom = { ".git", "__pycache__" },
+                -- exclude = { ".gitignore", ".env" },
+            },
+            actions = {
+                open_file = {
+                    quit_on_open = true,
+                }
             },
             on_attach = function(bufnr)
                 local api = require "nvim-tree.api"
@@ -102,7 +107,6 @@ return {
                         none = "  ",
                     },
                 },
-
                 icons = {
                     webdev_colors = true,
                     git_placement = "signcolumn",
