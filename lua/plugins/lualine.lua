@@ -10,7 +10,7 @@ return {
 
         -- Color table for highlights
         -- stylua: ignore
-        local colors = require("lua.vanity").colors
+        local colors = require("vanity").colors
 
         local conditions = {
             buffer_not_empty = function()
@@ -82,7 +82,7 @@ return {
         ins_left {
             -- mode component
             function()
-                return '󰌓'
+                return ''
             end,
             color = function()
                 -- auto change color according to neovims mode

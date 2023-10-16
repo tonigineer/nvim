@@ -35,6 +35,7 @@ return {
                 "markdown",
                 "python",
                 "regex",
+                "rust",
                 "vim",
             },
             ignore_install = { "" },

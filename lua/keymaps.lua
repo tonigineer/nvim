@@ -42,12 +42,12 @@ opts                     = { silent = true }
 mappings.n["<leader>/"]  = {
     cmd = "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>",
     opts = opts,
-    desc = "󰆈 Comment line (toggle)"
+    desc = "󰆈 Comment line "
 }
 mappings.v["<leader>/"]  = {
     cmd = "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
     opts = opts,
-    desc = "󰆈 Comment line (toggle)"
+    desc = "󰆈 Comment line "
 }
 
 -- [[ Customs ]]
@@ -67,14 +67,14 @@ mappings.n["<leader>dp"] = { desc = " Pause" }
 mappings.n["<leader>dh"] = { desc = "󰗧 Run to cursor" }
 mappings.n["<leader>dr"] = { desc = " Run" }
 
--- [[ Goto preview ]]
-opts                     = { noremap = true }
-mappings.n["<leader>g"]  = { desc = " Goto preview" }
-mappings.n["<leader>gp"] = {
-    cmd = "<cmd>lua require('goto-preview').goto_preview_definition()<CR>",
-    opts = opts,
-    desc = "Preview Definition"
-}
+
+-- [[ Diagnostic/Lspsaga ]]
+mappings.n["<leader>g"]  = { desc = " Lspsaga" }
+mappings.n["<leader>gd"] = { desc = "Preview Definition" }
+mappings.n["<leader>gD"] = { desc = "Goto Definition" }
+mappings.n["<leader>gj"] = { desc = "Jump to next message" }
+mappings.n["<leader>gk"] = { desc = "Jump to previous message" }
+mappings.n["<leader>gK"] = { desc = "Hover documentation" }
 
 -- [[ Indent lines ]]
 -- Stay in indent mode
@@ -96,7 +96,7 @@ mappings.v["J"]          = { cmd = ":move +1<CR>", opts = opts, desc = "Move lin
 
 -- [[ NvimTree ]]
 opts                     = { silent = true }
-mappings.n["<leader>e"]  = { cmd = "<cmd>NvimTreeToggle<cr>", opts = opts, desc = " NvimTree (toggle)" }
+mappings.n["<leader>e"]  = { cmd = "<cmd>NvimTreeToggle<cr>", opts = opts, desc = " NvimTree " }
 
 -- [[ Old habits ]]
 opts                     = { silent = true }
@@ -123,7 +123,7 @@ mappings.n["<leader>ws"] = { cmd = ":sp l<CR>", opts = {}, desc = "Split horizon
 mappings.n["<leader>wv"] = { cmd = ":vsp l<CR>", opts = {}, desc = "Split vertical " }
 
 -- [[ Symbols outline ]]
-mappings.n["<leader>o"]  = { cmd = ":SymbolsOutline<CR>", opts = {}, desc = "󱔁 Symbols outline (toggle)" }
+mappings.n["<leader>o"]  = { cmd = ":SymbolsOutline<CR>", opts = {}, desc = "󱔁 Symbols outline " }
 
 -- [[ Telescope ]]
 mappings.n["<leader>f"]  = { desc = " Telescope" }

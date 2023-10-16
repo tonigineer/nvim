@@ -27,7 +27,9 @@ function M.config()
             "lua_ls",
             "pyright",
             "clangd",
-            "rust_analyzer"
+            "rust_analyzer",
+            "bashls",
+            "jsonls"
         },
         automatic_installation = true,
     }
@@ -45,8 +47,10 @@ function M.config()
         ensure_installed = {
             "stylua",
             "black",
-            "cpplint",
-            "ruff"
+            "clang_format",
+            "shfmt",
+            "spellcheck",
+            "fixjson"
         },
     })
 end

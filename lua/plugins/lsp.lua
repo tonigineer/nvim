@@ -16,11 +16,54 @@ return {
         local lspconfig = require("lspconfig")
         local cmp_nvim_lsp = require("cmp_nvim_lsp")
 
-        local opts = { noremap = true, silent = true }
+        local signs = { Error = " ", Warn = " ", Hint = " ", Info = " " }
+        for type, icon in pairs(signs) do
+            local hl = "DiagnosticSign" .. type
+            vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
+        end
+
         local on_attach = function(client, bufnr)
-            opts.buffer = bufnr
+            local opts = { noremap = true, silent = true, buffer = bufnr }
+            vim.keymap.set("n", "<leader>gd", "<cmd>Lspsaga peek_definition<CR>", opts)
+            vim.keymap.set("n", "<leader>gD", "<cmd>Lspsaga goto_definition<CR>", opts)
+            vim.keymap.set("n", "<leader>gk", "<cmd>Lspsaga diagnostic_jump_prev<CR>", opts)
+            vim.keymap.set("n", "<leader>gj", "<cmd>Lspsaga diagnostic_jump_next<CR>", opts)
+            vim.keymap.set("n", "<leader>gK", "<cmd>Lspsaga hover_doc<CR>", opts)
+
+            if client.name == "pyright" then
+                vim.keymap.set("n", "<Leader>gi", "<cmd>PyrightOrganizeImports<CR>", opts)
+            end
         end
         local capabilities = cmp_nvim_lsp.default_capabilities()
+
+        -- bash
+        lspconfig.bashls.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            filetypes = { "sh" },
+        })
+
+        -- -- docker
+        -- lspconfig.dockerls.setup({
+        --     capabilities = capabilities,
+        --     on_attach = on_attach,
+        -- })
+
+        -- -- html, typescriptreact, javascriptreact, css, sass, scss, less, svelte, vue
+        -- lspconfig.emmet_ls.setup({
+        --     capabilities = capabilities,
+        --     on_attach = on_attach,
+        --     filetypes = {
+        --         "css",
+        --     },
+        -- })
+
+        -- json
+        lspconfig.jsonls.setup({
+            capabilities = capabilities,
+            on_attach = on_attach,
+            filetypes = { "json", "jsonc" },
+        })
 
         -- Lua
         lspconfig["lua_ls"].setup({
