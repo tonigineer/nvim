@@ -156,8 +156,8 @@ return {
                 },
             },
             view = {
-                adaptive_size = false,
-                width = 40,
+                adaptive_size = true,
+                width = 20,
                 side = "left",
                 number = false,
                 relativenumber = false,

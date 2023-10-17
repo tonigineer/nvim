@@ -63,14 +63,14 @@ return {
                 show_buffer_icons = true,
                 show_buffer_close_icons = true,
                 show_close_icon = true,
-                show_tab_indicators = true,
+                show_tab_indicators = false,
                 persist_buffer_sort = true, -- whether or not custom sorted buffers should persist
                 -- can also be a table containing 2 custom separators
                 -- [focused and unfocused]. eg: { '|', '|' }
                 separator_style = "thin", -- | "thick" | "thin" | { 'any', 'any' },
                 enforce_regular_tabs = true,
                 always_show_bufferline = true,
-                -- sort_by = 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs' | function(buffer_a, buffer_b)
+                -- sort_by = 'id' | 'extension' | 'relative_directory' | 'directory' | 'tabs'
                 --   -- add custom logic
                 --   return buffer_a.modified > buffer_b.modified
                 -- end
@@ -81,8 +81,8 @@ return {
                 --     bg = '<colour-value-here>',
                 -- },
                 background = {
-                    fg = "#FFFFFF",
-                    -- bg = "#333333",
+                    fg = theme_colors["fg"],
+                    bg = theme_colors["bg"]
                 },
                 tab = {
                     -- fg = theme_colors["Violet"].color,
@@ -111,22 +111,22 @@ return {
                     -- bg = "#666666",
                 },
                 close_button_visible = {
-                    fg = theme_colors["yellow"].color,
+                    fg = theme_colors["yellow"],
                     -- bg = "#666666",
                 },
                 close_button_selected = {
-                    fg = theme_colors["orange"].color,
+                    fg = theme_colors["orange"],
                     -- bg = theme_colors["Yellow"].color,
                 },
                 buffer = {
                     fg = "#FFFFFF",
                 },
                 buffer_visible = {
-                    fg = theme_colors["yellow"].color,
+                    fg = theme_colors["yellow"],
                     -- bg = theme_colors["Red"].color,
                 },
                 buffer_selected = {
-                    fg = theme_colors["orange"].color,
+                    fg = theme_colors["orange"],
                     -- bg = theme_colors["Red"].color,
                     bold = true,
                     italic = false,
@@ -136,11 +136,11 @@ return {
                     -- bg = theme_colors["White"].color,
                 },
                 numbers_visible = {
-                    fg = theme_colors["yellow"].color,
+                    fg = theme_colors["yellow"],
                     -- bg = theme_colors["White"].color,
                 },
                 numbers_selected = {
-                    fg = theme_colors["orange"].color,
+                    fg = theme_colors["orange"],
                     -- bg = theme_colors["White"].color,
                     bold = true,
                     italic = false,

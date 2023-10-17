@@ -1,9 +1,3 @@
-local M = {
-    "williamboman/mason.nvim",
-    cmd = "Mason",
-    event = "BufReadPre",
-}
-
 local settings = {
     ui = {
         icons = {
@@ -19,40 +13,52 @@ local settings = {
     max_concurrent_installers = 10,
 }
 
-function M.config()
-    require("mason").setup(settings)
+return {
+    "williamboman/mason.nvim",
+    cmd = "Mason",
+    event = "BufReadPre",
 
-    require("mason-lspconfig").setup {
-        ensure_installed = {
-            "lua_ls",
-            "pyright",
-            "clangd",
-            "rust_analyzer",
-            "bashls",
-            "jsonls"
-        },
-        automatic_installation = true,
-    }
+    config = function()
+        require("mason").setup(settings)
 
-    require("mason-nvim-dap").setup({
-        automatic_installation = true,
-        ensure_installed = {
-            "codelldb",
-            "debugpy"
-        },
-    })
+        require("mason-lspconfig").setup {
+            ensure_installed = {
+                "lua_ls",
+                "pyright",
+                "clangd",
+                "rust_analyzer",
+                "bashls",
+                "jsonls"
+            },
+            automatic_installation = true,
+        }
 
-    require("mason-null-ls").setup({
-        automatic_installation = true,
-        ensure_installed = {
-            "stylua",
-            "black",
-            "clang_format",
-            "shfmt",
-            "spellcheck",
-            "fixjson"
-        },
-    })
-end
+        require("mason-nvim-dap").setup({
+            automatic_installation = true,
+            ensure_installed = {
+                "codelldb",
+                "debugpy"
+            },
+        })
 
-return M
+        require("mason-null-ls").setup({
+            automatic_installation = true,
+            ensure_installed = {
+                -- Lua
+                "stylua",
+                "checklua",
+                -- C/C++
+                "clang_format",
+                "cpplint",
+                -- Python
+                "black",
+                "pylint",
+                -- Bash
+                "shfmt",
+                "spellcheck",
+                -- Json
+                "fixjson"
+            },
+        })
+    end
+}

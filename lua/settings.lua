@@ -14,7 +14,7 @@ global.python3_host_prog = "/usr/bin/python"
 options.completeopt = "menuone,noinsert,noselect"
 
 -- [[ Context ]]
-options.colorcolumn = '80'
+options.colorcolumn = ''
 options.number = true
 options.relativenumber = true
 options.scrolloff = 8                  -- minimal number of screen lines to keep above and below the cursor

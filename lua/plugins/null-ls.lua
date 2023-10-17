@@ -14,13 +14,16 @@ return {
             -- Enable/Disable here
             sources = {
                 null_ls.builtins.formatting.stylua,
+                null_ls.builtins.diagnostics.luacheck,
                 null_ls.builtins.formatting.clang_format,
+                null_ls.builtins.diagnostics.cpplint,
                 null_ls.builtins.formatting.black,
+                null_ls.builtins.diagnostics.pylint,
                 null_ls.builtins.formatting.shfmt,
                 null_ls.builtins.diagnostics.shellcheck,
                 null_ls.builtins.formatting.fixjson,
-
             },
+
             -- Format on save
             on_attach = function(client, bufnr)
                 if client.supports_method("textDocument/formatting") then
