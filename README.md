@@ -4,8 +4,6 @@
 
 A [Lazy](https://github.com/folke/lazy.nvim) and [Mason](https://github.com/williamboman/mason.nvim) based [Neovim](https://neovim.io/) configuration with [LSP](https://github.com/neovim/nvim-lspconfig) and [DAP](https://github.com/mfussenegger/nvim-dap) support for:
 
-<center>
-
 Language | 📰 LSP | 🪲 DAP
 --: | :-: | :-:
 Rust |  ✔️ | ✔️
@@ -15,8 +13,6 @@ Lua |  ✔️ | ✔️
 Bash |  ✔️ | ✖️
 Json |  ✔️ | ✖️
 Markdown |  ✔️ | ✖️
-
-</center>
 
 ## 💾 Installation
 

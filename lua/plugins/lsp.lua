@@ -43,6 +43,14 @@ return {
             filetypes = { "sh" },
         })
 
+        -- C/C++
+        local capabilities_edit = capabilities
+        capabilities_edit.offsetEncoding = { "utf-16" }
+        lspconfig["clangd"].setup({
+            capabilities = capabilities_edit,
+            on_attach = on_attach,
+        })
+
         -- -- docker
         -- lspconfig.dockerls.setup({
         --     capabilities = capabilities,
@@ -86,17 +94,15 @@ return {
             },
         })
 
-        -- Python
-        lspconfig["pyright"].setup({
+        -- Markdown
+        lspconfig.marksman.setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })
 
-        -- C/C++
-        local capabilities_edit = capabilities
-        capabilities_edit.offsetEncoding = { "utf-16" }
-        lspconfig["clangd"].setup({
-            capabilities = capabilities_edit,
+        -- Python
+        lspconfig["pyright"].setup({
+            capabilities = capabilities,
             on_attach = on_attach,
         })
 

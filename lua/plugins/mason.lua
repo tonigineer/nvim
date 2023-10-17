@@ -28,7 +28,8 @@ return {
                 "clangd",
                 "rust_analyzer",
                 "bashls",
-                "jsonls"
+                "jsonls",
+                "marksman"
             },
             automatic_installation = true,
         }
@@ -57,7 +58,9 @@ return {
                 "shfmt",
                 "spellcheck",
                 -- Json
-                "fixjson"
+                "fixjson",
+                --Markdown
+                "markdownlint"
             },
         })
     end
