@@ -95,7 +95,7 @@ return {
         })
 
         -- Markdown
-        lspconfig.marksman.setup({
+        lspconfig["marksman"].setup({
             capabilities = capabilities,
             on_attach = on_attach,
         })

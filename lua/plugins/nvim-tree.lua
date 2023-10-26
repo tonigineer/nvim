@@ -6,9 +6,9 @@ return {
         -- local tree_cb = require("nvim-tree.config").nvim_tree_callback
         require("nvim-tree").setup {
             filters = {
-                dotfiles = true,
-                -- custom = { ".git", "__pycache__" },
-                -- exclude = { ".gitignore", ".env" },
+                dotfiles = false,
+                custom = { ".git", "__pycache__" },
+                exclude = { ".gitignore", ".gitmodules" },
             },
             actions = {
                 open_file = {
@@ -19,7 +19,13 @@ return {
                 local api = require "nvim-tree.api"
 
                 local function opts(desc)
-                    return { desc = "nvim-tree: " .. desc, buffer = bufnr, noremap = true, silent = true, nowait = true }
+                    return {
+                        desc = "nvim-tree: " .. desc,
+                        buffer = bufnr,
+                        noremap = true,
+                        silent = true,
+                        nowait = true
+                    }
                 end
 
                 -- Default mappings. Feel free to modify or remove as you wish.
