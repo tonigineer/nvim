@@ -19,7 +19,7 @@ Markdown |  ✔️ | ✖️
 Install mandatory dependencies and clone the repository:
 
 ```sh
-pacman -S fd ripgrep zip npm python3-pip
+pacman -S fd ripgrep zip npm python-pip
 git clone https://github.com/tonigineer/nvim.git ~/.config/nvim
 ```
 
