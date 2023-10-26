@@ -19,7 +19,7 @@ Markdown |  ✔️ | ✖️
 Install mandatory dependencies and clone the repository:
 
 ```sh
-pacman -S fd ripgrep
+pacman -S fd ripgrep zip npm python3-pip
 git clone https://github.com/tonigineer/nvim.git ~/.config/nvim
 ```
 
@@ -30,3 +30,22 @@ In order to make `:checkhealth` completely happy, additional dependencies and se
 ```sh
 pacman -S 
 ```
+
+<details>
+    
+<summary>Install Neovim on Ubuntu</summary>
+
+
+```sh
+# Neovim for Ubuntu
+sudo apt install build-essential tar wget
+wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
+tar -xf ~/nvim-linux64.tar.gz
+sudo mkdir /opt/nvim && -r nvim-linux64 /opt/nvim
+sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim
+rm -rf nvim-linux64*
+```
+
+
+</details>
+
