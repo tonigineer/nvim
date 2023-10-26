@@ -28,7 +28,14 @@ git clone https://github.com/tonigineer/nvim.git ~/.config/nvim
 In order to make `:checkhealth` completely happy, additional dependencies and setup steps are needed:
 
 ```sh
-pacman -S 
+yay -S julia-bin luarocks python-neovim-git
+rustup default stable
+
+# Treesitter executable
+sudo pacman -S yarn
+yarn global add tree-sitter-cli
+cargo install tree-sitter-cli
+npm install -g tree-sitter-cli
 ```
 
 <details>
