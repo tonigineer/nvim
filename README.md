@@ -35,7 +35,7 @@ rustup default stable
 sudo pacman -S yarn
 yarn global add tree-sitter-cli
 cargo install tree-sitter-cli
-npm install -g tree-sitter-cli
+sudo npm install -g tree-sitter-cli
 ```
 
 <details>
