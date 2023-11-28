@@ -95,4 +95,4 @@ options.formatoptions:remove { "c", "r", "o" } -- This is a sequence of letters 
 --    -- Else default to the system current shell.
 --    vim.opt.shell = os.getenv('SHELL')
 -- end
-vim.opt.shell = "/usr/bin/fish"
+vim.opt.shell = "/usr/bin/zsh"
