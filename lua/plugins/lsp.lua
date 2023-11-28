@@ -7,7 +7,8 @@ return {
                 "simrat39/rust-tools.nvim",
                 "Saecki/crates.nvim",
                 "p00f/clangd_extensions.nvim",
-                "nvimdev/lspsaga.nvim"
+                "nvimdev/lspsaga.nvim",
+                "elkowar/yuck.vim"
             }
         },
     },
