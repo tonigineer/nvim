@@ -36,6 +36,11 @@ mappings.n["<C-l>"]      = {
     opts = opts,
     desc = "Select next buffer"
 }
+mappings.n["<leader>q"]  = {
+    cmd = "<cmd>bd<CR>",
+    opts = opts,
+    desc = "Close buffer"
+}
 
 -- [[ Comments ]]
 opts                     = { silent = true }
@@ -55,18 +60,18 @@ opts                     = { nowait = true, silent = true }
 mappings.i["jk"]         = { cmd = "<C-[>", opts = opts, desc = "Move lines up" }
 mappings.i["kj"]         = { cmd = "<C-[>", opts = opts, desc = "Move lines up" }
 
--- [[ Diagnostics ]]
-mappings.n["<leader>d"]  = { desc = " Diagnostic" }
-mappings.n["<leader>db"] = { desc = "● Set breakpoint" }
-mappings.n["<leader>dq"] = { desc = " Terminate debugging" }
-mappings.n["<leader>dc"] = { desc = " Clear breakpoints" }
-mappings.n["<leader>dn"] = { desc = " Step over" }
-mappings.n["<leader>di"] = { desc = " Step into" }
-mappings.n["<leader>do"] = { desc = " Step out" }
-mappings.n["<leader>dp"] = { desc = " Pause" }
-mappings.n["<leader>dh"] = { desc = "󰗧 Run to cursor" }
-mappings.n["<leader>dr"] = { desc = " Run" }
-
+-- -- [[ Diagnostics ]]
+-- mappings.n["<leader>d"]  = { desc = " Diagnostic" }
+-- mappings.n["<leader>db"] = { desc = "● Set breakpoint" }
+-- mappings.n["<leader>dq"] = { desc = " Terminate debugging" }
+-- mappings.n["<leader>dc"] = { desc = " Clear breakpoints" }
+-- mappings.n["<leader>dn"] = { desc = " Step over" }
+-- mappings.n["<leader>di"] = { desc = " Step into" }
+-- mappings.n["<leader>do"] = { desc = " Step out" }
+-- mappings.n["<leader>dp"] = { desc = " Pause" }
+-- mappings.n["<leader>dh"] = { desc = "󰗧 Run to cursor" }
+-- mappings.n["<leader>dr"] = { desc = " Run" }
+--
 
 -- [[ Diagnostic/Lspsaga ]]
 mappings.n["<leader>g"]  = { desc = " Lspsaga" }
@@ -115,12 +120,13 @@ mappings.v["<C-a>"]      = { cmd = "gg<S-v>G", opts = opts, desc = "Select all" 
 -- [[ Splits ]]
 opts                     = { silent = true }
 mappings.n["<leader>w"]  = { desc = " Splits" }
-mappings.n["<leader>wh"] = { cmd = ":wincmd h<CR>", opts = {}, desc = "Move left" }
-mappings.n["<leader>wj"] = { cmd = ":wincmd j<CR>", opts = {}, desc = "Move down" }
-mappings.n["<leader>wk"] = { cmd = ":wincmd k<CR>", opts = {}, desc = "Move up" }
-mappings.n["<leader>wl"] = { cmd = ":wincmd l<CR>", opts = {}, desc = "Move right" }
-mappings.n["<leader>ws"] = { cmd = ":sp l<CR>", opts = {}, desc = "Split horizonal " }
-mappings.n["<leader>wv"] = { cmd = ":vsp l<CR>", opts = {}, desc = "Split vertical " }
+mappings.n["<leader>wh"] = { cmd = ":wincmd h<CR>", opts = opts, desc = "Move left" }
+mappings.n["<leader>wj"] = { cmd = ":wincmd j<CR>", opts = opts, desc = "Move down" }
+mappings.n["<leader>wk"] = { cmd = ":wincmd k<CR>", opts = opts, desc = "Move up" }
+mappings.n["<leader>wl"] = { cmd = ":wincmd l<CR>", opts = opts, desc = "Move right" }
+mappings.n["<leader>ws"] = { cmd = ":sp l<CR>", opts = opts, desc = "Split horizonal " }
+mappings.n["<leader>wv"] = { cmd = ":vsp l<CR>", opts = opts, desc = "Split vertical " }
+mappings.n["<leader>wq"] = { cmd = ":bd<CR>", opts = opts, desc = "Close window" }
 
 -- [[ Symbols outline ]]
 mappings.n["<leader>o"]  = { cmd = ":SymbolsOutline<CR>", opts = {}, desc = "󱔁 Symbols outline " }

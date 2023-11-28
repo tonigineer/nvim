@@ -48,7 +48,7 @@ return {
                 enable = true,
             },
             indent = { enable = true, disable = { "python", "css" } },
-            context_commentstring = {
+            tscontext_commentstring = {
                 enable = true,
                 enable_autocmd = false,
             },

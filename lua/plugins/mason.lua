@@ -34,13 +34,13 @@ return {
             automatic_installation = true,
         }
 
-        require("mason-nvim-dap").setup({
-            automatic_installation = true,
-            ensure_installed = {
-                "codelldb",
-                "debugpy"
-            },
-        })
+        -- require("mason-nvim-dap").setup({
+        --     automatic_installation = true,
+        --     ensure_installed = {
+        --         "codelldb",
+        --         "debugpy"
+        --     },
+        -- })
 
         require("mason-null-ls").setup({
             automatic_installation = true,
