@@ -85,7 +85,7 @@ mappings.n["<leader>gK"] = { desc = "Hover documentation" }
 -- Stay in indent mode
 opts                     = { silent = true }
 mappings.v["<"]          = { cmd = "<gv", opts = opts, desc = "Indent to the left" }
-mappings.v[">"]          = { cmd = ">gv", opts = opts, desc = "Indent to the right" }
+mappings.v["<"]          = { cmd = "<gv", opts = opts, desc = "Indent to the left" }
 
 -- [[ Leader ]]
 -- INFO: forced by lazy to be set within lazy-vim.lua
