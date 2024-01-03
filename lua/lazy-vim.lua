@@ -3,6 +3,7 @@ local global = vim.g
 global.mapleader = " "
 global.maplocalleader = " "
 
+-- Bootstrap lazy
 local lazypath = vim.fn.stdpath("data") .. "/lazy/lazy.nvim"
 if not vim.loop.fs_stat(lazypath) then
     vim.fn.system({
@@ -19,7 +20,7 @@ vim.opt.rtp:prepend(lazypath)
 require("lazy").setup("plugins", {
     install = { missing = true },
     defaults = { lazy = true },
-    change_detection = { enabled = false },
+    change_detection = { enabled = true },
     checker = { enabled = true },
     debug = false,
     ui = {
