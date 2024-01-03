@@ -30,15 +30,15 @@ return {
             --- function will be called with a ColorScheme table
             ---@param colors ColorScheme
             on_colors = function(colors)
-                colors.bg = "#1a1b26"
+                colors.bg = "#16161e"
                 colors.bg_dark = "#16161e"
                 colors.bg_float = "#16161e"
-                colors.bg_highlight = "#292e42"
+                colors.bg_highlight = "#16161e"
                 colors.bg_popup = "#16161e"
                 colors.bg_search = "#3d59a1"
                 colors.bg_sidebar = "#16161e"
                 colors.bg_statusline = "#16161e"
-                colors.bg_visual = "#283457"
+                colors.bg_visual = "#16161e"
                 colors.black = "#15161e"
                 colors.blue = "#7aa2f7"
                 colors.blue0 = "#FFF4E5"
@@ -47,8 +47,8 @@ return {
                 colors.blue5 = "#89ddff"
                 colors.blue6 = "#b4f9f8"
                 colors.blue7 = "#394b70"
-                colors.border = "#15161e"
-                colors.border_highlight = "#27a1b9"
+                colors.border = "#266d6a"
+                colors.border_highlight = "#61ffca"
                 colors.comment = "#565f89"
                 colors.cyan = "#7dcfff"
                 colors.dark3 = "#545c7e"
@@ -93,7 +93,7 @@ return {
                 colors.red = "#f7768e"
                 colors.red1 = "#db4b4b"
                 colors.teal = "#1abc9c"
-                colors.terminal_black = "#140e1a"
+                colors.terminal_black = "#16161e"
                 colors.warning = "#e0af68"
                 colors.yellow = "#e0af68"
             end,
@@ -252,4 +252,3 @@ return {
 --         vim.cmd.colorscheme("catppuccin")
 --     end,
 -- }
-
