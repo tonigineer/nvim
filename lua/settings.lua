@@ -77,8 +77,8 @@ options.fillchars:append({ eob = " " })
 
 options.list = true
 options.linebreak = true
--- options.listchars:append "space:⋅"  -- ␣
--- options.listchars:append "eol:¬"  -- ↵
+options.listchars:append "space:⋅" -- ␣
+-- options.listchars:append "eol:¬" -- ↵
 options.listchars:append("tab:⋅⋅")
 options.listchars:append("trail:~")
 options.listchars:append("extends:>")
