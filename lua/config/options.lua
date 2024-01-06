@@ -5,6 +5,11 @@
 local options = vim.opt
 local global = vim.g
 
+-- [[ Checkhealth ]]
+global.loaded_node_provider = 0
+global.loaded_perl_provider = 0
+global.loaded_ruby_provider = 0
+
 -- [[ Context ]]
 options.colorcolumn = ""
 options.number = true

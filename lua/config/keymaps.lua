@@ -44,18 +44,18 @@ local opts = {}
 --     desc = "Close buffer"
 -- }
 
--- [[ Comments ]]
-opts = { silent = true }
-mappings.n["<leader>/"] = {
-    cmd = "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>",
-    opts = opts,
-    desc = "󰆈 Comment line ",
-}
-mappings.v["<leader>/"] = {
-    cmd = "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
-    opts = opts,
-    desc = "󰆈 Comment line ",
-}
+-- -- [[ Comments ]]
+-- opts = { silent = true }
+-- mappings.n["<leader>/"] = {
+--     cmd = "<cmd>lua require('Comment.api').toggle.linewise.current()<CR>",
+--     opts = opts,
+--     desc = "󰆈 Comment line ",
+-- }
+-- mappings.v["<leader>/"] = {
+--     cmd = "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<CR>",
+--     opts = opts,
+--     desc = "󰆈 Comment line ",
+-- }
 
 -- [[ Customs ]]
 opts = { nowait = true, silent = true }
@@ -123,8 +123,8 @@ mappings.n["<C-s>"] = { cmd = ":w!<Return>", opts = opts, desc = "Save files" }
 mappings.v["<C-s>"] = { cmd = ":w!<Return>", opts = opts, desc = "Save files" }
 mappings.i["<C-s>"] =
     { cmd = "<Esc>:w!<Return>", opts = opts, desc = "Save files" }
-mappings.n["<C-a>"] = { cmd = "gg<S-v>G", opts = opts, desc = "Select all" }
-mappings.v["<C-a>"] = { cmd = "gg<S-v>G", opts = opts, desc = "Select all" }
+-- mappings.n["<C-a>"] = { cmd = "gg<S-v>G", opts = opts, desc = "Select all" }
+-- mappings.v["<C-a>"] = { cmd = "gg<S-v>G", opts = opts, desc = "Select all" }
 
 -- -- [[ Splits ]]
 -- opts                     = { silent = true }
@@ -156,3 +156,5 @@ mappings.v["<C-a>"] = { cmd = "gg<S-v>G", opts = opts, desc = "Select all" }
 -- mappings.n["<leader>fn"] = { cmd = ':lua require"startup".new_file()<CR>', opts = {}, desc = "Create new file" }
 
 apply_mappings(mappings)
+
+vim.keymap.del("n", "<c-/>")

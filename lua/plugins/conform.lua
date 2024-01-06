@@ -1,6 +1,5 @@
--- NOTE: don't know why this is necessary, but without this code
--- the formatter in python does not work. strange, because all
--- other do just fine :(
+-- NOTE: don't know why this is necessary, but without formatter
+-- in python does not work.
 
 return {
     {
@@ -26,4 +25,3 @@ return {
         },
     },
 }
-
