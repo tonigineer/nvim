@@ -91,7 +91,7 @@ return {
                 colors.bg_sidebar = "#16161e"
                 colors.bg_statusline = "#3b4261"
                 colors.bg_visual = "#3b4261"
-                colors.black = "#15161e"
+                colors.black = "#16161e"
                 colors.blue = "#7aa2f7"
                 colors.blue0 = "#FFF4E5"
                 colors.blue1 = "#2ac3de"
@@ -132,7 +132,7 @@ return {
                     change = "#61ffca",
                     delete = "#ff6767",
                 }
-                colors.green = "#9ece6a"
+                colors.green = "#FFF4E5"
                 colors.green1 = "#73daca"
                 colors.green2 = "#41a6b5"
                 colors.hint = "#1abc9c"
@@ -154,153 +154,7 @@ return {
             --- function will be called with a Highlights and ColorScheme table
             ---@param highlights Highlights
             ---@param colors ColorScheme
-            -- on_highlights = function(hl, c)
-            --     local prompt = "#2d3149"
-            --     hl.TelescopeNormal = {
-            --       bg = c.bg_dark,
-            --       fg = c.fg_dark,
-            --     }
-            --     hl.TelescopeBorder = {
-            --       bg = c.bg_dark,
-            --       fg = c.bg_dark,
-            --     }
-            --     hl.TelescopePromptNormal = {
-            --       bg = prompt,
-            --     }
-            --     hl.TelescopePromptBorder = {
-            --       bg = prompt,
-            --       fg = prompt,
-            --     }
-            --     hl.TelescopePromptTitle = {
-            --       bg = prompt,
-            --       fg = prompt,
-            --     }
-            --     hl.TelescopePreviewTitle = {
-            --       bg = c.bg_dark,
-            --       fg = c.bg_dark,
-            --     }
-            --     hl.TelescopeResultsTitle = {
-            --       bg = c.bg_dark,
-            --       fg = c.bg_dark,
-            --     }
-            --   end,
         })
 
-        -- vim.cmd.colorscheme("catppuccin")
     end,
 }
-
--- return {
---     "catppuccin/nvim",
---     config = function()
---         local config = require("catppuccin")
---         config.setup({
---             flavour = "mocha", -- latte, frappe, macchiato, mocha
---             background = { -- :h background
---                 light = "latte",
---                 dark = "macchiato",
---             },
---             transparent_background = true, -- disables setting the background color.
---             show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
---             term_colors = true, -- sets terminal colors (e.g. `g:terminal_color_0`)
---             dim_inactive = {
---                 enabled = false, -- dims the background color of inactive window
---                 shade = "dark",
---                 percentage = 0.9, -- percentage of the shade to apply to the inactive window
---             },
---             no_italic = false, -- Force no italic
---             no_bold = false, -- Force no bold
---             no_underline = false, -- Force no underline
---             styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
---                 comments = { "italic" }, -- Change the style of comments
---                 conditionals = { "italic" },
---                 loops = {},
---                 functions = {},
---                 keywords = {},
---                 strings = {},
---                 variables = {},
---                 numbers = {},
---                 booleans = {},
---                 properties = {},
---                 types = {},
---                 operators = {},
---             },
---             color_overrides = {
---                 all = {},
---                 mocha = {
---                     rosewater = "#f5e0dc",
---                     flamingo = "#f2cdcd",
---                     pink = "#f5c2e7",
---                     mauve = "#cba6f7",
---                     red = "#f38ba8",
---                     maroon = "#eba0ac",
---                     peach = "#fab387",
---                     yellow = "#f9e2af",
---                     green = "#a6e3a1",
---                     teal = "#94e2d5",
---                     sky = "#89dceb",
---                     sapphire = "#74c7ec",
---                     blue = "#89b4fa",
---                     lavender = "#b4befe",
---                     text = "#cdd6f4",
---                     subtext1 = "#bac2de",
---                     subtext0 = "#a6adc8",
---                     overlay2 = "#9399b2",
---                     overlay1 = "#7f849c",
---                     overlay0 = "#6c7086",
---                     surface2 = "#585b70",
---                     surface1 = "#45475a",
---                     surface0 = "#313244",
---                     base = "#1e1e2e",
---                     mantle = "#181825",
---                     crust = "#11111b",
---                 },
---             },
---             custom_highlights = function(colors)
---                 return {
---                     Comment = { fg = colors.flamingo },
---                     TabLineSel = { bg = colors.pink },
---                     CmpBorder = { fg = colors.surface2 },
---                     Pmenu = { bg = colors.none },
---                 }
---             end,
---             integrations = {
---                 aerial = true,
---                 alpha = true,
---                 cmp = true,
---                 dashboard = true,
---                 flash = true,
---                 gitsigns = true,
---                 headlines = true,
---                 illuminate = true,
---                 indent_blankline = { enabled = true },
---                 leap = true,
---                 lsp_trouble = true,
---                 mason = true,
---                 markdown = true,
---                 mini = true,
---                 native_lsp = {
---                     enabled = true,
---                     underlines = {
---                         errors = { "undercurl" },
---                         hints = { "undercurl" },
---                         warnings = { "undercurl" },
---                         information = { "undercurl" },
---                     },
---                 },
---                 navic = { enabled = true, custom_bg = "lualine" },
---                 neotest = true,
---                 neotree = true,
---                 noice = true,
---                 notify = true,
---                 semantic_tokens = true,
---                 telescope = true,
---                 treesitter = true,
---                 treesitter_context = true,
---                 which_key = true,
---                 -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
---             },
---         })
---         vim.cmd.colorscheme("catppuccin")
---     end,
--- }
