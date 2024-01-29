@@ -39,10 +39,7 @@ cargo install tree-sitter-cli
 sudo npm install -g tree-sitter-cli
 ```
 
-<details>
-    
-<summary>Install Neovim on Ubuntu</summary>
-
+<details><summary>Install Neovim on Ubuntu</summary>
 
 ```sh
 # Neovim for Ubuntu
@@ -54,6 +51,4 @@ sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim
 rm -rf nvim-linux64*
 ```
 
-
 </details>
-
