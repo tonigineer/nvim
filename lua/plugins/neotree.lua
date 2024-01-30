@@ -2,6 +2,10 @@ return {
     "nvim-neo-tree/neo-tree.nvim",
     opts = function()
         return {
+            close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
+            popup_border_style = "rounded",
+            enable_git_status = true,
+            enable_diagnostics = true,
             default_component_configs = {
                 indent = {
                     with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
@@ -23,6 +27,14 @@ return {
                         staged = "",
                         conflict = "",
                     },
+                },
+            },
+            window = {
+                position = "left",
+                width = 25,
+                mapping_options = {
+                    noremap = true,
+                    nowait = true,
                 },
             },
         }
