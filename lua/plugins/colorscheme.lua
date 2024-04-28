@@ -155,6 +155,5 @@ return {
             ---@param highlights Highlights
             ---@param colors ColorScheme
         })
-
     end,
 }
