@@ -6,6 +6,12 @@ return {
             popup_border_style = "rounded",
             enable_git_status = true,
             enable_diagnostics = true,
+            filesystem = {
+                filtered_items = {
+                    hide_dotfiles = false,
+                    hide_gitignored = false,
+                },
+            },
             default_component_configs = {
                 indent = {
                     with_expanders = true, -- if nil and file nesting is enabled, will enable expanders
@@ -21,17 +27,20 @@ return {
                         deleted = "✖", -- this can only be used in the git_status source
                         renamed = "󰁕", -- this can only be used in the git_status source
                         -- Status type
-                        untracked = "",
+                        untracked = "?",
                         ignored = "",
                         unstaged = "󰄱",
                         staged = "",
                         conflict = "",
                     },
                 },
+                name = {
+                    use_git_status_colors = true,
+                },
             },
             window = {
                 position = "left",
-                width = 25,
+                width = 35,
                 mapping_options = {
                     noremap = true,
                     nowait = true,
