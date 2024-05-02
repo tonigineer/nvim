@@ -25,9 +25,10 @@ return {
             fg      = '#FAF7FE',
             yellow  = '#ffca85',
             green   = '#61ffca',
-            magenta = '#25C9F3',
+            blue = '#25C9F3',
             red     = '#ff6767',
-            gray    = '#BFBDCB'
+            gray    = '#BFBDCB',
+            black   = '#343434',
             -- cyan     = '#008080',
             -- darkblue = '#0b111b',
             -- blue     = '#51afef',
@@ -98,21 +99,21 @@ return {
 
         ins_left({
             function() return "▊" end,
-            color = { fg = colors.blue }, -- Sets highlighting of component
-            padding = { left = 0, right = 1 }, -- We don't need space before this
+            color = { fg = colors.black }, -- Sets highlighting of component
+            padding = { left = 1, right = 1 }, -- We don't need space before this
         })
 
         ins_left({
             -- mode component
             function()
                 local mode = {
-                    n = " NORMAL",
-                    i = " INSERT",
-                    v = " VISUAL",
-                    [""] = " VISUAL",
-                    V = " VISUAL-LINE",
-                    t = " TERMINAL",
-                    c = " COMMAND",
+                    n = "   NORMAL",
+                    i = "   INSERT",
+                    v = "   VISUAL",
+                    [""] = "   VISUAL",
+                    V = "   VISUAL-LINE",
+                    t = "   TERMINAL",
+                    c = "   COMMAND",
                 }
                 return mode[vim.fn.mode()]
             end,
@@ -121,17 +122,17 @@ return {
                 local mode_color = {
                     n = colors.red,
                     i = colors.green,
-                    v = colors.magenta,
-                    [""] = colors.magenta,
-                    V = colors.magenta,
-                    c = colors.magenta,
+                    v = colors.blue,
+                    [""] = colors.blue,
+                    V = colors.blue,
+                    c = colors.blue,
                     no = colors.red,
                     s = colors.yellow,
                     S = colors.yellow,
                     [""] = colors.yellow,
                     ic = colors.yellow,
-                    R = colors.magenta,
-                    Rv = colors.magenta,
+                    R = colors.blue,
+                    Rv = colors.blue,
                     cv = colors.red,
                     ce = colors.red,
                     r = colors.green,
@@ -141,24 +142,25 @@ return {
                     t = colors.red,
                 }
                 return {
-                    fg = colors.white,
+                    fg = colors.black,
                     -- fg = mode_color[vim.fn.mode()],
                     bg = mode_color[vim.fn.mode()],
                 }
             end,
-            padding = { right = 1 },
+            padding = { right = 3 },
         })
 
         ins_left({
             -- filesize component
             "filesize",
             cond = conditions.buffer_not_empty,
+            color = { fg = colors.black },
         })
 
         ins_left({
             "filename",
             cond = conditions.buffer_not_empty,
-            color = { fg = colors.magenta, gui = "bold" },
+            color = { fg = colors.blue, gui = "bold" },
         })
 
         ins_left({ "location" })
@@ -206,20 +208,20 @@ return {
             "o:encoding", -- option component same as &encoding in viml
             fmt = string.upper, -- I'm not sure why it's upper case either ;)
             cond = conditions.hide_in_width,
-            color = { fg = colors.fg, gui = "bold" },
+            color = { fg = colors.black, gui = "bold" },
         })
 
         ins_right({
             "fileformat",
             fmt = string.upper,
             icons_enabled = false, -- I think icons are cool but Eviline doesn't have them. sigh
-            color = { fg = colors.fg, gui = "bold" },
+            color = { fg = colors.black, gui = "bold" },
         })
 
         ins_right({
             "branch",
             icon = "",
-            color = { fg = colors.fg, gui = "bold" },
+            color = { fg = colors.green, gui = "bold" },
         })
 
         ins_right({
@@ -236,7 +238,7 @@ return {
 
         ins_right({
             function() return "▊" end,
-            color = { fg = colors.magenta },
+            color = { fg = colors.black },
             padding = { left = 1 },
         })
 
