@@ -37,14 +37,14 @@ return {
                             bg_p2 = "none",
 
                             special = "#61ffca",
-                            nontext = "#232323",
-                            whitespace = "#232323",
+                            nontext = "#454545",
+                            whitespace = "#454545",
 
                             bg_search = "none",
-                            bg_visual = "#555555",
+                            bg_visual = "#454545",
 
                             pmenu = {
-                                fg = "#232323",
+                                fg = "#454545",
                                 fg_sel = "#FAF7FE",
                                 bg = "none",
                                 bg_sel = "none",
@@ -72,8 +72,8 @@ return {
                             preproc = "#ffca85",
                             type = "#61ffca",
                             regex = "#ffca85",
-                            deprecated = "#222222",
-                            comment = "#343434",
+                            deprecated = "#454545",
+                            comment = "#787878",
                             punct = "#25C9F3",
                             special1 = "#ffca85",
                             special2 = "#FAF7FE",
