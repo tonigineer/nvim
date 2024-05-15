@@ -156,5 +156,3 @@ mappings.i["<C-s>"] =
 -- mappings.n["<leader>fn"] = { cmd = ':lua require"startup".new_file()<CR>', opts = {}, desc = "Create new file" }
 
 apply_mappings(mappings)
-
-vim.keymap.del("n", "<c-/>")
