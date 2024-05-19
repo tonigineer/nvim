@@ -3,29 +3,23 @@ return {
         "williamboman/mason.nvim",
         dependencies = { "williamboman/mason-lspconfig.nvim" },
         opts = {
-            ensure_installed = {
-                -- lua
+            ensure_installed = { -- lua
                 "lua-language-server",
                 "stylua",
-                "luacheck",
-                -- bash
+                "luacheck", -- bash
                 "bash-language-server",
                 "shellcheck",
-                "shfmt",
-                -- python
+                "shfmt", -- python
                 "pyright",
                 "black",
                 "isort",
-                "pylint",
-                -- c/cpp
+                "pylint", -- c/cpp
                 "clangd",
                 "clang-format",
-                "cpplint",
-                -- rust
+                "cpplint", -- rust
                 "rust-analyzer",
-                -- json
-                "json-lsp",
-                -- markdown
+                "clippy", -- json
+                "json-lsp", -- markdown
                 "marksman",
                 "markdownlint",
             },
@@ -68,30 +62,68 @@ return {
                 false
 
             local lspconfig = require("lspconfig")
-            -- lspconfig.tsserver.setup({
-            --     capabilities = capabilities,
-            -- })
-            -- lspconfig.solargraph.setup({
-            --     capabilities = capabilities,
-            -- })
-            -- lspconfig.html.setup({
-            --     capabilities = capabilities,
-            -- })
+
+            lspconfig.rust_analyzer.setup({
+                settings = {
+                    ["rust-analyzer"] = {
+                        check = {
+                            command = "clippy",
+                        },
+                        diagnostics = {
+                            enable = true,
+                        },
+                        cargo = {
+                            allFeatures = true,
+                        },
+                    },
+                },
+                root_dir = lspconfig.util.root_pattern("Cargo.toml"),
+                filetypes = { "rust" },
+            })
 
             lspconfig.lua_ls.setup({
                 capabilities = capabilities,
             })
+
             lspconfig.pyright.setup({
                 capabilities = capabilities,
             })
+
             lspconfig.clang.setup({
                 capabilities = capabilities,
             })
 
-            vim.keymap.set("n", "K", vim.lsp.buf.hover, {})
-            vim.keymap.set("n", "<leader>gd", vim.lsp.buf.definition, {})
-            vim.keymap.set("n", "<leader>gr", vim.lsp.buf.references, {})
-            vim.keymap.set("n", "<leader>ca", vim.lsp.buf.code_action, {})
+            local wk = require("which-key")
+            wk.register({
+                ["<leader>g"] = { "Go to" },
+                ["<leader>K"] = { ":lua vim.lsp.buf.hover() <cr>", "Hover" },
+                ["<leader>gd"] = {
+                    ":lua vim.lsp.buf.definition() <cr>",
+                    "Definition",
+                },
+                ["<leader>gr"] = {
+                    ":lua vim.lsp.buf.references() <cr>",
+                    "References",
+                },
+            })
+        end,
+    },
+    {
+        "saecki/crates.nvim",
+        ft = { "rust", "toml" },
+
+        config = function()
+            local wk = require("which-key")
+            wk.register({
+                ["<leader>r"] = { "Rust" },
+                ["<leader>rc"] = { "Crates" },
+                ["<leader>rcu"] = {
+                    ":lua require('crates').upgrade_all_crates() <cr>",
+                    "Upgrade all crates",
+                },
+            })
+
+            require("crates").setup({})
         end,
     },
 }

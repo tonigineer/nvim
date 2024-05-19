@@ -1,6 +1,5 @@
 -- return {
 --     "rebelot/kanagawa.nvim",
-
 --     config = function()
 --         -- Default options:
 --         require("kanagawa").setup({
@@ -25,24 +24,19 @@
 --                             fg = "#FAF7FE",
 --                             fg_dim = "#BFBDCB",
 --                             fg_reverse = "#25C9F3",
-
 --                             bg_dim = "none",
 --                             bg_gutter = "none",
-
 --                             bg_m3 = "none",
 --                             bg_m2 = "none",
 --                             bg_m1 = "none",
 --                             bg = "none",
 --                             bg_p1 = "none",
 --                             bg_p2 = "none",
-
 --                             special = "#61ffca",
 --                             nontext = "#454545",
 --                             whitespace = "#454545",
-
 --                             bg_search = "none",
 --                             bg_visual = "#454545",
-
 --                             pmenu = {
 --                                 fg = "#454545",
 --                                 fg_sel = "#FAF7FE",
@@ -129,12 +123,10 @@
 --                 light = "lotus",
 --             },
 --         })
-
 --         -- setup must be called before loading
 --         vim.cmd("colorscheme kanagawa")
 --     end,
 -- }
-
 return {
     "catppuccin/nvim",
     name = "catppuccin",
