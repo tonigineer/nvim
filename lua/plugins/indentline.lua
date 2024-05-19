@@ -43,7 +43,7 @@ return {
         opts = {
             scope = { enabled = false },
             exclude = {
-                filetypes = { "dashboard" },
+                filetypes = { "dashboard", "mason" },
                 buftypes = {},
             },
         },

@@ -25,9 +25,9 @@ return {
             },
             ui = {
                 icons = {
-                    package_installed = "✓",
-                    package_pending = "➜",
-                    package_uninstalled = "✗",
+                    package_installed = "",
+                    package_pending = "",
+                    package_uninstalled = "",
                 },
                 border = {
                     "╭",
@@ -95,7 +95,7 @@ return {
 
             local wk = require("which-key")
             wk.register({
-                ["<leader>g"] = { "Go to" },
+                ["<leader>g"] = { name = "Goto" },
                 ["<leader>K"] = { ":lua vim.lsp.buf.hover() <cr>", "Hover" },
                 ["<leader>gd"] = {
                     ":lua vim.lsp.buf.definition() <cr>",
@@ -115,8 +115,12 @@ return {
         config = function()
             local wk = require("which-key")
             wk.register({
-                ["<leader>r"] = { "Rust" },
-                ["<leader>rc"] = { "Crates" },
+                ["<leader>r"] = {
+                    name = "+Rust",
+                },
+                ["<leader>rc"] = {
+                    name = "+Crates",
+                },
                 ["<leader>rcu"] = {
                     ":lua require('crates').upgrade_all_crates() <cr>",
                     "Upgrade all crates",
