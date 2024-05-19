@@ -1,28 +1,34 @@
--- NOTE: don't know why this is necessary, but without formatter
--- in python does not work.
-
 return {
-    {
-        "williamboman/mason.nvim",
-        opts = function(_, opts) table.insert(opts.ensure_installed, "black") end,
-    },
-    {
-        "nvimtools/none-ls.nvim",
-        optional = true,
-        opts = function(_, opts)
-            local nls = require("null-ls")
-            opts.sources = opts.sources or {}
-            table.insert(opts.sources, nls.builtins.formatting.black)
-        end,
-    },
-    {
-        "stevearc/conform.nvim",
-        optional = true,
-        opts = {
+    "stevearc/conform.nvim",
+    config = function()
+        require("conform").setup({
             formatters_by_ft = {
                 lua = { "stylua" },
+                -- Conform will run multiple formatters sequentially
                 python = { "isort", "black" },
+                -- Use a sub-list to run only the first available formatter
+                -- javascript = { { "prettierd", "prettier" } },
+                -- Use the "*" filetype to run formatters on all filetypes.
+                rust = {"clippy"},
+                ["*"] = { "codespell" },
+                -- Use the "_" filetype to run formatters on filetypes that don't
+                -- have other formatters configured.
+                ["_"] = { "trim_whitespace" },
             },
-        },
-    },
+            format_on_save = {
+                -- I recommend these options. See :help conform.format for details.
+                lsp_fallback = true,
+                timeout_ms = 500,
+            },
+        })
+
+        vim.api.nvim_create_autocmd("BufWritePre", {
+            pattern = "*",
+            callback = function(args)
+                require("conform").format({
+                    bufnr = args.buf,
+                })
+            end,
+        })
+    end,
 }

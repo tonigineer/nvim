@@ -7,34 +7,28 @@ return {
             -- config
             theme = "hyper",
             hide = {
-                statusline = false, -- hide statusline default is true
-                tabline = false, -- hide the tabline
-                winbar = false, -- hide winbar
+                statusline = false,
+                tabline = false,
+                winbar = false,
             },
             config = {
                 week_header = {
-                    enable = true,
+                    enable = false,
                 },
+                header = {},
+                center = {},
                 shortcut = {
                     {
-                        desc = "󰊳 Update",
-                        group = "@property",
-                        action = "Lazy update",
-                        key = "u",
-                    },
-                    {
                         desc = " Health",
-                        group = "Number",
+                        group = "DiagnosticError",
                         action = ":checkhealth",
                         key = "h",
                     },
                     {
-                        icon = " ",
-                        icon_hl = "@variable",
-                        desc = "Files",
-                        group = "Label",
-                        action = "Telescope find_files",
-                        key = "f",
+                        desc = "󰊳 Lazy",
+                        group = "DiagnosticWarn",
+                        action = "Lazy update",
+                        key = "u",
                     },
                     {
                         desc = " Mason",
@@ -44,7 +38,7 @@ return {
                     },
                     {
                         desc = " dotfiles",
-                        group = "Number",
+                        group = "Files",
                         action = ":Neotree reveal ~/.dotfiles left",
                         key = "d",
                     },
