@@ -39,7 +39,7 @@ return {
                     {
                         desc = " dotfiles",
                         group = "Files",
-                        action = ":Neotree reveal ~/.dotfiles left",
+                        action = ":Neotree reveal ~/Dotfiles left",
                         key = "d",
                     },
                 },

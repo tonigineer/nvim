@@ -89,7 +89,7 @@ return {
                 capabilities = capabilities,
             })
 
-            lspconfig.clang.setup({
+            lspconfig.clangd.setup({
                 capabilities = capabilities,
             })
 
@@ -129,5 +129,10 @@ return {
 
             require("crates").setup({})
         end,
+    },
+    {
+        "theRealCarneiro/hyprland-vim-syntax",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        ft = "hypr",
     },
 }
