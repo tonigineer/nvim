@@ -35,7 +35,7 @@ return {
             wk.register({
                 ["<leader>f"] = { name = "+Telescope" },
                 ["<leader>ff"] = {
-                    "<cmd>Telescope find_files<cr>",
+                    "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
                     "Find File",
                 },
                 ["<leader>fb"] = {

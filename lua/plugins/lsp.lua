@@ -22,6 +22,9 @@ return {
                 "json-lsp", -- markdown
                 "marksman",
                 "markdownlint",
+                "cssls", -- css
+                "prettier",
+                "prettierd"
             },
             ui = {
                 icons = {
@@ -81,6 +84,10 @@ return {
                 filetypes = { "rust" },
             })
 
+            lspconfig.bashls.setup({
+                capabilities = capabilities,
+            })
+
             lspconfig.lua_ls.setup({
                 capabilities = capabilities,
             })
@@ -90,6 +97,10 @@ return {
             })
 
             lspconfig.clangd.setup({
+                capabilities = capabilities,
+            })
+
+            lspconfig.cssls.setup({
                 capabilities = capabilities,
             })
 

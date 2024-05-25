@@ -14,6 +14,8 @@ return {
                 -- Use the "_" filetype to run formatters on filetypes that don't
                 -- have other formatters configured.
                 ["_"] = { "trim_whitespace" },
+                bash = { "shfmt" },
+                scss = { { "prettierd", "prettier" } },
             },
             format_on_save = {
                 -- I recommend these options. See :help conform.format for details.
