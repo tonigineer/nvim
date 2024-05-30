@@ -28,6 +28,22 @@ end
 
 local opts = {}
 
+-- [[ Buffer ]]
+opts = {
+    nowait = true,
+    silent = true,
+}
+mappings.n["<leader>p"] = {
+    cmd = ":bp<cr>",
+    opts = opts,
+    desc = "Buffer previous",
+}
+mappings.n["<leader>n"] = {
+    cmd = ":bn<cr>",
+    opts = opts,
+    desc = "Buffer next",
+}
+
 -- [[ Customs ]]
 opts = {
     nowait = true,
