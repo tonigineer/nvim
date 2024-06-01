@@ -26,6 +26,11 @@ for _, mode in ipairs({ "", "n", "v", "x", "s", "o", "!", "i", "l", "c", "t" }) 
     mappings[mode] = {}
 end
 
+local wk = require("which-key")
+wk.register({
+    ["<leader>l"] = { name = "+LSP" },
+})
+
 local opts = {}
 
 -- [[ Buffer ]]

@@ -102,8 +102,8 @@ return {
                     "bashls",
                     "pyright",
                     "clangd",
-                    "rust-analyzer",
-                    "json-lsp",
+                    "rust_analyzer",
+                    "jsonls",
                     "marksman",
                     "cssls",
                 },
@@ -120,6 +120,9 @@ return {
                         local lua_opts = lsp_zero.nvim_lua_ls()
                         require("lspconfig").lua_ls.setup(lua_opts)
                     end,
+
+                    -- Disable LSP for rust here, since rustecean is used.
+                    rust_analyzer = function() end,
                 },
             })
         end,

@@ -3,11 +3,11 @@ return {
     config = function()
         require("conform").setup({
             formatters_by_ft = {
-                bash = { "shfmt" },
+                bash = { "shfmt", "shellcheck" },
                 lua = { "stylua" },
                 python = { "isort", "black" },
                 rust = { "rustfmt" },
-                scss = { { "prettierd", "prettier" } },
+                scss = { "prettierd" },
                 -- Use the "_" filetype to run formatters on filetypes that don't
                 -- have other formatters configured.
                 ["*"] = { "codespell" },
