@@ -47,7 +47,7 @@ return {
                     "<cmd>Telescope oldfiles<cr>",
                     "Open Recent File",
                 },
-                ["<leader>fn"] = { "<cmd>enew<cr>", "New File" },
+                ["<leader>fn"] = { "<cmd>new<cr>", "New File" },
             })
 
             require("telescope").load_extension("ui-select")

@@ -15,29 +15,6 @@ return {
         lazy = false,
         config = true,
         opts = {
-            ensure_installed = {
-                "lua-language-server",
-                "stylua",
-                "luacheck",
-                "bash-language-server",
-                "shellcheck",
-                "shfmt",
-                "pyright",
-                "black",
-                "isort",
-                "pylint",
-                "clangd",
-                "clang-format",
-                "cpplint",
-                "rust-analyzer",
-                "clippy",
-                "json-lsp",
-                "marksman",
-                "markdownlint",
-                "cssls",
-                "prettier",
-                "prettierd",
-            },
             ui = {
                 icons = {
                     package_installed = "",
@@ -120,9 +97,16 @@ return {
             end)
 
             require("mason-lspconfig").setup({
-                -- ensure_installed = {
-
-                -- },
+                ensure_installed = {
+                    "lua_ls",
+                    "bashls",
+                    "pyright",
+                    "clangd",
+                    "rust-analyzer",
+                    "json-lsp",
+                    "marksman",
+                    "cssls",
+                },
                 handlers = {
                     -- this first function is the "default handler"
                     -- it applies to every language server without a "custom handler"

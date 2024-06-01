@@ -1,8 +1,8 @@
 -- Format on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = "*",
-    callback = function(args) require("conform").format({ bufnr = args.buf }) end,
-})
+-- vim.api.nvim_create_autocmd("BufWritePre", {
+--    pattern = "*",
+--    callback = function(args) require("conform").format({ bufnr = args.buf }) end,
+-- })
 
 -- Change tabwidth base on file type
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
@@ -22,3 +22,6 @@ vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
         -- vim.opt.colorcolumn = 79
     end,
 })
+
+-- Disable Treesitter highlighting globally
+vim.cmd(":TSDisable highlight")

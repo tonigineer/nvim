@@ -85,3 +85,4 @@ options.listchars:append("precedes:<")
 options.iskeyword:append("-") -- treats words with `-` as single words
 options.shortmess:append("c") -- hide all the completion messages, e.g. "-- XXX completion (YYY)", "match 1 of 2", "The only match", "Pattern not found"
 options.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
+

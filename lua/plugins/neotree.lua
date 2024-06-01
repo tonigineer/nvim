@@ -30,7 +30,7 @@ return {
             close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
             popup_border_style = "rounded",
             enable_git_status = true,
-            enable_diagnostics = true,
+            enable_diagnostics = false,
             -- enable_normal_mode_for_inputs = false, -- Enable normal mode for input dialogs.
             open_files_do_not_replace_types = { "terminal", "trouble", "qf" }, -- when opening files, do not use windows containing these filetypes or buftypes
             sort_case_insensitive = false, -- used when sorting files and directories in the tree
@@ -75,7 +75,7 @@ return {
                 },
                 name = {
                     trailing_slash = false,
-                    use_git_status_colors = true,
+                    use_git_status_colors = false,
                     highlight = "NeoTreeFileName",
                 },
                 git_status = {
@@ -86,7 +86,7 @@ return {
                         deleted = "✖", -- this can only be used in the git_status source
                         renamed = "󰁕", -- this can only be used in the git_status source
                         -- Status type
-                        untracked = "",
+                        untracked = "?",
                         ignored = "",
                         unstaged = "󰄱",
                         staged = "",
@@ -208,7 +208,7 @@ return {
                     },
                 },
                 follow_current_file = {
-                    enabled = false, -- This will find and focus the file in the active buffer every time
+                    enabled = true, -- This will find and focus the file in the active buffer every time
                     --               -- the current file is changed while the tree is open.
                     leave_dirs_open = false, -- `false` closes auto expanded dirs, such as with `:Neotree reveal`
                 },

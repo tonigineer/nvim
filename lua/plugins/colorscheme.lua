@@ -1,57 +1,3 @@
--- return {
---     "rebelot/kanagawa.nvim",
---     config = function()
---         -- Default options:
---         require("kanagawa").setup({
---             compile = false, -- enable compiling the colorscheme
---             undercurl = true, -- enable undercurls
---             commentStyle = { italic = true },
---             functionStyle = {},
---             keywordStyle = { italic = true },
---             statementStyle = { bold = true },
---             typeStyle = {},
---             transparent = false, -- do not set background color
---             dimInactive = false, -- dim inactive window `:h hl-NormalNC`
---             terminalColors = true, -- define vim.g.terminal_color_{0,17}
---             colors = { -- add/modify theme and palette colors
---                 palette = {},
---                 theme = {
---                     wave = {},
---                     lotus = {},
---                     dragon = {},
---                     all = {
---                         ui = {
---                             fg = "#FAF7FE",
---                             fg_dim = "#BFBDCB",
---                             fg_reverse = "#25C9F3",
---                             bg_dim = "none",
---                             bg_gutter = "none",
---                             bg_m3 = "none",
---                             bg_m2 = "none",
---                             bg_m1 = "none",
---                             bg = "none",
---                             bg_p1 = "none",
---                             bg_p2 = "none",
---                             special = "#61ffca",
---                             nontext = "#454545",
---                             whitespace = "#454545",
---                             bg_search = "none",
---                             bg_visual = "#454545",
---                             pmenu = {
---                                 fg = "#454545",
---                                 fg_sel = "#FAF7FE",
---                                 bg = "none",
---                                 bg_sel = "none",
---                                 bg_sbar = "none",
---                                 bg_thumb = "none",
---                             },
---                             float = {
---                                 fg = "#FAF7FE",
---                                 bg = "none",
---                                 fg_border = "#25C9F3",
---                                 bg_border = "none",
---                             },
---                         },
 --                         syn = {
 --                             string = "#61ffca",
 --                             variable = "#25C9F3",
@@ -68,137 +14,217 @@
 --                             regex = "#ffca85",
 --                             deprecated = "#454545",
 --                             comment = "#787878",
---                             punct = "#25C9F3",
---                             special1 = "#ffca85",
---                             special2 = "#FAF7FE",
---                             special3 = "#25C9F3",
---                         },
---                         vcs = {
---                             added = "#61ffca",
---                             removed = "#ff6767",
---                             changed = "#ffca85",
---                         },
---                         diff = {
---                             add = "#61ffca",
---                             delete = "#ff6767",
---                             change = "#ffca85",
---                             text = "#FAF7FE",
---                         },
---                         diag = {
---                             ok = "#61ffca",
---                             error = "#ff6767",
---                             warning = "#ffca85",
---                             info = "#FAF7FE",
---                             hint = "#25C9F3",
---                         },
---                         term = {
---                             "", -- black
---                             "", -- red
---                             "", -- green
---                             "", -- yellow
---                             "", -- blue
---                             "", -- magenta
---                             "", -- cyan
---                             "", -- white
---                             "", -- bright black
---                             "", -- bright red
---                             "", -- bright green
---                             "", -- bright yellow
---                             "", -- bright blue
---                             "", -- bright magenta
---                             "", -- bright cyan
---                             "", -- bright white
---                             "", -- extended color 1
---                             "", -- extended color 2
---                         },
---                     },
---                 },
---             },
---             overrides = function(colors) -- add/modify highlights
---                 return {}
---             end,
---             theme = "wave", -- Load "wave" theme when 'background' option is not set
---             background = { -- map the value of 'background' option to a theme
---                 dark = "wave", -- try "dragon" !
---                 light = "lotus",
---             },
---         })
---         -- setup must be called before loading
---         vim.cmd("colorscheme kanagawa")
---     end,
--- }
+
 return {
-    "catppuccin/nvim",
-    name = "catppuccin",
+    "folke/tokyonight.nvim",
+    lazy = false,
     priority = 1000,
+    opts = {},
 
     config = function()
-        require("catppuccin").setup({
-            flavour = "auto", -- latte, frappe, macchiato, mocha
-            background = { -- :h background
-                light = "latte",
-                dark = "mocha",
-            },
-            transparent_background = true, -- disables setting the background color.
-            show_end_of_buffer = false, -- shows the '~' characters after the end of buffers
-            term_colors = false, -- sets terminal colors (e.g. `g:terminal_color_0`)
-            dim_inactive = {
-                enabled = false, -- dims the background color of inactive window
-                shade = "dark",
-                percentage = 0.15, -- percentage of the shade to apply to the inactive window
-            },
-            no_italic = false, -- Force no italic
-            no_bold = false, -- Force no bold
-            no_underline = false, -- Force no underline
-            styles = { -- Handles the styles of general hi groups (see `:h highlight-args`):
-                comments = { "italic" }, -- Change the style of comments
-                conditionals = { "italic" },
-                loops = {},
+        require("tokyonight").setup({
+            style = "moon", -- The theme comes in three styles, `storm`, `moon`, a darker variant `night` and `day`
+            light_style = "day", -- The theme is used when the background is set to light
+            transparent = true, -- Enable this to disable setting the background color
+            terminal_colors = true, -- Configure the colors used when opening a `:terminal` in [Neovim](https://github.com/neovim/neovim)
+            styles = {
+                -- Value is any valid attr-list value for `:help nvim_set_hl`
+                comments = { italic = true },
+                keywords = { italic = false },
                 functions = {},
-                keywords = {},
-                strings = {},
                 variables = {},
-                numbers = {},
-                booleans = {},
-                properties = {},
-                types = {},
-                operators = {},
-                -- miscs = {}, -- Uncomment to turn off hard-coded styles
+                -- Background styles. Can be "dark", "transparent" or "normal"
+                sidebars = "transparent", -- style for sidebars, see below
+                floats = "transparent", -- style for floating windows
             },
-            color_overrides = {
-                all = {
-                    text = "#ffffff",
-                },
-                latte = {
-                    base = "#ff0000",
-                    mantle = "#242424",
-                    crust = "#474747",
-                },
-                frappe = {},
-                macchiato = {},
-                mocha = {
-                    base = "#000000",
-                    mantle = "#FF0000",
-                    crust = "#00FF00",
-                },
-            },
-            custom_highlights = {},
-            default_integrations = true,
-            integrations = {
-                cmp = true,
-                gitsigns = true,
-                nvimtree = true,
-                treesitter = true,
-                notify = false,
-                mini = {
-                    enabled = true,
-                    indentscope_color = "",
-                },
-                -- For more plugins integrations please scroll down (https://github.com/catppuccin/nvim#integrations)
-            },
-        })
+            sidebars = { "qf", "help" }, -- Set a darker background on sidebar-like windows. For example: `["qf", "vista_kind", "terminal", "packer"]`
+            day_brightness = 0.3, -- Adjusts the brightness of the colors of the **Day** style. Number between 0 and 1, from dull to vibrant colors
+            hide_inactive_statusline = true, -- Enabling this option, will hide inactive statuslines and replace them with a thin border instead. Should work with the standard **StatusLine** and **LuaLine**.
+            dim_inactive = true, -- dims inactive windows
+            lualine_bold = false, -- When `true`, section headers in the lualine theme will be bold
 
-        -- setup must be called before loading
-        vim.cmd.colorscheme("catppuccin-mocha")
+            --- You can override specific color groups to use other groups or a hex color
+            --- function will be called with a ColorScheme table
+            ---@class colors ColorScheme
+            on_colors = function(colors)
+                local default_colors = {
+                    _name = "tokyonight_night",
+                    bg = "#1a1b26",
+                    bg_dark = "#16161e",
+                    bg_float = "#16161e",
+                    bg_highlight = "#292e42",
+                    bg_popup = "#16161e",
+                    bg_search = "#3d59a1",
+                    bg_sidebar = "#16161e",
+                    bg_statusline = "#16161e",
+                    bg_visual = "#283457",
+                    black = "#15161e",
+                    blue = "#7aa2f7",
+                    blue0 = "#3d59a1",
+                    blue1 = "#2ac3de",
+                    blue2 = "#0db9d7",
+                    blue5 = "#89ddff",
+                    blue6 = "#b4f9f8",
+                    blue7 = "#394b70",
+                    border = "#15161e",
+                    border_highlight = "#27a1b9",
+                    comment = "#565f89",
+                    cyan = "#7dcfff",
+                    dark3 = "#545c7e",
+                    dark5 = "#737aa2",
+                    delta = {
+                        add = "#2c5a66",
+                        delete = "#713137",
+                    },
+                    diff = {
+                        add = "#20303b",
+                        change = "#1f2231",
+                        delete = "#37222c",
+                        text = "#394b70",
+                    },
+                    error = "#db4b4b",
+                    fg = "#c0caf5",
+                    fg_dark = "#a9b1d6",
+                    fg_float = "#c0caf5",
+                    fg_gutter = "#3b4261",
+                    fg_sidebar = "#a9b1d6",
+                    git = {
+                        add = "#449dab",
+                        change = "#6183bb",
+                        delete = "#914c54",
+                        ignore = "#545c7e",
+                    },
+                    gitSigns = {
+                        add = "#266d6a",
+                        change = "#536c9e",
+                        delete = "#b2555b",
+                    },
+                    green = "#9ece6a",
+                    green1 = "#73daca",
+                    green2 = "#41a6b5",
+                    hint = "#1abc9c",
+                    info = "#0db9d7",
+                    magenta = "#bb9af7",
+                    magenta2 = "#ff007c",
+                    none = "NONE",
+                    orange = "#ff9e64",
+                    purple = "#9d7cd8",
+                    red = "#f7768e",
+                    red1 = "#db4b4b",
+                    teal = "#1abc9c",
+                    terminal_black = "#414868",
+                    todo = "#7aa2f7",
+                    warning = "#e0af68",
+                    yellow = "#e0af68",
+                }
+
+                colors = default_colors
+                -- colors.green = "#61ffca"
+                -- colors.white = "#FAF7FE"
+                -- colors.blue = "#25C9F3"
+                -- colors.red = "#ff6767"
+            end,
+
+            --- You can override specific highlights to use other groups or a hex color
+            --- function will be called with a Highlights and ColorScheme table
+            ---@class highlights Highlights
+            ---@class colors ColorScheme
+            on_highlights = function(hl, c)
+                -- Telescope
+                local title = "#61ffca"
+                local prompt_text = "#FAF7FE"
+                hl.TelescopeNormal = {
+                    bg = c.bg_none,
+                    fg = c.fg_dark,
+                }
+                hl.TelescopeBorder = {
+                    bg = c.bg_none,
+                    fg = c.fg_dark,
+                }
+                hl.TelescopePromptNormal = {
+                    bg = c.bg_none,
+                    fg = prompt_text,
+                }
+                hl.TelescopePromptBorder = {
+                    bg = c.bg_none,
+                    fg = c.fg_dark,
+                }
+                hl.TelescopePromptTitle = {
+                    bg = c.bg_none,
+                    fg = title,
+                }
+                hl.TelescopePreviewTitle = {
+                    bg = c.bg_none,
+                    fg = title,
+                }
+                hl.TelescopeResultsTitle = {
+                    bg = c.bg_none,
+                    fg = title,
+                }
+
+                -- Lines/Indents/Comments
+                local help_gray = "#3f404f"
+                hl.Comment = {
+                    fg = help_gray,
+                    style = {
+                        italic = true,
+                    },
+                }
+                hl.LineNr = {
+                    fg = help_gray,
+                }
+                hl.LineNrAbove = {
+                    fg = help_gray,
+                }
+                hl.LineNrBelow = {
+                    fg = help_gray,
+                }
+                hl.IndentBlanklineChar = {
+                    fg = help_gray,
+                    nocombine = true,
+                }
+                hl.IndentBlanklineContextChar = {
+                    fg = "#2ac3de",
+                    nocombine = true,
+                }
+                hl.IndentLine = {
+                    fg = help_gray,
+                    nocombine = true,
+                }
+                hl.IndentLineCurrent = {
+                    fg = "#2ac3de",
+                    nocombine = true,
+                }
+                hl.IblIndent = {
+                    fg = help_gray,
+                    nocombine = true,
+                }
+                hl.IblScope = {
+                    fg = "#2ac3de",
+                    nocombine = true,
+                }
+
+                -- Cursor
+                hl.CursorLineNr = {
+                    bold = true,
+                    fg = "#ff6767",
+                }
+                hl.CursorLine = {
+                    bg = "#1f2231",
+                }
+
+                -- Syntax
+                hl.Constant = {
+                    fg = "#ff6767",
+                }
+                hl.Keyword = {
+                    fg = "#ff6767",
+                    style = {
+                        italic = true,
+                    },
+                }
+            end,
+        })
+        vim.cmd([[colorscheme tokyonight]])
     end,
 }
