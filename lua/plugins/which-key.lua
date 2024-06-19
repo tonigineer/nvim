@@ -27,7 +27,7 @@ return {
         },
         -- add operators that will trigger motion and text object completion
         -- to enable all native operators, set the preset / operators plugin above
-        operators = { gc = "Comments" },
+        -- operators = { gc = "Comments" },
         key_labels = {
             -- override the label used to display some keys. It doesn't effect WK in any other way.
             -- For example:
@@ -75,7 +75,7 @@ return {
         show_help = true, -- show a help message in the command line for using WhichKey
         show_keys = true, -- show the currently pressed key and its label as a message in the command line
         triggers = "auto", -- automatically setup triggers
-        -- triggers = {"<leader>"} -- or specifiy a list manually
+        -- triggers = {"<leader>"} -- or specify a list manually
         -- list of triggers, where WhichKey should not wait for timeoutlen and show immediately
         triggers_nowait = {
             -- marks
