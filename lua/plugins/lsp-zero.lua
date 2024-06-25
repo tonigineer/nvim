@@ -123,6 +123,34 @@ return {
 
                     -- Disable LSP for rust here, since rustecean is used.
                     rust_analyzer = function() end,
+
+                    pyright = function()
+                        local util = require("lspconfig/util")
+                        local path = util.path
+
+                        local function get_python_path()
+                            local possible_venv = path.join(
+                                -- vim.fn.expand("%:p:h") .. "/.venv/bin/python"
+                                vim.fn.fnamemodify(vim.fn.getcwd(), ":t"),
+                                ".venv/bin/python"
+                            )
+
+                            if vim.fn.filereadable(possible_venv) then
+                                return possible_venv
+                            end
+
+                            return vim.fn.exepath("python3")
+                                or vim.fn.exepath("python")
+                                or "python"
+                        end
+
+                        require("lspconfig").pyright.setup({
+                            on_init = function(client)
+                                client.config.settings.python.pythonPath =
+                                    get_python_path()
+                            end,
+                        })
+                    end,
                 },
             })
         end,
