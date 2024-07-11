@@ -108,7 +108,7 @@ return {
                 colors.blue = "#25C9F3"
                 colors.red = "#ff6767"
             end,
-
+            --
             --- You can override specific highlights to use other groups or a hex color
             --- function will be called with a Highlights and ColorScheme table
             ---@class highlights Highlights
@@ -145,14 +145,10 @@ return {
                     bg = c.bg_none,
                     fg = title,
                 }
-
                 -- Lines/Indents/Comments
                 local help_gray = "#3f404f"
                 hl.Comment = {
                     fg = help_gray,
-                    style = {
-                        italic = true,
-                    },
                 }
                 hl.LineNr = {
                     fg = help_gray,
@@ -212,9 +208,9 @@ return {
                 hl.GitSignsDelete = {
                     fg = "#ff6767",
                 }
-                -- hl.GitSignsText = {
-                --     fg = "#394b70",
-                -- }
+                hl.GitSignsText = {
+                    fg = "#394b70",
+                }
             end,
         })
         vim.cmd([[colorscheme tokyonight]])
