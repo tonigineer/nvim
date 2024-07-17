@@ -32,22 +32,29 @@ return {
             -- vim.keymap.set("n", "<leader><leader>", builtin.oldfiles, {})
 
             local wk = require("which-key")
-            wk.register({
-                ["<leader>f"] = { name = "+Telescope" },
-                ["<leader>ff"] = {
+            wk.add({
+                { "<leader>f", group = "+Telescope" },
+                {
+                    "<leader>ff",
                     "<cmd>lua require'telescope.builtin'.find_files({ find_command = {'rg', '--files', '--hidden', '-g', '!.git' }})<cr>",
-                    "Find File",
+                    desc = "Find File",
                 },
-                ["<leader>fb"] = {
+                {
+                    "<leader>fb",
                     "<cmd>Telescope buffers<cr>",
-                    "Find Buffer",
+                    desc = "Find Buffer",
                 },
-                ["<leader>fg"] = { "<cmd>Telescope live_grep<cr>", "Live grep" },
-                ["<leader>fr"] = {
+                {
+                    "<leader>fg",
+                    "<cmd>Telescope live_grep<cr>",
+                    desc = "Live grep",
+                },
+                {
+                    "<leader>fr",
                     "<cmd>Telescope oldfiles<cr>",
-                    "Open Recent File",
+                    desc = "Open Recent File",
                 },
-                ["<leader>fn"] = { "<cmd>new<cr>", "New File" },
+                { "<leader>fn", "<cmd>new<cr>", desc = "New File" },
             })
 
             require("telescope").load_extension("ui-select")

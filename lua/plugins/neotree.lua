@@ -315,11 +315,10 @@ return {
         -- vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
 
         local wk = require("which-key")
-        wk.register({
-            ["<leader>e"] = {
-                "<cmd>Neotree filesystem toggle left<cr>",
-                "NeoTree ",
-            },
+        wk.add({
+            "<leader>e",
+            "<cmd>Neotree filesystem toggle left<cr>",
+            desc = "NeoTree ",
         })
     end,
 }

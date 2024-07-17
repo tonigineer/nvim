@@ -12,8 +12,9 @@ local function apply_mappings(mappings)
             -- Add a label to which key
             if wk_found then
                 if string.find(keys, "<leader>") and cfg.desc then
-                    wk.register({
-                        [keys] = { cfg.desc },
+                    wk.add({
+                        keys,
+                        cfg.desc,
                     })
                 end
             end
@@ -27,9 +28,7 @@ for _, mode in ipairs({ "", "n", "v", "x", "s", "o", "!", "i", "l", "c", "t" }) 
 end
 
 local wk = require("which-key")
-wk.register({
-    ["<leader>l"] = { name = "+LSP" },
-})
+wk.add({ "<leader>l", group = "+LSP" })
 
 local opts = {}
 
