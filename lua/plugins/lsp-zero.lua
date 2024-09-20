@@ -12,9 +12,16 @@ return {
     },
     {
         "williamboman/mason.nvim",
+        build = ":MasonUpdate",
+        opts_extend = { "ensure_installed" },
         lazy = false,
         config = true,
         opts = {
+            ensure_installed = {
+                "stylua",
+                "shfmt",
+                "isort"
+            },
             ui = {
                 icons = {
                     package_installed = "",
@@ -36,6 +43,9 @@ return {
             },
             log_level = vim.log.levels.INFO,
             max_concurrent_installers = 10,
+            ensure_installed = {
+                "isort",
+            },
         },
     },
 
@@ -97,16 +107,16 @@ return {
             end)
 
             require("mason-lspconfig").setup({
-                ensure_installed = {
-                    "lua_ls",
-                    "bashls",
-                    "pyright",
-                    "clangd",
-                    "rust_analyzer",
-                    "jsonls",
-                    "marksman",
-                    "cssls",
-                },
+                -- ensure_installed = {
+                --     "lua_ls",
+                --     "bashls",
+                --     "pyright",
+                --     "clangd",
+                --     "rust_analyzer",
+                --     "jsonls",
+                --     "marksman",
+                --     "cssls",
+                -- },
                 handlers = {
                     -- this first function is the "default handler"
                     -- it applies to every language server without a "custom handler"
@@ -130,7 +140,7 @@ return {
 
                         local function get_python_path()
                             local possible_venv = path.join(
-                                -- vim.fn.expand("%:p:h") .. "/.venv/bin/python"
+                            -- vim.fn.expand("%:p:h") .. "/.venv/bin/python"
                                 vim.fn.fnamemodify(vim.fn.getcwd(), ":t"),
                                 ".venv/bin/python"
                             )
