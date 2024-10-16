@@ -1,54 +1,30 @@
-# Neovim configuration
+# Neovim Configuration
 
-<kbd>![preview](./assets/preview.png)</kbd>
-<kbd>![preview](./assets/preview_2.png)</kbd>
-
-A configuration based on the starter template of [LazyVim](https://github.com/LazyVim/LazyVim). Refer to [documentation](https://lazyvim.github.io/installation) if needed.
-
-Language | 📰 LSP
---: | :-:
-Rust |  ✔️
-C\C++ |  ✔️
-Python |  ✔️
-Lua |  ✔️
-Bash |  ✔️
-Json |  ✔️
-Markdown |  ✔️
+This is my Neovim setup, built upon the starter template from [LazyVim](https://github.com/LazyVim/LazyVim). For more details and installation instructions, refer to the official [LazyVim documentation](https://lazyvim.github.io/installation).
 
 ## 💾 Installation
 
-Install mandatory dependencies and clone the repository:
+To install the necessary dependencies and clone the configuration repository, follow these steps:
 
 ```sh
-pacman -S fd ripgrep zip npm python-pip
+pacman -S fd ripgrep zip npm python-pip luarocks python-neovim-git
 git clone https://github.com/tonigineer/nvim.git ~/.config/nvim
 ```
 
-## 🔧 Dependencies
+### 🔧 Dependencies
 
-In order to make `:checkhealth` completely happy, additional dependencies and setup steps are needed:
+To ensure `:checkhealth` in Neovim passes without errors, you'll need to install some additional dependencies and perform a few setup steps:
 
 ```sh
-yay -S julia-bin luarocks python-neovim-git
+# Install Rust (required for some plugins)
 rustup default stable
 
-# Treesitter executable
+# Install Treesitter CLI (for syntax highlighting and more)
 sudo pacman -S yarn
 yarn global add tree-sitter-cli
 cargo install tree-sitter-cli
 sudo npm install -g tree-sitter-cli
 ```
 
-<details><summary>Install Neovim on Ubuntu</summary>
-
-```sh
-# Neovim for Ubuntu
-sudo apt install build-essential tar wget
-wget https://github.com/neovim/neovim/releases/download/stable/nvim-linux64.tar.gz
-tar -xf ~/nvim-linux64.tar.gz
-sudo mkdir /opt/nvim && -r nvim-linux64 /opt/nvim
-sudo ln -s /opt/nvim/bin/nvim /usr/bin/nvim
-rm -rf nvim-linux64*
-```
-
-</details>
+> [!NOTE]
+> This guide might not cover all potential issues, as I may have fixed some dependencies directly on my machine without updating this document.
