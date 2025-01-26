@@ -23,6 +23,7 @@ return {
                     "ron",
                     "rust",
                     "toml",
+                    "typescript",
                     "vim",
                 },
             })

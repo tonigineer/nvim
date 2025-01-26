@@ -13,20 +13,14 @@ return {
     {
         "williamboman/mason.nvim",
         build = ":MasonUpdate",
-        opts_extend = { "ensure_installed" },
         lazy = false,
         config = true,
         opts = {
-            ensure_installed = {
-                "stylua",
-                "shfmt",
-                "isort"
-            },
             ui = {
                 icons = {
-                    package_installed = "",
-                    package_pending = "",
-                    package_uninstalled = "",
+                    package_installed = "✓",
+                    package_pending = "➜",
+                    package_uninstalled = "✗",
                 },
                 border = {
                     "╭",
@@ -48,6 +42,53 @@ return {
             },
         },
     },
+      -- Mason Tool Installer
+  {
+    "WhoIsSethDaniel/mason-tool-installer.nvim",
+    dependencies = { "williamboman/mason.nvim" },
+    config = function()
+      require("mason-tool-installer").setup({
+        ensure_installed = {
+            "clangd",
+            "clang-format",
+            "codelldb",
+          -- LSP servers
+          "rust-analyzer",
+
+          "pyright",
+          "black",
+
+          "bash-language-server",
+          "shfmt",
+
+          "lua-language-server",
+          "stylua",
+
+
+          "vim-language-server",
+
+          "typescript-language-server",
+          "prettier",
+
+
+          "taplo",
+
+
+     
+          "hyprls",
+
+          -- Formatters
+   
+
+        },
+
+        -- Optional settings
+        auto_update = true,   -- automatically check for tool updates
+        run_on_start = true,  -- install/update on Neovim startup
+        start_delay = 3000,   -- 3-second delay to reduce potential blocking
+      })
+    end,
+  },
 
     -- Autocompletion
     {
@@ -107,16 +148,6 @@ return {
             end)
 
             require("mason-lspconfig").setup({
-                -- ensure_installed = {
-                --     "lua_ls",
-                --     "bashls",
-                --     "pyright",
-                --     "clangd",
-                --     "rust_analyzer",
-                --     "jsonls",
-                --     "marksman",
-                --     "cssls",
-                -- },
                 handlers = {
                     -- this first function is the "default handler"
                     -- it applies to every language server without a "custom handler"
