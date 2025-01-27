@@ -60,7 +60,7 @@ options.writebackup = false -- if a file is being edited by another program (or 
 -- [[ Theme ]]
 options.syntax = "ON"
 options.termguicolors = true
-options.cursorline = true -- highlight the current line
+options.cursorline = false -- highlight the current line
 options.laststatus = 3 -- only the last window will always have a status line
 options.showcmd = false -- hide (partial) command in the last line of the screen (for performance)
 options.ruler = true -- hide the line and column number of the cursor position

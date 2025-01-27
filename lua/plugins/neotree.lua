@@ -312,13 +312,38 @@ return {
             },
         })
 
-        -- vim.cmd([[nnoremap \ :Neotree reveal<cr>]])
-
         local wk = require("which-key")
+
         wk.add({
             "<leader>e",
             "<cmd>Neotree filesystem toggle left<cr>",
-            desc = "NeoTree ",
+            desc = "NeoTree Toggle",
+        })
+
+        wk.add({
+            "<C-A-e>",
+            "<cmd>Neotree filesystem toggle left<cr>",
+            desc = "NeoTree Toggle",
+        })
+
+        wk.add({
+            "<C-A-q>",
+            "<cmd>Neotree filesystem close left<cr>",
+            desc = "NeoTree Close",
+        })
+
+        wk.add({
+            "<C-0>",
+            function()
+                for _, win in ipairs(vim.api.nvim_list_wins()) do
+                    local bufnr = vim.api.nvim_win_get_buf(win)
+                    local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
+                    if ft == "neo-tree" then
+                        vim.cmd("Neotree focus filesystem left")
+                    end
+                end
+            end,
+            desc = "NeoTree Focus",
         })
     end,
 }

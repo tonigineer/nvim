@@ -42,53 +42,47 @@ return {
             },
         },
     },
-      -- Mason Tool Installer
-  {
-    "WhoIsSethDaniel/mason-tool-installer.nvim",
-    dependencies = { "williamboman/mason.nvim" },
-    config = function()
-      require("mason-tool-installer").setup({
-        ensure_installed = {
-            "clangd",
-            "clang-format",
-            "codelldb",
-          -- LSP servers
-          "rust-analyzer",
+    -- Mason Tool Installer
+    {
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        dependencies = { "williamboman/mason.nvim" },
+        config = function()
+            require("mason-tool-installer").setup({
+                ensure_installed = {
+                    "clangd",
+                    "clang-format",
+                    "codelldb",
+                    -- LSP servers
+                    "rust-analyzer",
 
-          "pyright",
-          "black",
+                    "pyright",
+                    "black",
 
-          "bash-language-server",
-          "shfmt",
+                    "bash-language-server",
+                    "shfmt",
 
-          "lua-language-server",
-          "stylua",
+                    "lua-language-server",
+                    "stylua",
 
+                    "vim-language-server",
 
-          "vim-language-server",
+                    "typescript-language-server",
+                    "prettier",
 
-          "typescript-language-server",
-          "prettier",
+                    "taplo",
 
+                    "hyprls",
 
-          "taplo",
+                    -- Formatters
+                },
 
-
-     
-          "hyprls",
-
-          -- Formatters
-   
-
-        },
-
-        -- Optional settings
-        auto_update = true,   -- automatically check for tool updates
-        run_on_start = true,  -- install/update on Neovim startup
-        start_delay = 3000,   -- 3-second delay to reduce potential blocking
-      })
-    end,
-  },
+                -- Optional settings
+                auto_update = true, -- automatically check for tool updates
+                run_on_start = true, -- install/update on Neovim startup
+                start_delay = 3000, -- 3-second delay to reduce potential blocking
+            })
+        end,
+    },
 
     -- Autocompletion
     {
@@ -171,7 +165,7 @@ return {
 
                         local function get_python_path()
                             local possible_venv = path.join(
-                            -- vim.fn.expand("%:p:h") .. "/.venv/bin/python"
+                                -- vim.fn.expand("%:p:h") .. "/.venv/bin/python"
                                 vim.fn.fnamemodify(vim.fn.getcwd(), ":t"),
                                 ".venv/bin/python"
                             )

@@ -37,12 +37,12 @@ opts = {
     nowait = true,
     silent = true,
 }
-mappings.n["<leader>p"] = {
+mappings.n["<S-h>"] = {
     cmd = ":bp<cr>",
     opts = opts,
     desc = "Buffer previous",
 }
-mappings.n["<leader>n"] = {
+mappings.n["<S-l>"] = {
     cmd = ":bn<cr>",
     opts = opts,
     desc = "Buffer next",
@@ -69,15 +69,25 @@ mappings.i["kj"] = {
 opts = {
     silent = true,
 }
-mappings.v["<"] = {
-    cmd = "<gv",
+mappings.n["<"] = {
+    cmd = "<<",
     opts = opts,
     desc = "Indent to the left",
+}
+mappings.n[">"] = {
+    cmd = ">>",
+    opts = opts,
+    desc = "Indent to the right",
 }
 mappings.v["<"] = {
     cmd = "<gv",
     opts = opts,
     desc = "Indent to the left",
+}
+mappings.v[">"] = {
+    cmd = ">gv",
+    opts = opts,
+    desc = "Indent to the right",
 }
 
 -- [[ Move lines with K and J ]]
@@ -87,20 +97,20 @@ opts = {
 mappings.n["K"] = {
     cmd = ":move -2<CR>",
     opts = opts,
-    desc = "Move lines up",
+    desc = "Move line up",
 }
 mappings.n["J"] = {
     cmd = ":move +1<CR>",
     opts = opts,
-    desc = "Move lines down",
+    desc = "Move line down",
 }
 mappings.v["K"] = {
-    cmd = "move -2<CR>",
+    cmd = ":move '<-2<CR>gv=gv",
     opts = opts,
     desc = "Move lines up",
 }
 mappings.v["J"] = {
-    cmd = ":move +1<CR>",
+    cmd = ":move '>+1<CR>gv=gv",
     opts = opts,
     desc = "Move lines down",
 }
@@ -164,5 +174,12 @@ mappings.v["<C-a>"] = {
     opts = opts,
     desc = "Select all",
 }
+
+vim.api.nvim_set_keymap(
+    "n",
+    "<leader>F",
+    ":lua require('conform').format({ bufnr = vim.api.nvim_get_current_buf() })<CR>",
+    { noremap = true, silent = false, desc = "Format buffer with Conform" }
+)
 
 apply_mappings(mappings)
