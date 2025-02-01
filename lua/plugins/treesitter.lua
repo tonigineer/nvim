@@ -14,6 +14,7 @@ return {
                     "cpp",
                     "css",
                     "html",
+                    "hyprlang",
                     "json",
                     "lua",
                     "markdown",
@@ -27,6 +28,7 @@ return {
                     "vim",
                 },
             })
+
         end,
     },
 }

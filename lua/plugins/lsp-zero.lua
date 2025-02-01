@@ -22,24 +22,21 @@ return {
                     package_pending = "➜",
                     package_uninstalled = "✗",
                 },
-                border = {
-                    "╭",
-                    "─",
-                    "╮",
-                    "│",
-                    "╯",
-                    "─",
-                    "╰",
-                    "│",
-                },
-                width = 0.5,
+                -- border = {
+                --     "╭",
+                --     "─",
+                --     "╮",
+                --     "│",
+                --     "╯",
+                --     "─",
+                --     "╰",
+                --     "│",
+                --     width = 0.5,
+                -- },
                 height = 0.5,
             },
             log_level = vim.log.levels.INFO,
             max_concurrent_installers = 10,
-            ensure_installed = {
-                "isort",
-            },
         },
     },
     -- Mason Tool Installer
@@ -128,6 +125,15 @@ return {
             { "hrsh7th/cmp-nvim-lsp" },
             { "williamboman/mason-lspconfig.nvim" },
         },
+        opts = {
+            ui = {
+                windows = {
+                    default_options = {
+                        border = "rounded",
+                    },
+                },
+            },
+        },
         config = function()
             -- This is where all the LSP shenanigans will live
             local lsp_zero = require("lsp-zero")
@@ -156,8 +162,23 @@ return {
                         require("lspconfig").lua_ls.setup(lua_opts)
                     end,
 
+                    -- hpyrls = function()
+                    --     -- (Optional) Configure lua language server for neovim
+                    --     -- local lua_opts = lsp_zero.nvim_lua_ls()
+                    --     require("lspconfig").hyprls.setup()
+                    -- end,
+
                     -- Disable LSP for rust here, since rustecean is used.
                     rust_analyzer = function() end,
+
+                    tsserver = function()
+                        require("lazyvim.util").lsp.on_attach(function(client)
+                            if client.name == "tsserver" then
+                                client.server_capabilities.documentFormattingProvider =
+                                    true
+                            end
+                        end)
+                    end,
 
                     pyright = function()
                         local util = require("lspconfig/util")
@@ -189,5 +210,10 @@ return {
                 },
             })
         end,
+    },
+    {
+        "theRealCarneiro/hyprland-vim-syntax",
+        dependencies = { "nvim-treesitter/nvim-treesitter" },
+        ft = "hypr",
     },
 }
