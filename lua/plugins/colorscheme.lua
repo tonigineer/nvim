@@ -56,7 +56,7 @@ return {
                 String = { fg = "iris" },
                 -- VertSplit = { fg = "muted", bg = "muted" },
                 -- Normal = { bg = "none" },
-                CursorLine = { bg = "none" },
+                -- CursorLine = { bg = "none" },
                 -- Tags = { fg = "love" },
                 -- Keyword = { fg = "love" },
                 -- Delimiter = { fg = "iris" },

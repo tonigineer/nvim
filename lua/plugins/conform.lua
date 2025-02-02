@@ -10,6 +10,7 @@ return {
                 scss = { "prettierd" },
                 javascript = { "prettierd" },
                 typescript = { "prettierd" },
+                json = { "jq" },
 
                 -- Use the "_" filetype to run formatters on filetypes that don't
                 -- have other formatters configured.

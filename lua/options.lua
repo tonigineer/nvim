@@ -72,17 +72,16 @@ options.expandtab = true -- convert tabs to spaces
 options.shiftwidth = 4 -- the number of spaces inserted for each indentation
 options.softtabstop = 4
 options.tabstop = 4 -- insert 2 spaces for a tab
-options.fillchars:append({ eob = " " })
+-- options.fillchars:append({ eob = " " })
 
 options.list = true
 options.linebreak = true
-options.listchars:append("space:⋅") -- ␣
--- options.listchars:append "eol:¬" -- ↵
-options.listchars:append("tab:⋅⋅")
+-- options.listchars:append("space:⋅") -- ␣
+options.listchars:append("eol:¬") -- ↵
+-- options.listchars:append("tab:⋅⋅")
 options.listchars:append("trail:~")
 options.listchars:append("extends:>")
 options.listchars:append("precedes:<")
 options.iskeyword:append("-") -- treats words with `-` as single words
 options.shortmess:append("c") -- hide all the completion messages, e.g. "-- XXX completion (YYY)", "match 1 of 2", "The only match", "Pattern not found"
 options.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
-

@@ -49,14 +49,16 @@ return {
                     "clangd",
                     "clang-format",
                     "codelldb",
-                    -- LSP servers
+
                     "rust-analyzer",
 
                     "pyright",
                     "black",
+                    "isort",
 
                     "bash-language-server",
                     "shfmt",
+                    "shellcheck",
 
                     "lua-language-server",
                     "stylua",
@@ -66,11 +68,7 @@ return {
                     "typescript-language-server",
                     "prettier",
 
-                    "taplo",
-
                     "hyprls",
-
-                    -- Formatters
                 },
 
                 -- Optional settings
