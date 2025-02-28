@@ -72,12 +72,13 @@ options.expandtab = true -- convert tabs to spaces
 options.shiftwidth = 4 -- the number of spaces inserted for each indentation
 options.softtabstop = 4
 options.tabstop = 4 -- insert 2 spaces for a tab
--- options.fillchars:append({ eob = " " })
+vim.opt.fillchars:append({ eob = " " })  -- Remove `~` from empty lines
 
 options.list = true
 options.linebreak = true
 -- options.listchars:append("space:⋅") -- ␣
 options.listchars:append("eol:¬") -- ↵
+
 -- options.listchars:append("tab:⋅⋅")
 options.listchars:append("trail:~")
 options.listchars:append("extends:>")

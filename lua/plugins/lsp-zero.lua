@@ -66,7 +66,8 @@ return {
                     "vim-language-server",
 
                     "typescript-language-server",
-                    "prettier",
+                    "prettierd",
+                    "css-lsp",
 
                     "hyprls",
                 },
@@ -168,15 +169,6 @@ return {
 
                     -- Disable LSP for rust here, since rustecean is used.
                     rust_analyzer = function() end,
-
-                    tsserver = function()
-                        require("lazyvim.util").lsp.on_attach(function(client)
-                            if client.name == "tsserver" then
-                                client.server_capabilities.documentFormattingProvider =
-                                    true
-                            end
-                        end)
-                    end,
 
                     pyright = function()
                         local util = require("lspconfig/util")
