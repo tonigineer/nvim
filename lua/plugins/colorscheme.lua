@@ -56,7 +56,7 @@ return {
                 String = { fg = "iris" },
                 -- VertSplit = { fg = "muted", bg = "muted" },
                 -- Normal = { bg = "none" },
-                -- CursorLine = { bg = "none" },
+                CursorLine = { fg = "none", bg = "none" },
                 -- Tags = { fg = "love" },
                 -- Keyword = { fg = "love" },
                 -- Delimiter = { fg = "iris" },
@@ -70,14 +70,13 @@ return {
 
             before_highlight = function(group, highlight, palette)
                 -- Disable all undercurls
-                -- if highlight.undercurl then
-                --     highlight.undercurl = false
-                -- end
+                if highlight.undercurl then highlight.undercurl = false end
                 --
                 -- Change palette colour
-                -- if highlight.fg == palette.pine then
-                --     highlight.fg = palette.foam
-                -- end
+                if highlight.fg == palette.pine then
+                    highlight.fg = palette.foam
+                    -- highlight.bg = palette.pine
+                end
             end,
         })
 
