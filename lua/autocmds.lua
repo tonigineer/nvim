@@ -36,5 +36,38 @@ vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
     end,
 })
 
+-- Style inlay hints
+vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#868386", italic = true })
+
+-- Enable inlay hints
+vim.diagnostic.config({
+    virtual_text = true,
+    signs = true,
+    underline = true,
+    update_in_insert = false,
+    severity_sort = false,
+})
+
+-- Enable hover of diagnostic window when in line
+vim.api.nvim_create_autocmd("CursorHold", {
+    buffer = bufnr,
+    callback = function()
+        local opts = {
+            focusable = false,
+            close_events = {
+                "BufLeave",
+                "CursorMoved",
+                "InsertEnter",
+                "FocusLost",
+            },
+            border = "rounded",
+            source = "always",
+            prefix = " ",
+            scope = "cursor",
+        }
+        vim.diagnostic.open_float(nil, opts)
+    end,
+})
+
 -- Disable Treesitter highlighting globally
 vim.cmd(":TSDisable highlight")
