@@ -53,7 +53,7 @@ return {
             -- https://rosepinetheme.com/palette/
             highlight_groups = {
                 Comment = { fg = "subtle" },
-                String = { fg = "iris" },
+                String = { fg = "#FFFFFF", italic = true },
                 -- VertSplit = { fg = "muted", bg = "muted" },
                 -- Normal = { bg = "none" },
                 CursorLine = { fg = "none", bg = "none" },
@@ -74,7 +74,7 @@ return {
                 --
                 -- Change palette colour
                 if highlight.fg == palette.pine then
-                    highlight.fg = palette.foam
+                    highlight.fg = palette.pine
                     -- highlight.bg = palette.pine
                 end
             end,

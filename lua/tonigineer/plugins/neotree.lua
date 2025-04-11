@@ -8,24 +8,6 @@ return {
         -- "3rd/image.nvim", -- Optional image support in preview window: See `# Preview Mode` for more information
     },
     config = function()
-        -- If you want icons for diagnostic errors, you'll need to define them somewhere:
-        vim.fn.sign_define(
-            "DiagnosticSignError",
-            { text = " ", texthl = "DiagnosticSignError" }
-        )
-        vim.fn.sign_define(
-            "DiagnosticSignWarn",
-            { text = " ", texthl = "DiagnosticSignWarn" }
-        )
-        vim.fn.sign_define(
-            "DiagnosticSignInfo",
-            { text = " ", texthl = "DiagnosticSignInfo" }
-        )
-        vim.fn.sign_define(
-            "DiagnosticSignHint",
-            { text = "󰌵", texthl = "DiagnosticSignHint" }
-        )
-
         require("neo-tree").setup({
             close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
             popup_border_style = "rounded",
@@ -312,38 +294,30 @@ return {
             },
         })
 
-        local wk = require("which-key")
-
-        wk.add({
-            "<leader>e",
-            "<cmd>Neotree filesystem toggle left<cr>",
-            desc = "NeoTree Toggle",
-        })
-
-        wk.add({
+        vim.keymap.set(
+            { "n", "v", "i" },
             "<C-A-e>",
             "<cmd>Neotree filesystem toggle left<cr>",
-            desc = "NeoTree Toggle",
-        })
+            { desc = "NeoTree Toggle" }
+        )
 
-        wk.add({
+        vim.keymap.set(
+            { "n", "v" },
+            "<leader>e",
+            "<cmd>Neotree filesystem toggle left<cr>",
+            { desc = "NeoTree Toggle" }
+        )
+
+        vim.keymap.set(
+            { "n", "v", "i" },
             "<C-A-q>",
             "<cmd>Neotree filesystem close left<cr>",
-            desc = "NeoTree Close",
-        })
+            { desc = "NeoTree Toggle" }
+        )
 
-        wk.add({
-            "<C-0>",
-            function()
-                for _, win in ipairs(vim.api.nvim_list_wins()) do
-                    local bufnr = vim.api.nvim_win_get_buf(win)
-                    local ft = vim.api.nvim_buf_get_option(bufnr, "filetype")
-                    if ft == "neo-tree" then
-                        vim.cmd("Neotree focus filesystem left")
-                    end
-                end
-            end,
-            desc = "NeoTree Focus",
-        })
+        vim.api.nvim_set_hl(0, "NeoTreeNormal", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "NeoTreeNormalNC", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "NeoTreeEndOfBuffer", { bg = "NONE" })
+        vim.api.nvim_set_hl(0, "NeoTreeWinSeparator", { bg = "NONE" })
     end,
 }

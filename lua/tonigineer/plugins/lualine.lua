@@ -21,7 +21,7 @@ return {
         -- Color table for highlights
         -- stylua: ignore
         local colors = {
-            bg      = 'none',
+            bg      = '#121212',
             fg      = '#FAF7FE',
             yellow  = '#ffca85',
             green   = '#61ffca',
@@ -61,6 +61,7 @@ return {
                     normal = { c = { fg = colors.fg, bg = colors.bg } },
                     inactive = { c = { fg = colors.fg, bg = colors.bg } },
                 },
+
                 globalstatus = true,
                 disabled_filetypes = {
                     statusline = { "dashboard", "alpha", "starter" },
@@ -110,7 +111,7 @@ return {
                     n = "   NORMAL",
                     i = "   INSERT",
                     v = "   VISUAL",
-                    [""] = "   VISUAL",
+                    ["␖"] = "   VISUAL",
                     V = "   VISUAL-LINE",
                     t = "   TERMINAL",
                     c = "   COMMAND",
@@ -123,13 +124,13 @@ return {
                     n = colors.red,
                     i = colors.green,
                     v = colors.blue,
-                    [""] = colors.blue,
+                    ["␖"] = colors.blue,
                     V = colors.blue,
                     c = colors.blue,
                     no = colors.red,
                     s = colors.yellow,
                     S = colors.yellow,
-                    [""] = colors.yellow,
+                    ["␓"] = colors.yellow,
                     ic = colors.yellow,
                     R = colors.blue,
                     Rv = colors.blue,
