@@ -28,8 +28,8 @@ vim.keymap.set({ "n", "v" }, "<C-a>", "gg<S-v>G", { desc = "Select all" })
 vim.keymap.set({ "i" }, "<C-z>", "<Esc>:u<Return>i", { desc = "Undo" })
 vim.keymap.set({ "n", "v" }, "<C-z>", ":u<Return>", { desc = "Undo" })
 
-vim.keymap.set({ "i" }, "<C-y>", "<Esc><C-R><Return>i", { desc = "Redo" })
-vim.keymap.set({ "i" }, "<C-y>", "<Esc><C-R><Return>i", { desc = "Redo" })
+vim.keymap.set({ "i" }, "<C-y>", "<Esc><C-r>i", { desc = "Redo" })
+vim.keymap.set({ "n", "v" }, "<C-y>", "<C-r>", { desc = "Redo" })
 
 vim.keymap.set({ "n" }, "<", "<<", { desc = "Indent left" })
 vim.keymap.set({ "n" }, ">", ">>", { desc = "Indent right" })
