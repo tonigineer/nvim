@@ -32,12 +32,12 @@ vim.keymap.set({ "i" }, "<C-y>", "<Esc><C-r>i", { desc = "Redo" })
 vim.keymap.set({ "n", "v" }, "<C-y>", "<C-r>", { desc = "Redo" })
 
 vim.keymap.set({ "n" }, "<", "<<", { desc = "Indent left" })
-vim.keymap.set({ "n" }, ">", ">>", { desc = "Indent right" })
 vim.keymap.set({ "v" }, "<", "<gv", { desc = "Indent left" })
 vim.keymap.set({ "v" }, ">", ">gv", { desc = "Indent right" })
+vim.keymap.set({ "n" }, ">", ">>", { desc = "Indent right" })
 
--- vim.keymap.set({"n"}, "K", ":move ':move -2<CR>", {desc = "Move lines up"})
--- vim.keymap.set({"n"}, "J", ":move +1<CR>", {desc = "Move lines down"})
+vim.keymap.set({ "n" }, "K", ":move -2<CR>", { desc = "Move lines up" })
+vim.keymap.set({ "n" }, "J", ":move +1<CR>", { desc = "Move lines down" })
 
 vim.keymap.set({ "v" }, "K", ":move '<-2<CR>gv=gv", { desc = "Move lines up" })
 vim.keymap.set(
