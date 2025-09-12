@@ -71,24 +71,46 @@ return {
                     --
                     -- In this case, we create a function that lets us more easily define mappings specific
                     -- for LSP related items. It sets the mode, buffer and description for us each time.
+                    require("which-key").add({
+                        { "<leader>g", group = "[G]oTo" },
+                    })
+
                     local map = function(keys, func, desc, mode)
                         mode = mode or "n"
                         vim.keymap.set(
                             mode,
                             keys,
                             func,
-                            { buffer = event.buf, desc = "LSP: " .. desc }
+                            { buffer = event.buf, desc = desc }
                         )
                     end
 
+                    map("<leader>H", function()
+                        local opts = {
+                            focusable = true,
+                            close_events = {
+                                "BufLeave",
+                                "CursorMoved",
+                                "InsertEnter",
+                                "FocusLost",
+                            },
+                            border = "rounded",
+                            source = "always",
+                            prefix = " ",
+                            scope = "cursor",
+                        }
+                        if next(vim.lsp.get_clients()) == nil then return end
+                        pcall(vim.lsp.buf.hover, opts)
+                    end, "[H]over")
+
                     -- Rename the variable under your cursor.
                     --  Most Language Servers support renaming across files, etc.
-                    map("grn", vim.lsp.buf.rename, "[R]e[n]ame")
+                    map("<leader>R", vim.lsp.buf.rename, "[R]ename")
 
                     -- Execute a code action, usually your cursor needs to be on top of an error
                     -- or a suggestion from your LSP for this to activate.
                     map(
-                        "gra",
+                        "<leader>ga",
                         vim.lsp.buf.code_action,
                         "[G]oto Code [A]ction",
                         { "n", "x" }
@@ -96,7 +118,7 @@ return {
 
                     -- Find references for the word under your cursor.
                     map(
-                        "grr",
+                        "<leader>gr",
                         require("telescope.builtin").lsp_references,
                         "[G]oto [R]eferences"
                     )
@@ -104,7 +126,7 @@ return {
                     -- Jump to the implementation of the word under your cursor.
                     --  Useful when your language has ways of declaring types without an actual implementation.
                     map(
-                        "gri",
+                        "<leader>gi",
                         require("telescope.builtin").lsp_implementations,
                         "[G]oto [I]mplementation"
                     )
@@ -113,39 +135,68 @@ return {
                     --  This is where a variable was first declared, or where a function is defined, etc.
                     --  To jump back, press <C-t>.
                     map(
-                        "grd",
+                        "<leader>gd",
                         require("telescope.builtin").lsp_definitions,
                         "[G]oto [D]efinition"
                     )
 
                     -- WARN: This is not Goto Definition, this is Goto Declaration.
                     --  For example, in C this would take you to the header.
-                    map("grD", vim.lsp.buf.declaration, "[G]oto [D]eclaration")
+                    map(
+                        "<leader>gD",
+                        vim.lsp.buf.declaration,
+                        "[G]oto [D]eclaration"
+                    )
 
                     -- Fuzzy find all the symbols in your current document.
                     --  Symbols are things like variables, functions, types, etc.
                     map(
-                        "gO",
+                        "<leader>S",
                         require("telescope.builtin").lsp_document_symbols,
-                        "Open Document Symbols"
+                        "[S]ymbols"
                     )
 
                     -- Fuzzy find all the symbols in your current workspace.
                     --  Similar to document symbols, except searches over your entire project.
                     map(
-                        "gW",
+                        "<leader>W",
                         require("telescope.builtin").lsp_dynamic_workspace_symbols,
-                        "Open Workspace Symbols"
+                        "[W]orkspace Symbols"
                     )
 
                     -- Jump to the type of the word under your cursor.
                     --  Useful when you're not sure what type a variable is and you want to see
                     --  the definition of its *type*, not where it was *defined*.
                     map(
-                        "grt",
+                        "<leader>gt",
                         require("telescope.builtin").lsp_type_definitions,
                         "[G]oto [T]ype Definition"
                     )
+
+                    -- Debugging
+                    require("which-key").add({
+                        { "<leader>d", group = "[D]ebug" },
+                    })
+
+                    local dap = require("dap")
+                    map(
+                        "<leader>db",
+                        dap.toggle_breakpoint,
+                        "Toggle [B]reakpoint"
+                    )
+                    map("<leader>dB", dap.set_breakpoint, "Set [B]reakpoint")
+                    map("<leader>dc", dap.continue, "[C]ontinue")
+                    map("<leader>dr", dap.repl.open, "[I]nspect")
+                    map("<leader>dk", dap.terminate, "[K]ill")
+
+                    map("<leader>do", dap.step_over, "Step [O]ver")
+                    map("<leader>di", dap.step_into, "Step [I]nto")
+                    map("<leader>du", dap.step_out, "Step O[u]t")
+                    -- map("<leader>dl", dap.run_last, "Run Last")
+
+                    -- local dapui = require("dapui")
+                    -- map("<leader>duu", dapui.open, "open ui")
+                    -- map("<leader>duc", dapui.close, "close ui")
 
                     -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
                     ---@param client vim.lsp.Client
@@ -227,6 +278,10 @@ return {
                             event.buf
                         )
                     then
+                        require("which-key").add({
+                            { "<leader>t", group = "[T]oggles" },
+                        })
+
                         map(
                             "<leader>th",
                             function()
@@ -289,10 +344,10 @@ return {
             --  - settings (table): Override the default settings passed when initializing the server.
             --        For example, to see the options for `lua_ls`, you could go to: https://luals.github.io/wiki/settings/
             local servers = {
-                -- clangd = {},
+                clangd = {},
                 -- gopls = {},
-                -- pyright = {},
-                -- rust_analyzer = {},
+                pyright = {},
+                rust_analyzer = {},
                 -- ... etc. See `:help lspconfig-all` for a list of all the pre-configured LSPs
                 --
                 -- Some languages (like typescript) have entire language plugins that can be useful:
@@ -368,7 +423,7 @@ return {
         cmd = { "ConformInfo" },
         keys = {
             {
-                "<leader>f",
+                "<leader>F",
                 function()
                     require("conform").format({
                         async = true,

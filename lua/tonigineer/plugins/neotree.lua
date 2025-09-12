@@ -297,15 +297,15 @@ return {
             { "n", "v", "i" },
             "<C-A-e>",
             "<cmd>Neotree filesystem toggle left<cr>",
-            { desc = "NeoTree Toggle" }
+            { desc = "N[e]oTree Toggle" }
         )
 
-        vim.keymap.set(
-            { "n", "v" },
-            "<leader>E",
-            "<cmd>Neotree position=current<cr>",
-            { desc = "NeoTree netrw" }
-        )
+        -- vim.keymap.set(
+        --     { "n", "v" },
+        --     "<leader>E",
+        --     "<cmd>Neotree position=current<cr>",
+        --     { desc = "NeoTree netrw" }
+        -- )
 
         vim.keymap.set(
             { "n", "v" },

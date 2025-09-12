@@ -6,7 +6,7 @@
 --    vim.cmd("so")
 -- end)
 
-vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open netrw" })
+-- vim.keymap.set("n", "<leader>pv", vim.cmd.Ex, { desc = "Open netrw" })
 
 -- vim.keymap.set("x", "<leader>p", [["_dP]], { desc = "Paste without register"})
 

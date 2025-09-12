@@ -47,7 +47,7 @@ vim.diagnostic.config({
 
 -- Enable hover of diagnostic window when in line
 vim.api.nvim_create_autocmd("CursorHold", {
-    buffer = bufnr,
+    -- buffer = bufnr,
     callback = function()
         local opts = {
             focusable = false,
@@ -66,5 +66,26 @@ vim.api.nvim_create_autocmd("CursorHold", {
     end,
 })
 
+-- Always show hover under cursor
+-- vim.api.nvim_create_autocmd("CursorHold", {
+--     callback = function()
+--         local opts = {
+--             focusable = true,
+--             close_events = {
+--                 "BufLeave",
+--                 "CursorMoved",
+--                 "InsertEnter",
+--                 "FocusLost",
+--             },
+--             border = "rounded",
+--             source = "always",
+--             prefix = " ",
+--             scope = "cursor",
+--         }
+--         if next(vim.lsp.get_clients()) == nil then return end
+--         pcall(vim.lsp.buf.hover, opts)
+--     end,
+-- })
+
 -- Disable Treesitter highlighting globally
-vim.cmd(":TSDisable highlight")
+-- vim.cmd(":TSDisable highlight")
