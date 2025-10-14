@@ -43,11 +43,10 @@ return {
                     expander_highlight = "NeoTreeExpander",
                 },
                 icon = {
-                    folder_closed = "",
-                    folder_open = "",
-                    folder_empty = "",
-                    -- The next two settings are only a fallback, if you use nvim-web-devicons and configure default icons there
-                    -- then these will never be used.
+                    folder_closed = "󰉋",
+                    folder_open = "󰝰",
+                    folder_empty = "󰉖",
+                    folder_empty_open = "󰉕",
                     default = "*",
                     highlight = "NeoTreeFileIcon",
                 },
@@ -87,10 +86,12 @@ return {
                 last_modified = {
                     enabled = true,
                     required_width = 88, -- min width of window required to show this column
+                    format = "relative",
                 },
                 created = {
                     enabled = true,
                     required_width = 110, -- min width of window required to show this column
+                    format = "relative",
                 },
                 symlink_target = {
                     enabled = false,
@@ -101,8 +102,8 @@ return {
             -- see `:h neo-tree-custom-commands-global`
             commands = {},
             window = {
-                position = "left",
-                width = 40,
+                position = "right",
+                width = 30,
                 mapping_options = {
                     noremap = true,
                     nowait = true,
@@ -296,7 +297,7 @@ return {
         vim.keymap.set(
             { "n", "v", "i" },
             "<C-A-e>",
-            "<cmd>Neotree filesystem toggle left<cr>",
+            "<cmd>Neotree filesystem toggle right<cr>",
             { desc = "N[e]oTree Toggle" }
         )
 
@@ -310,14 +311,14 @@ return {
         vim.keymap.set(
             { "n", "v" },
             "<leader>e",
-            "<cmd>Neotree filesystem toggle left<cr>",
+            "<cmd>Neotree filesystem toggle right<cr>",
             { desc = "NeoTree Toggle" }
         )
 
         vim.keymap.set(
             { "n", "v", "i" },
             "<C-A-q>",
-            "<cmd>Neotree filesystem close left<cr>",
+            "<cmd>Neotree filesystem close right<cr>",
             { desc = "NeoTree Toggle" }
         )
 

@@ -46,3 +46,17 @@ vim.keymap.set(
     ":move '>+1<CR>gv=gv",
     { desc = "Move lines down" }
 )
+
+vim.keymap.set(
+    "n",
+    "]t",
+    function() require("todo-comments").jump_next() end,
+    { desc = "Next todo comment" }
+)
+
+vim.keymap.set(
+    "n",
+    "[t",
+    function() require("todo-comments").jump_prev() end,
+    { desc = "Previous todo comment" }
+)

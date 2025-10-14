@@ -63,7 +63,7 @@ vim.g.have_nerd_font = true
 vim.opt.syntax = "ON"
 vim.opt.termguicolors = true
 vim.opt.cursorline = true -- highlight the current line
-vim.api.nvim_set_hl(0, "CursorLineNr", { fg = "#61FFCA", bold = true })
+vim.api.nvim_set_hl(0, "CursorLineNr", { link = "DiagnosticWarn", bold = true })
 vim.opt.laststatus = 3 -- only the last window will always have a status line
 vim.opt.showcmd = false -- hide (partial) command in the last line of the screen (for performance)
 vim.opt.ruler = true -- hide the line and column number of the cursor position
@@ -79,13 +79,20 @@ vim.opt.fillchars:append({ eob = " " }) -- Remove `~` from empty lines
 
 vim.opt.list = true
 vim.opt.linebreak = true
-vim.opt.listchars:append("space:⋅") -- ␣
+-- vim.opt.listchars:append("space:·") -- ␣
+vim.opt.listchars:append("space:‧") -- ␣
 -- vim.opt.listchars:append("eol:¬") -- ↵
+-- vim.opt.listchars:append("eol:↴") -- ↵
 
--- vim.opt.listchars:append("tab:⋅⋅")
+vim.opt.listchars:append("tab:→ ") -- →␣
 vim.opt.listchars:append("trail:~")
 vim.opt.listchars:append("extends:>")
 vim.opt.listchars:append("precedes:<")
 vim.opt.iskeyword:append("-") -- treats words with `-` as single words
 vim.opt.shortmess:append("c") -- hide all the completion messages, e.g. "-- XXX completion (YYY)", "match 1 of 2", "The only match", "Pattern not found"
 vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
+
+vim.opt.fillchars:append({ eob = " " }) -- remove ~ from empty lines
+
+vim.opt.list = true
+vim.opt.linebreak = true

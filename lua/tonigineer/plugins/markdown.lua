@@ -628,4 +628,43 @@ return {
         -- Applied to icon.
         highlight = "RenderMarkdownIndent",
     },
+    config = function()
+        vim.api.nvim_set_hl(
+            0,
+            "RenderMarkdownH1",
+            { fg = "#E5E5E5", bold = true }
+        )
+        vim.api.nvim_set_hl(
+            0,
+            "RenderMarkdownH2",
+            { fg = "#D0D0D0", bold = true }
+        )
+        vim.api.nvim_set_hl(
+            0,
+            "RenderMarkdownH3",
+            { fg = "#B8B8B8", bold = true }
+        )
+        vim.api.nvim_set_hl(
+            0,
+            "RenderMarkdownH4",
+            { fg = "#A0A0A0", bold = true }
+        )
+        vim.api.nvim_set_hl(
+            0,
+            "RenderMarkdownH5",
+            { fg = "#888888", bold = true }
+        )
+        vim.api.nvim_set_hl(
+            0,
+            "RenderMarkdownH6",
+            { fg = "#707070", bold = true }
+        )
+
+        vim.api.nvim_set_hl(0, "RenderMarkdownH1Bg", { bg = "#2A2A2A" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownH2Bg", { bg = "#242424" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownH3Bg", { bg = "#1E1E1E" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownH4Bg", { bg = "#1A1A1A" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownH5Bg", { bg = "#161616" })
+        vim.api.nvim_set_hl(0, "RenderMarkdownH6Bg", { bg = "#121212" })
+    end,
 }
