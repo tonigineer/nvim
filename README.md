@@ -1,30 +1,47 @@
 # Neovim Configuration
 
-This is my Neovim setup, built upon the starter template from [LazyVim](https://github.com/LazyVim/LazyVim). For more details and installation instructions, refer to the official [LazyVim documentation](https://lazyvim.github.io/installation).
+Noteable features: [LSP](https://github.com/neovim/nvim-lspconfig), [DAP](https://github.com/mfussenegger/nvim-dap), [which-key](https://github.com/folke/which-key.nvim), [toogleterm](https://github.com/akinsho/toggleterm.nvim), [lazygit](https://github.com/kdheepak/lazygit.nvim)
 
-## 💾 Installation
-
-To install the necessary dependencies and clone the configuration repository, follow these steps:
+## Dependencies
 
 ```sh
-pacman -S fd ripgrep zip npm python-pip luarocks python-neovim-git
+sudo pacman -S --needed \
+  fd ripgrep zip npm python-pip luarocks python-neovim-git
+```
+
+## Installation
+
+To install the necessary dependencies and clone the configuration repository, follow
+these steps:
+
+```sh
 git clone https://github.com/tonigineer/nvim.git ~/.config/nvim
 ```
 
-### 🔧 Dependencies
+## Health check
 
-To ensure `:checkhealth` in Neovim passes without errors, you'll need to install some additional dependencies and perform a few setup steps:
+Some plugins require the Tree-sitter CLI.
 
 ```sh
-# Install Rust (required for some plugins)
 rustup default stable
-
-# Install Treesitter CLI (for syntax highlighting and more)
-sudo pacman -S yarn
-yarn global add tree-sitter-cli
 cargo install tree-sitter-cli
-sudo npm install -g tree-sitter-cli
 ```
 
-> [!NOTE]
-> This guide might not cover all potential issues, as I may have fixed some dependencies directly on my machine without updating this document.
+## Colorscheme
+
+The colorscheme is set to `:colorscheme m3scheme`, which hot-reloads colors from
+[Caelestia-Cli](https://github.com/caelestia-dots/cli) at:
+
+```sh
+~/.local/state/caelestia/scheme.json
+```
+
+To switch the colorscheme, change it in `set.lua` and uncomment the workaround
+in `init.lua` as shown below.
+
+```sh
+~/.config/nvim/lua/tonigineer
+├─ init.lua
+├─ set.lua
+└─ colors/m3scheme.lua
+```
