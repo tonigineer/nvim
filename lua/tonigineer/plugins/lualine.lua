@@ -12,17 +12,17 @@ return {
         end
     end,
 
-    opts = function()
-        local custom_vague = require("lualine.themes.vague")
-
-        custom_vague.normal.a.bg = "#131317"
-        custom_vague.normal.b.bg = "#131317"
-        custom_vague.normal.c.bg = "#131317"
-
-        require("lualine").setup({
-            options = { theme = custom_vague },
-        })
-    end,
+    -- opts = function()
+    --     local custom_vague = require("lualine.themes.vague")
+    --
+    --     custom_vague.normal.a.bg = "#fff8f5"
+    --     custom_vague.normal.b.bg = "#fff8f5"
+    --     custom_vague.normal.c.bg = "#fff8f5"
+    --
+    --     require("lualine").setup({
+    --         options = { theme = custom_vague },
+    --     })
+    -- end,
 }
 
 -- return {
