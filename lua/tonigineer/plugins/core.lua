@@ -163,6 +163,27 @@ return {
                 --   },
                 -- },
                 -- pickers = {}
+                defaults = {
+                    file_ignore_patterns = { "%.git/" }, -- extra safety
+                },
+                pickers = {
+                    find_files = {
+                        find_command = {
+                            "fd",
+                            "--type",
+                            "f",
+                            "--hidden",
+                            "--follow",
+                            "--exclude",
+                            ".git",
+                        },
+                    },
+                    live_grep = {
+                        additional_args = function(_)
+                            return { "--hidden", "--glob", "!.git/*" } -- search dotfiles, skip .git
+                        end,
+                    },
+                },
                 extensions = {
                     ["ui-select"] = {
                         require("telescope.themes").get_dropdown(),
