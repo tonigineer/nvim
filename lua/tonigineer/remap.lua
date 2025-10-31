@@ -60,3 +60,12 @@ vim.keymap.set(
     function() require("todo-comments").jump_prev() end,
     { desc = "Previous todo comment" }
 )
+
+vim.keymap.set(
+    "n",
+    "<leader>tc",
+    function()
+        require("telescope.builtin").colorscheme({ enable_preview = true })
+    end,
+    { desc = "Pick colorscheme" }
+)

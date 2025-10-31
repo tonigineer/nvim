@@ -12,6 +12,41 @@ return {
             },
         },
     },
+
+    -- Inline Diagnostic
+    {
+        "rachartier/tiny-inline-diagnostic.nvim",
+        event = "VeryLazy",
+        priority = 1000,
+        config = function()
+            require("tiny-inline-diagnostic").setup({
+                use_icons_from_diagnostic = true,
+                set_arrow_to_diag_color = true,
+                transparent_bg = true,
+                show_all_diags_on_cursorline = true,
+                enable_on_insert = true,
+                enable_on_select = true,
+                options = {
+                    show_source = {
+                        enabled = true,
+                    },
+                },
+                signs = {
+                    left = "",
+                    right = "",
+                    diag = "●",
+                    arrow = "    ",
+                    up_arrow = "    ",
+                    vertical = " │",
+                    vertical_end = " └",
+                },
+                blend = {
+                    factor = 0.22,
+                },
+            })
+        end,
+    },
+
     -- Main LSP configuration
     {
         "neovim/nvim-lspconfig",
@@ -19,7 +54,7 @@ return {
             -- Automatically install LSPs and related tools to stdpath for Neovim
             -- Mason must be loaded before its dependents so we need to set it up here.
             -- Note: `opts = {}` is the same as calling `require('mason').setup({})`
-            { "williamboman/mason.nvim",             opts = {} },
+            { "williamboman/mason.nvim", opts = {} },
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
 
@@ -27,7 +62,7 @@ return {
             { "antosha417/nvim-lsp-file-operations", config = true },
 
             -- Useful status updates for LSP.
-            { "j-hui/fidget.nvim",                   opts = {} },
+            { "j-hui/fidget.nvim", opts = {} },
 
             -- Allows extra capabilities provided by blink.cmp
             "saghen/blink.cmp",
@@ -185,102 +220,21 @@ return {
                         "List diagnostics"
                     )
 
-                    -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
-                    ---@param client vim.lsp.Client
-                    ---@param method vim.lsp.protocol.Method
-                    ---@param bufnr? integer some lsp support methods only in specific files
-                    ---@return boolean
-                    local function client_supports_method(client, method, bufnr)
-                        if vim.fn.has("nvim-0.11") == 1 then
-                            return client:supports_method(method, bufnr)
-                        else
-                            return client.supports_method(
-                                method,
-                                { bufnr = bufnr }
-                            )
-                        end
-                    end
+                    require("which-key").add({
+                        { "<leader>t", group = "Toggles" },
+                    })
 
-                    -- The following two autocommands are used to highlight references of the
-                    -- word under your cursor when your cursor rests there for a little while.
-                    --    See `:help CursorHold` for information about when this is executed
-                    --
-                    -- When you move your cursor, the highlights will be cleared (the second autocommand).
-                    local client =
-                        vim.lsp.get_client_by_id(event.data.client_id)
-                    if
-                        client
-                        and client_supports_method(
-                            client,
-                            vim.lsp.protocol.Methods.textDocument_documentHighlight,
-                            event.buf
-                        )
-                    then
-                        local highlight_augroup = vim.api.nvim_create_augroup(
-                            "kickstart-lsp-highlight",
-                            { clear = false }
-                        )
-                        vim.api.nvim_create_autocmd(
-                            { "CursorHold", "CursorHoldI" },
-                            {
-                                buffer = event.buf,
-                                group = highlight_augroup,
-                                callback = vim.lsp.buf.document_highlight,
-                            }
-                        )
-
-                        vim.api.nvim_create_autocmd(
-                            { "CursorMoved", "CursorMovedI" },
-                            {
-                                buffer = event.buf,
-                                group = highlight_augroup,
-                                callback = vim.lsp.buf.clear_references,
-                            }
-                        )
-
-                        vim.api.nvim_create_autocmd("LspDetach", {
-                            group = vim.api.nvim_create_augroup(
-                                "kickstart-lsp-detach",
-                                { clear = true }
-                            ),
-                            callback = function(event2)
-                                vim.lsp.buf.clear_references()
-                                vim.api.nvim_clear_autocmds({
-                                    group = "kickstart-lsp-highlight",
-                                    buffer = event2.buf,
+                    map(
+                        "<leader>th",
+                        function()
+                            vim.lsp.inlay_hint.enable(
+                                not vim.lsp.inlay_hint.is_enabled({
+                                    bufnr = event.buf,
                                 })
-                            end,
-                        })
-                    end
-
-                    -- The following code creates a keymap to toggle inlay hints in your
-                    -- code, if the language server you are using supports them
-                    --
-                    -- This may be unwanted, since they displace some of your code
-                    if
-                        client
-                        and client_supports_method(
-                            client,
-                            vim.lsp.protocol.Methods.textDocument_inlayHint,
-                            event.buf
-                        )
-                    then
-                        require("which-key").add({
-                            { "<leader>t", group = "Toggles" },
-                        })
-
-                        map(
-                            "<leader>th",
-                            function()
-                                vim.lsp.inlay_hint.enable(
-                                    not vim.lsp.inlay_hint.is_enabled({
-                                        bufnr = event.buf,
-                                    })
-                                )
-                            end,
-                            "Inlay hints"
-                        )
-                    end
+                            )
+                        end,
+                        "Inlay hints"
+                    )
                 end,
             })
 

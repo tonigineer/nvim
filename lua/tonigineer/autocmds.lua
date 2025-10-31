@@ -46,25 +46,25 @@ vim.api.nvim_create_autocmd("FileType", {
 -- })
 
 -- Enable hover of diagnostic window when in line
-vim.api.nvim_create_autocmd("CursorHold", {
-    -- buffer = bufnr,
-    callback = function()
-        local opts = {
-            focusable = false,
-            close_events = {
-                "BufLeave",
-                "CursorMoved",
-                "InsertEnter",
-                "FocusLost",
-            },
-            border = "rounded",
-            source = "always",
-            prefix = " ",
-            scope = "cursor",
-        }
-        vim.diagnostic.open_float(nil, opts)
-    end,
-})
+-- vim.api.nvim_create_autocmd("CursorHold", {
+--     -- buffer = bufnr,
+--     callback = function()
+--         local opts = {
+--             focusable = false,
+--             close_events = {
+--                 "BufLeave",
+--                 "CursorMoved",
+--                 "InsertEnter",
+--                 "FocusLost",
+--             },
+--             border = "rounded",
+--             source = "always",
+--             prefix = " ",
+--             scope = "cursor",
+--         }
+--         vim.diagnostic.open_float(nil, opts)
+--     end,
+-- })
 
 -- Always show hover under cursor
 -- vim.api.nvim_create_autocmd("CursorHold", {
