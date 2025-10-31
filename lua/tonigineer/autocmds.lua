@@ -34,16 +34,16 @@ vim.api.nvim_create_autocmd("FileType", {
 -- })
 
 -- Style inlay hints
-vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#868386", italic = true })
+-- vim.api.nvim_set_hl(0, "LspInlayHint", { fg = "#868386", italic = true })
 
--- Enable inlay hints
-vim.diagnostic.config({
-    virtual_text = true,
-    signs = true,
-    underline = true,
-    update_in_insert = false,
-    severity_sort = false,
-})
+-- -- Enable inlay hints
+-- vim.diagnostic.config({
+--     virtual_text = true,
+--     signs = true,
+--     underline = true,
+--     update_in_insert = false,
+--     severity_sort = false,
+-- })
 
 -- Enable hover of diagnostic window when in line
 vim.api.nvim_create_autocmd("CursorHold", {

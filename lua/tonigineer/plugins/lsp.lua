@@ -12,7 +12,6 @@ return {
             },
         },
     },
-
     -- Main LSP configuration
     {
         "neovim/nvim-lspconfig",
@@ -20,42 +19,20 @@ return {
             -- Automatically install LSPs and related tools to stdpath for Neovim
             -- Mason must be loaded before its dependents so we need to set it up here.
             -- Note: `opts = {}` is the same as calling `require('mason').setup({})`
-            { "williamboman/mason.nvim", opts = {} },
+            { "williamboman/mason.nvim",             opts = {} },
             "williamboman/mason-lspconfig.nvim",
             "WhoIsSethDaniel/mason-tool-installer.nvim",
 
+            -- Update import after rename
+            { "antosha417/nvim-lsp-file-operations", config = true },
+
             -- Useful status updates for LSP.
-            { "j-hui/fidget.nvim", opts = {} },
+            { "j-hui/fidget.nvim",                   opts = {} },
 
             -- Allows extra capabilities provided by blink.cmp
             "saghen/blink.cmp",
         },
         config = function()
-            -- Brief aside: **What is LSP?**
-            --
-            -- LSP is an initialism you've probably heard, but might not understand what it is.
-            --
-            -- LSP stands for Language Server Protocol. It's a protocol that helps editors
-            -- and language tooling communicate in a standardized fashion.
-            --
-            -- In general, you have a "server" which is some tool built to understand a particular
-            -- language (such as `gopls`, `lua_ls`, `rust_analyzer`, etc.). These Language Servers
-            -- (sometimes called LSP servers, but that's kind of like ATM Machine) are standalone
-            -- processes that communicate with some "client" - in this case, Neovim!
-            --
-            -- LSP provides Neovim with features like:
-            --  - Go to definition
-            --  - Find references
-            --  - Autocompletion
-            --  - Symbol Search
-            --  - and more!
-            --
-            -- Thus, Language Servers are external tools that must be installed separately from
-            -- Neovim. This is where `mason` and related plugins come into play.
-            --
-            -- If you're wondering about lsp vs treesitter, you can check out the wonderfully
-            -- and elegantly composed help section, `:help lsp-vs-treesitter`
-
             --  This function gets run when an LSP attaches to a particular buffer.
             --    That is to say, every time a new file is opened that is associated with
             --    an lsp (for example, opening `main.rs` is associated with `rust_analyzer`) this
@@ -66,13 +43,8 @@ return {
                     { clear = true }
                 ),
                 callback = function(event)
-                    -- Note: Remember that Lua is a real programming language, and as such it is possible
-                    -- to define small helper and utility functions so you don't have to repeat yourself.
-                    --
-                    -- In this case, we create a function that lets us more easily define mappings specific
-                    -- for LSP related items. It sets the mode, buffer and description for us each time.
                     require("which-key").add({
-                        { "<leader>g", group = "[G]oTo" },
+                        { "<leader>g", group = "Goto" },
                     })
 
                     local map = function(keys, func, desc, mode)
@@ -101,7 +73,7 @@ return {
                         }
                         if next(vim.lsp.get_clients()) == nil then return end
                         pcall(vim.lsp.buf.hover, opts)
-                    end, "[H]over")
+                    end, "Show hover")
 
                     -- Rename the variable under your cursor.
                     --  Most Language Servers support renaming across files, etc.
@@ -142,7 +114,7 @@ return {
                             prefill_substitute_for_cword({ boundary = true })
                         end
                     end, {
-                        desc = "[R]ename or substitute",
+                        desc = "Rename",
                     })
 
                     -- Execute a code action, usually your cursor needs to be on top of an error
@@ -150,7 +122,7 @@ return {
                     map(
                         "<leader>ga",
                         vim.lsp.buf.code_action,
-                        "[G]oto Code [A]ction",
+                        "Code actions",
                         { "n", "x" }
                     )
 
@@ -158,7 +130,7 @@ return {
                     map(
                         "<leader>gr",
                         require("telescope.builtin").lsp_references,
-                        "[G]oto [R]eferences"
+                        "References"
                     )
 
                     -- Jump to the implementation of the word under your cursor.
@@ -166,7 +138,7 @@ return {
                     map(
                         "<leader>gi",
                         require("telescope.builtin").lsp_implementations,
-                        "[G]oto [I]mplementation"
+                        "Implementation"
                     )
 
                     -- Jump to the definition of the word under your cursor.
@@ -175,32 +147,28 @@ return {
                     map(
                         "<leader>gd",
                         require("telescope.builtin").lsp_definitions,
-                        "[G]oto [D]efinition"
+                        "Definition"
                     )
 
                     -- Warn: This is not Goto Definition, this is Goto Declaration.
                     --  For example, in C this would take you to the header.
-                    map(
-                        "<leader>gD",
-                        vim.lsp.buf.declaration,
-                        "[G]oto [D]eclaration"
-                    )
+                    map("<leader>gD", vim.lsp.buf.declaration, "Declaration")
 
                     -- Fuzzy find all the symbols in your current document.
                     --  Symbols are things like variables, functions, types, etc.
-                    map(
-                        "<leader>S",
-                        require("telescope.builtin").lsp_document_symbols,
-                        "[S]ymbols"
-                    )
+                    -- map(
+                    --     "<leader>S",
+                    --     require("telescope.builtin").lsp_document_symbols,
+                    --     "[S]ymbols"
+                    -- )
 
                     -- Fuzzy find all the symbols in your current workspace.
                     --  Similar to document symbols, except searches over your entire project.
-                    map(
-                        "<leader>W",
-                        require("telescope.builtin").lsp_dynamic_workspace_symbols,
-                        "[W]orkspace Symbols"
-                    )
+                    -- map(
+                    --     "<leader>W",
+                    --     require("telescope.builtin").lsp_dynamic_workspace_symbols,
+                    --     "[W]orkspace Symbols"
+                    -- )
 
                     -- Jump to the type of the word under your cursor.
                     --  Useful when you're not sure what type a variable is and you want to see
@@ -208,33 +176,14 @@ return {
                     map(
                         "<leader>gt",
                         require("telescope.builtin").lsp_type_definitions,
-                        "[G]oto [T]ype Definition"
+                        "Type Definition"
                     )
 
-                    -- Debugging
-                    require("which-key").add({
-                        { "<leader>d", group = "[D]ebug" },
-                    })
-
-                    local dap = require("dap")
                     map(
-                        "<leader>db",
-                        dap.toggle_breakpoint,
-                        "Toggle [B]reakpoint"
+                        "<leader>D",
+                        require("telescope.builtin").diagnostics,
+                        "List diagnostics"
                     )
-                    map("<leader>dB", dap.set_breakpoint, "Set [B]reakpoint")
-                    map("<leader>dc", dap.continue, "[C]ontinue")
-                    map("<leader>dr", dap.repl.open, "[I]nspect")
-                    map("<leader>dk", dap.terminate, "[K]ill")
-
-                    map("<leader>do", dap.step_over, "Step [O]ver")
-                    map("<leader>di", dap.step_into, "Step [I]nto")
-                    map("<leader>du", dap.step_out, "Step O[u]t")
-                    -- map("<leader>dl", dap.run_last, "Run Last")
-
-                    -- local dapui = require("dapui")
-                    -- map("<leader>duu", dapui.open, "open ui")
-                    -- map("<leader>duc", dapui.close, "close ui")
 
                     -- This function resolves a difference between neovim nightly (version 0.11) and stable (version 0.10)
                     ---@param client vim.lsp.Client
@@ -317,7 +266,7 @@ return {
                         )
                     then
                         require("which-key").add({
-                            { "<leader>t", group = "[T]oggles" },
+                            { "<leader>t", group = "Toggles" },
                         })
 
                         map(
@@ -329,7 +278,7 @@ return {
                                     })
                                 )
                             end,
-                            "[T]oggle Inlay [H]ints"
+                            "Inlay hints"
                         )
                     end
                 end,
@@ -337,32 +286,21 @@ return {
 
             -- Diagnostic Config
             -- See :help vim.diagnostic.Opts
+            local severity = vim.diagnostic.severity
             vim.diagnostic.config({
-                severity_sort = true,
-                float = { border = "rounded", source = "if_many" },
-                underline = { severity = vim.diagnostic.severity.ERROR },
-                signs = vim.g.have_nerd_font
-                        and {
-                            text = {
-                                [vim.diagnostic.severity.ERROR] = "󰅚 ",
-                                [vim.diagnostic.severity.WARN] = "󰀪 ",
-                                [vim.diagnostic.severity.INFO] = "󰋽 ",
-                                [vim.diagnostic.severity.HINT] = "󰌶 ",
-                            },
-                        }
-                    or {},
-                virtual_text = {
-                    source = "if_many",
-                    spacing = 2,
-                    format = function(diagnostic)
-                        local diagnostic_message = {
-                            [vim.diagnostic.severity.ERROR] = diagnostic.message,
-                            [vim.diagnostic.severity.WARN] = diagnostic.message,
-                            [vim.diagnostic.severity.INFO] = diagnostic.message,
-                            [vim.diagnostic.severity.HINT] = diagnostic.message,
-                        }
-                        return diagnostic_message[diagnostic.severity]
-                    end,
+                signs = {
+                    text = {
+                        [severity.ERROR] = " ", -- error (circle with x)
+                        [severity.WARN] = " ", -- warning (rounded)
+                        [severity.HINT] = " ", -- lightbulb (rounded)
+                        [severity.INFO] = " ", -- info (rounded)
+                    },
+                    -- text = {
+                    --     [severity.ERROR] = " ",
+                    --     [severity.WARN] = " ",
+                    --     [severity.HINT] = "󰠠 ",
+                    --     [severity.INFO] = " ",
+                    -- },
                 },
             })
 
@@ -372,57 +310,13 @@ return {
             --  So, we create new capabilities with blink.cmp, and then broadcast that to the servers.
             local capabilities = require("blink.cmp").get_lsp_capabilities()
 
-            local servers = {
-                clangd = {},
-                pyright = {},
-                rust_analyzer = {},
-                lua_ls = {
-                    settings = {
-                        Lua = {
-                            completion = {
-                                callSnippet = "Replace",
-                            },
-                        },
-                    },
-                },
-                bashls = {
-                    filetypes = { "sh", "bash", "zsh" },
-                },
-                marksman = {},
-            }
-
-            local ensure_installed = vim.tbl_keys(servers or {})
-            vim.list_extend(ensure_installed, {
-                "stylua",
-                "shfmt",
-                "isort",
-                "black",
-                "prettier",
-                "prettierd",
-            })
-            require("mason-tool-installer").setup({
-                ensure_installed = ensure_installed,
-            })
-
-            require("mason-lspconfig").setup({
-                ensure_installed = {}, -- explicitly set to an empty table (Kickstart populates installs via mason-tool-installer)
-                automatic_installation = false,
-                handlers = {
-                    function(server_name)
-                        local server = servers[server_name] or {}
-                        -- This handles overriding only values explicitly passed
-                        -- by the server configuration above. Useful when disabling
-                        -- certain features of an LSP (for example, turning off formatting for ts_ls)
-                        server.capabilities = vim.tbl_deep_extend(
-                            "force",
-                            {},
-                            capabilities,
-                            server.capabilities or {}
-                        )
-                        require("lspconfig")[server_name].setup(server)
-                    end,
-                },
-            })
+            -- Configured in root:/after/lsp/...
+            -- local servers = {
+            --     clangd = {},
+            --     pyright = {},
+            --     rust_analyzer = {},
+            --     lua_ls = {},
+            -- }
         end,
     },
 
@@ -440,7 +334,7 @@ return {
                     })
                 end,
                 mode = "",
-                desc = "[F]ormat buffer",
+                desc = "Format",
             },
         },
         opts = {
@@ -467,7 +361,7 @@ return {
                 javascript = {
                     "prettierd",
                     "prettier",
-                    -- stop_after_first = true,
+                    stop_after_first = true,
                 },
                 markdown = { "prettierd" }, -- or "markdownlint" / "prettier"
             },
@@ -607,19 +501,19 @@ return {
         main = "nvim-treesitter.configs", -- Sets main module to use for opts
         -- [[ Configure Treesitter ]] See `:help nvim-treesitter`
         opts = {
-            ensure_installed = {
-                "bash",
-                "c",
-                "diff",
-                "html",
-                "lua",
-                "luadoc",
-                "markdown",
-                "markdown_inline",
-                "query",
-                "vim",
-                "vimdoc",
-            },
+            -- ensure_installed = {
+            --     "bash",
+            --     "c",
+            --     "diff",
+            --     "html",
+            --     "lua",
+            --     "luadoc",
+            --     "markdown",
+            --     "markdown_inline",
+            --     "query",
+            --     "vim",
+            --     "vimdoc",
+            -- },
             -- Autoinstall languages that are not installed
             auto_install = true,
             highlight = {

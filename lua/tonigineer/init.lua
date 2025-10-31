@@ -21,11 +21,6 @@ local function watch_file(path, fn)
     return h
 end
 
-local _ = watch_file(
-    "~/.local/state/caelestia/scheme.json",
-    function()
-        vim.defer_fn(function()
-            vim.cmd.colorscheme("m3scheme")
-        end, 150) -- delay in ms
-    end
-)
+local _ = watch_file("~/.local/state/caelestia/scheme.json", function()
+    vim.defer_fn(function() vim.cmd.colorscheme("m3scheme") end, 150) -- delay in ms
+end)

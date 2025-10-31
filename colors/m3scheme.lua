@@ -1,5 +1,8 @@
--- ~/.config/nvim/colors/m3scheme.lua
+-- Reset highlighting.
+vim.cmd.highlight("clear")
+if vim.fn.exists("syntax_on") then vim.cmd.syntax("reset") end
 
+vim.o.termguicolors = true
 vim.g.colors_name = "m3scheme"
 
 -- Function to read the JSON file using Neovim's built-in parser
@@ -215,7 +218,6 @@ local function apply_colors()
             "surface"
         )
     end
-    ------------------------------------
 
     vim.cmd("hi clear")
     if vim.fn.exists("syntax_on") then vim.cmd("syntax reset") end
@@ -229,25 +231,19 @@ local function apply_colors()
     end
 
     -- Base highlights
-    set_hl(
-        "Normal",
-        {
-            fg = colors.text or colors.onBackground,
-            bg = colors.base or colors.background,
-        }
-    )
+    set_hl("Normal", {
+        fg = colors.text or colors.onBackground,
+        bg = colors.base or colors.background,
+    })
     set_hl(
         "NormalFloat",
         { fg = colors.text or colors.onSurface, bg = colors.surface }
     )
     set_hl("FloatBorder", { fg = colors.outline, bg = colors.surface })
-    set_hl(
-        "NormalNC",
-        {
-            fg = colors.text or colors.onBackground,
-            bg = colors.base or colors.background,
-        }
-    )
+    set_hl("NormalNC", {
+        fg = colors.text or colors.onBackground,
+        bg = colors.base or colors.background,
+    })
 
     -- Cursor and selection
     set_hl(
@@ -265,45 +261,30 @@ local function apply_colors()
     )
     set_hl("Visual", { bg = colors.surface1 or colors.surfaceContainer })
     set_hl("VisualNOS", { bg = colors.surface1 or colors.surfaceContainer })
-    set_hl(
-        "Search",
-        {
-            fg = colors.base or colors.background,
-            bg = colors.yellow or colors.tertiary,
-        }
-    )
-    set_hl(
-        "IncSearch",
-        {
-            fg = colors.base or colors.background,
-            bg = colors.peach or colors.primary,
-        }
-    )
-    set_hl(
-        "CurSearch",
-        {
-            fg = colors.base or colors.background,
-            bg = colors.peach or colors.primary,
-        }
-    )
+    set_hl("Search", {
+        fg = colors.base or colors.background,
+        bg = colors.yellow or colors.tertiary,
+    })
+    set_hl("IncSearch", {
+        fg = colors.base or colors.background,
+        bg = colors.peach or colors.primary,
+    })
+    set_hl("CurSearch", {
+        fg = colors.base or colors.background,
+        bg = colors.peach or colors.primary,
+    })
 
     -- Line numbers
     set_hl("LineNr", { fg = colors.overlay0 or colors.outline })
     set_hl("CursorLineNr", { fg = colors.primary, bold = true })
-    set_hl(
-        "SignColumn",
-        {
-            fg = colors.surface1 or colors.surfaceContainer,
-            bg = colors.base or colors.background,
-        }
-    )
-    set_hl(
-        "FoldColumn",
-        {
-            fg = colors.overlay0 or colors.outline,
-            bg = colors.base or colors.background,
-        }
-    )
+    set_hl("SignColumn", {
+        fg = colors.surface1 or colors.surfaceContainer,
+        bg = colors.base or colors.background,
+    })
+    set_hl("FoldColumn", {
+        fg = colors.overlay0 or colors.outline,
+        bg = colors.base or colors.background,
+    })
 
     -- Syntax highlighting
     set_hl(
@@ -345,31 +326,22 @@ local function apply_colors()
     )
     set_hl("Ignore", { fg = colors.overlay0 or colors.outline })
     set_hl("Error", { fg = colors.error })
-    set_hl(
-        "Todo",
-        {
-            fg = colors.base or colors.background,
-            bg = colors.yellow or colors.tertiary,
-        }
-    )
+    set_hl("Todo", {
+        fg = colors.base or colors.background,
+        bg = colors.yellow or colors.tertiary,
+    })
 
     -- Diff colors
     set_hl("DiffAdd", { fg = colors.success, bg = colors.successContainer })
-    set_hl(
-        "DiffChange",
-        {
-            fg = colors.blue or colors.primary,
-            bg = colors.surface1 or colors.surfaceContainer,
-        }
-    )
+    set_hl("DiffChange", {
+        fg = colors.blue or colors.primary,
+        bg = colors.surface1 or colors.surfaceContainer,
+    })
     set_hl("DiffDelete", { fg = colors.error, bg = colors.errorContainer })
-    set_hl(
-        "DiffText",
-        {
-            fg = colors.blue or colors.primary,
-            bg = colors.surface2 or colors.surfaceContainerHigh,
-        }
-    )
+    set_hl("DiffText", {
+        fg = colors.blue or colors.primary,
+        bg = colors.surface2 or colors.surfaceContainerHigh,
+    })
 
     -- Git signs
     set_hl("GitSignsAdd", { fg = colors.success })
@@ -396,13 +368,10 @@ local function apply_colors()
         "TabLineFill",
         { fg = colors.overlay1 or colors.outline, bg = colors.surface }
     )
-    set_hl(
-        "TabLineSel",
-        {
-            fg = colors.text or colors.onSurface,
-            bg = colors.surface1 or colors.surfaceContainer,
-        }
-    )
+    set_hl("TabLineSel", {
+        fg = colors.text or colors.onSurface,
+        bg = colors.surface1 or colors.surfaceContainer,
+    })
 
     -- Popup menu
     set_hl(
@@ -423,38 +392,26 @@ local function apply_colors()
     set_hl("DiagnosticHint", { fg = colors.teal or colors.tertiary })
     set_hl("DiagnosticOk", { fg = colors.success })
 
-    set_hl(
-        "DiagnosticVirtualTextError",
-        { fg = colors.error, bg = colors.surface0 or colors.surfaceContainerLow }
-    )
-    set_hl(
-        "DiagnosticVirtualTextWarn",
-        {
-            fg = colors.peach or colors.secondary,
-            bg = colors.surface0 or colors.surfaceContainerLow,
-        }
-    )
-    set_hl(
-        "DiagnosticVirtualTextInfo",
-        {
-            fg = colors.blue or colors.primary,
-            bg = colors.surface0 or colors.surfaceContainerLow,
-        }
-    )
-    set_hl(
-        "DiagnosticVirtualTextHint",
-        {
-            fg = colors.teal or colors.tertiary,
-            bg = colors.surface0 or colors.surfaceContainerLow,
-        }
-    )
-    set_hl(
-        "DiagnosticVirtualTextOk",
-        {
-            fg = colors.success,
-            bg = colors.surface0 or colors.surfaceContainerLow,
-        }
-    )
+    set_hl("DiagnosticVirtualTextError", {
+        fg = colors.error,
+        bg = colors.surface0 or colors.surfaceContainerLow,
+    })
+    set_hl("DiagnosticVirtualTextWarn", {
+        fg = colors.peach or colors.secondary,
+        bg = colors.surface0 or colors.surfaceContainerLow,
+    })
+    set_hl("DiagnosticVirtualTextInfo", {
+        fg = colors.blue or colors.primary,
+        bg = colors.surface0 or colors.surfaceContainerLow,
+    })
+    set_hl("DiagnosticVirtualTextHint", {
+        fg = colors.teal or colors.tertiary,
+        bg = colors.surface0 or colors.surfaceContainerLow,
+    })
+    set_hl("DiagnosticVirtualTextOk", {
+        fg = colors.success,
+        bg = colors.surface0 or colors.surfaceContainerLow,
+    })
 
     set_hl("DiagnosticUnderlineError", { undercurl = true, sp = colors.error })
     set_hl(
@@ -560,13 +517,10 @@ local function apply_colors()
     set_hl("@comment.error", { fg = colors.error })
     set_hl("@comment.warning", { fg = colors.peach or colors.secondary })
     set_hl("@comment.note", { fg = colors.blue or colors.primary })
-    set_hl(
-        "@comment.todo",
-        {
-            fg = colors.base or colors.background,
-            bg = colors.yellow or colors.tertiary,
-        }
-    )
+    set_hl("@comment.todo", {
+        fg = colors.base or colors.background,
+        bg = colors.yellow or colors.tertiary,
+    })
 
     -- Markup (for markdown, etc.)
     set_hl(
@@ -645,24 +599,18 @@ local function apply_colors()
         "TelescopeNormal",
         { fg = colors.text or colors.onSurface, bg = colors.surface }
     )
-    set_hl(
-        "TelescopeSelection",
-        {
-            fg = colors.text or colors.onSurface,
-            bg = colors.surface1 or colors.surfaceContainer,
-        }
-    )
+    set_hl("TelescopeSelection", {
+        fg = colors.text or colors.onSurface,
+        bg = colors.surface1 or colors.surfaceContainer,
+    })
     set_hl(
         "TelescopeSelectionCaret",
         { fg = colors.primary, bg = colors.surface1 or colors.surfaceContainer }
     )
-    set_hl(
-        "TelescopeMultiSelection",
-        {
-            fg = colors.text or colors.onSurface,
-            bg = colors.surface2 or colors.surfaceContainerHigh,
-        }
-    )
+    set_hl("TelescopeMultiSelection", {
+        fg = colors.text or colors.onSurface,
+        bg = colors.surface2 or colors.surfaceContainerHigh,
+    })
     set_hl("TelescopeTitle", { fg = colors.primary, bold = true })
     set_hl(
         "TelescopePromptTitle",
