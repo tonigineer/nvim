@@ -5,10 +5,8 @@ return {
             ensure_installed = {
                 "bashls",
                 "clangd",
-                "cpplint",
                 "hyprls",
                 "lua_ls",
-                "pylint",
                 "pyright",
                 "qmlls",
                 "rust_analyzer",
@@ -36,6 +34,7 @@ return {
             ensure_installed = {
                 "black",
                 "clang-format",
+                "cpplint",
                 "eslint_d",
                 "isort",
                 "prettier",
