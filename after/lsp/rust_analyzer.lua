@@ -1,9 +1,9 @@
 return {
-    cmd = { 'rust-analyzer' },
-    filetypes = { 'rust' },
-    root_markers = { 'Cargo.toml', 'rust-project.json' },
+    cmd = { "rust-analyzer" },
+    filetypes = { "rust" },
+    root_markers = { "Cargo.toml", "rust-project.json" },
     settings = {
-        ['rust-analyzer'] = {
+        ["rust-analyzer"] = {
             inlayHints = {
                 chainingHints = { enable = true },
             },

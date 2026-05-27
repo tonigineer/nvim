@@ -2,104 +2,116 @@
 -- Default vim.opt that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/vim.opt.lua
 -- Add any additional vim.opt here
 
--- [[ Colorscheme ]]
-vim.cmd.colorscheme("m3scheme")
+-- ———— Colorscheme ————————————————————————————————————————————————————————————
 
--- Note: Remember to uncomment to workaround in ./init.lua
--- vim.cmd.colorscheme("vague")
+-- vim.cmd.colorscheme("m3scheme")
+-- Note: Remember to uncomment the workaround in ./init.lua when switching
+vim.cmd.colorscheme("vague")
 -- vim.cmd.colorscheme("rose-pine-moon")
 
--- [[ Checkhealth ]]
+-- ———— Providers (disable unused ones for faster :checkhealth) ————————————————
+
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
--- [[ Context ]]
-vim.opt.colorcolumn = ""
+-- ———— Context & Cursor ———————————————————————————————————————————————————————
+
 vim.opt.number = true
 vim.opt.relativenumber = true
-vim.opt.scrolloff = 8 -- minimal number of screen lines to keep above and below the cursor
-vim.opt.sidescrolloff = 8 -- minimal number of screen columns to keep to the left and right of the cursor if wrap is `false`
+vim.opt.cursorline = true
 vim.opt.signcolumn = "yes"
-vim.opt.pumheight = 10 -- pop up menu height
-vim.opt.showmode = false -- see things like -- INSERT -- anymore
-vim.opt.updatetime = 300 -- faster completion (4000ms default)
-vim.opt.timeoutlen = 200 -- time to wait for a mapped sequence to complete (in milliseconds)
-vim.opt.whichwrap:append("<,>,[,],h,l") -- keys allowed to move to the previous/next line when the beginning/end of line is reached
+vim.opt.colorcolumn = ""
+vim.opt.scrolloff = 8          -- Min lines to keep above/below cursor
+vim.opt.sidescrolloff = 8      -- Min columns to keep left/right of cursor when wrap is off
+vim.opt.laststatus = 3         -- Global statusline
+vim.opt.ruler = true           -- Show cursor position
+vim.opt.showmode = false       -- Don't show -- INSERT -- etc.
+vim.opt.showcmd = false        -- Hide partial command in last line
 
--- [[ Filetypes ]]
+-- Highlight current line number
+vim.api.nvim_set_hl(0, "CursorLineNr", { link = "DiagnosticWarn", bold = true })
+
+-- ———— Timing —————————————————————————————————————————————————————————————————
+
+vim.opt.updatetime = 300       -- Faster swap write & CursorHold trigger
+vim.opt.timeoutlen = 200       -- Time to wait for mapped sequence (ms)
+
+-- ———— Wrapping & Movement ————————————————————————————————————————————————————
+
+vim.opt.whichwrap:append("<,>,[,],h,l") -- Keys allowed to cross line boundaries
+vim.opt.linebreak = true
+
+-- ———— Filetypes & Encoding ———————————————————————————————————————————————————
+
 vim.opt.encoding = "utf8"
--- if performing an operation that would fail due to unsaved changes in the buffer (like `:q`),
--- instead raise a dialog asking if you wish to save the current file(s)
--- See `:help 'confirm'`
-vim.opt.confirm = true
+vim.opt.confirm = true         -- Ask to save on quit with unsaved changes
 
--- [[ Interpreter ]]
+-- ———— Interpreter & Shell ————————————————————————————————————————————————————
+
 vim.g.python3_host_prog = "/usr/bin/python"
+vim.opt.shell = "/usr/bin/zsh"
 
--- -- If the current system shell or the `shell` option is set to /usr/bin/fish then revert to sh
+-- -- If the current system shell or the `shell` option is set to /usr/bin/fish
+-- -- then revert to sh, else default to the current system shell.
 -- if os.getenv('SHELL') == "/usr/bin/fish" or vim.opt.shell == "/usr/bin/fish" then
 --     vim.opt.shell = "/usr/bin/fish"
 -- else
---    -- Else default to the system current shell.
 --    vim.opt.shell = os.getenv('SHELL')
 -- end
-vim.opt.shell = "/usr/bin/zsh"
 
--- [[ Mouse ]]
+-- ———— Mouse & Clipboard ——————————————————————————————————————————————————————
+
 vim.opt.mouse = "a"
 vim.opt.clipboard:append("unnamedplus")
 
--- [[ Search ]]
+-- ———— Search —————————————————————————————————————————————————————————————————
+
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = false
 
--- [[ Splits ]]
-vim.opt.splitright = true -- force all horizontal splits to go below current window
-vim.opt.splitbelow = true -- force all vertical splits to go to the right of current window
+-- ———— Window Splits ——————————————————————————————————————————————————————————
 
--- [[ Swap files]]
+vim.opt.splitright = true      -- Horizontal splits go right
+vim.opt.splitbelow = true      -- Vertical splits go below
+
+-- ———— Backup & Undo ——————————————————————————————————————————————————————————
+
 vim.opt.swapfile = false
-vim.opt.undofile = true -- enable persistent undo
-vim.opt.writebackup = false -- if a file is being edited by another program (or was written to file while editing with another program), it
+vim.opt.writebackup = false
+vim.opt.undofile = true        -- Persistent undo
 
--- [[ Theme ]]
+-- ———— Appearance & Theme —————————————————————————————————————————————————————
+
 vim.g.have_nerd_font = true
 vim.opt.syntax = "ON"
 vim.opt.termguicolors = true
-vim.opt.cursorline = true -- highlight the current line
-vim.api.nvim_set_hl(0, "CursorLineNr", { link = "DiagnosticWarn", bold = true })
-vim.opt.laststatus = 3 -- only the last window will always have a status line
-vim.opt.showcmd = false -- hide (partial) command in the last line of the screen (for performance)
-vim.opt.ruler = true -- hide the line and column number of the cursor position
-vim.opt.guifont = "monospace:h17" -- the font used in graphical neovim applications
+vim.opt.guifont = "monospace:h17"
 
--- [[ Whitespace ]]
--- https://stackoverflow.com/a/51995699
-vim.opt.expandtab = true -- convert tabs to spaces
-vim.opt.shiftwidth = 4 -- the number of spaces inserted for each indentation
+-- ———— Whitespace & Indentation ———————————————————————————————————————————————
+
+vim.opt.expandtab = true       -- Use spaces instead of tabs
+vim.opt.shiftwidth = 4         -- Indent width
 vim.opt.softtabstop = 4
-vim.opt.tabstop = 4 -- insert 2 spaces for a tab
-vim.opt.fillchars:append({ eob = " " }) -- Remove `~` from empty lines
+vim.opt.tabstop = 4            -- Visual tab width
+vim.opt.iskeyword:append("-")  -- Treat words with `-` as single words
+
+-- ———— Listchars (visible whitespace) —————————————————————————————————————————
 
 vim.opt.list = true
-vim.opt.linebreak = true
--- vim.opt.listchars:append("space:·") -- ␣
-vim.opt.listchars:append("space:‧") -- ␣
--- vim.opt.listchars:append("eol:¬") -- ↵
--- vim.opt.listchars:append("eol:↴") -- ↵
-
-vim.opt.listchars:append("tab:→ ") -- →␣
+vim.opt.listchars:append("space:‧")
+vim.opt.listchars:append("tab:→ ")
 vim.opt.listchars:append("trail:~")
 vim.opt.listchars:append("extends:>")
 vim.opt.listchars:append("precedes:<")
-vim.opt.iskeyword:append("-") -- treats words with `-` as single words
-vim.opt.shortmess:append("c") -- hide all the completion messages, e.g. "-- XXX completion (YYY)", "match 1 of 2", "The only match", "Pattern not found"
-vim.opt.formatoptions:remove({ "c", "r", "o" }) -- This is a sequence of letters which describes how automatic formatting is to be done
+-- vim.opt.listchars:append("eol:¬")
+-- vim.opt.listchars:append("eol:↴")
 
-vim.opt.fillchars:append({ eob = " " }) -- remove ~ from empty lines
+-- ———— UI Helpers —————————————————————————————————————————————————————————————
 
-vim.opt.list = true
-vim.opt.linebreak = true
+vim.opt.pumheight = 10         -- Popup menu max height
+vim.opt.fillchars:append({ eob = " " }) -- Remove `~` from empty lines
+vim.opt.shortmess:append("c")  -- Hide completion messages
+vim.opt.formatoptions:remove({ "c", "r", "o" }) -- Disable auto comment continuation

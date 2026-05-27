@@ -1,6 +1,5 @@
 -- SOURCE: https://github.com/MariaSolOs/dotfiles/blob/main/.config/nvim/colors/miss-dracula.lua
 
--- Reset highlighting.
 vim.cmd.highlight("clear")
 if vim.fn.exists("syntax_on") then vim.cmd.syntax("reset") end
 
@@ -44,27 +43,31 @@ local colors = {
     yellow = "#E8EDA2",
 }
 
--- Terminal colors.
-vim.g.terminal_color_0 = colors.transparent_black
-vim.g.terminal_color_1 = colors.red
-vim.g.terminal_color_2 = colors.green
-vim.g.terminal_color_3 = colors.yellow
-vim.g.terminal_color_4 = colors.purple
-vim.g.terminal_color_5 = colors.pink
-vim.g.terminal_color_6 = colors.cyan
-vim.g.terminal_color_7 = colors.white
-vim.g.terminal_color_8 = colors.selection
-vim.g.terminal_color_9 = colors.bright_red
-vim.g.terminal_color_10 = colors.bright_green
-vim.g.terminal_color_11 = colors.bright_yellow
-vim.g.terminal_color_12 = colors.bright_blue
-vim.g.terminal_color_13 = colors.bright_magenta
-vim.g.terminal_color_14 = colors.bright_cyan
-vim.g.terminal_color_15 = colors.bright_white
+-- Terminal colors
+for i = 0, 15 do
+    local color_map = {
+        [0] = colors.transparent_black,
+        [1] = colors.red,
+        [2] = colors.green,
+        [3] = colors.yellow,
+        [4] = colors.purple,
+        [5] = colors.pink,
+        [6] = colors.cyan,
+        [7] = colors.white,
+        [8] = colors.selection,
+        [9] = colors.bright_red,
+        [10] = colors.bright_green,
+        [11] = colors.bright_yellow,
+        [12] = colors.bright_blue,
+        [13] = colors.bright_magenta,
+        [14] = colors.bright_cyan,
+        [15] = colors.bright_white,
+    }
+    vim.g["terminal_color_" .. i] = color_map[i]
+end
 vim.g.terminal_color_background = colors.bg
 vim.g.terminal_color_foreground = colors.fg
 
--- Groups used for my statusline.
 ---@type table<string, vim.api.keyset.highlight>
 local statusline_groups = {}
 for mode, color in pairs({
@@ -80,27 +83,15 @@ for mode, color in pairs({
     statusline_groups["StatuslineModeSeparator" .. mode] =
         { fg = colors[color], bg = colors.transparent_black }
 end
+
 statusline_groups = vim.tbl_extend("error", statusline_groups, {
-    StatuslineItalic = {
-        fg = colors.grey,
-        bg = colors.transparent_black,
-        italic = true,
-    },
-    StatuslineSpinner = {
-        fg = colors.bright_green,
-        bg = colors.transparent_black,
-        bold = true,
-    },
-    StatuslineTitle = {
-        fg = colors.bright_white,
-        bg = colors.transparent_black,
-        bold = true,
-    },
+    StatuslineItalic = { fg = colors.grey, bg = colors.transparent_black, italic = true },
+    StatuslineSpinner = { fg = colors.bright_green, bg = colors.transparent_black, bold = true },
+    StatuslineTitle = { fg = colors.bright_white, bg = colors.transparent_black, bold = true },
 })
 
 ---@type table<string, vim.api.keyset.highlight>
 local groups = vim.tbl_extend("error", statusline_groups, {
-    -- Builtins.
     Boolean = { fg = colors.cyan },
     Character = { fg = colors.green },
     ColorColumn = { bg = colors.selection },
@@ -166,7 +157,7 @@ local groups = vim.tbl_extend("error", statusline_groups, {
     WarningMsg = { fg = colors.yellow },
     WildMenu = { fg = colors.transparent_black, bg = colors.white },
 
-    -- Treesitter.
+    -- Treesitter
     ["@annotation"] = { fg = colors.yellow },
     ["@attribute"] = { fg = colors.cyan },
     ["@boolean"] = { fg = colors.purple },
@@ -222,7 +213,7 @@ local groups = vim.tbl_extend("error", statusline_groups, {
     ["@variable.member"] = { fg = colors.orange },
     ["@variable.parameter"] = { fg = colors.orange },
 
-    -- Semantic tokens.
+    -- Semantic tokens
     ["@class"] = { fg = colors.cyan },
     ["@decorator"] = { fg = colors.cyan },
     ["@enum"] = { fg = colors.cyan },
@@ -248,10 +239,10 @@ local groups = vim.tbl_extend("error", statusline_groups, {
     ["@struct"] = { fg = colors.cyan },
     ["@typeParameter"] = { fg = colors.cyan },
 
-    -- Package manager.
+    -- Lazy
     LazyDimmed = { fg = colors.grey },
 
-    -- LSP.
+    -- LSP
     DiagnosticDeprecated = { strikethrough = true, fg = colors.fg },
     DiagnosticError = { fg = colors.red },
     DiagnosticFloatingError = { fg = colors.red },
@@ -265,22 +256,10 @@ local groups = vim.tbl_extend("error", statusline_groups, {
     DiagnosticUnderlineInfo = { undercurl = true, sp = colors.cyan },
     DiagnosticUnderlineWarn = { undercurl = true, sp = colors.yellow },
     DiagnosticUnnecessary = { fg = colors.grey, italic = true },
-    DiagnosticVirtualTextError = {
-        fg = colors.red,
-        bg = colors.transparent_red,
-    },
-    DiagnosticVirtualTextHint = {
-        fg = colors.cyan,
-        bg = colors.transparent_blue,
-    },
-    DiagnosticVirtualTextInfo = {
-        fg = colors.cyan,
-        bg = colors.transparent_blue,
-    },
-    DiagnosticVirtualTextWarn = {
-        fg = colors.yellow,
-        bg = colors.transparent_yellow,
-    },
+    DiagnosticVirtualTextError = { fg = colors.red, bg = colors.transparent_red },
+    DiagnosticVirtualTextHint = { fg = colors.cyan, bg = colors.transparent_blue },
+    DiagnosticVirtualTextInfo = { fg = colors.cyan, bg = colors.transparent_blue },
+    DiagnosticVirtualTextWarn = { fg = colors.yellow, bg = colors.transparent_yellow },
     DiagnosticWarn = { fg = colors.yellow },
     LspCodeLens = { fg = colors.cyan, underline = true },
     LspFloatWinBorder = { fg = colors.comment },
@@ -288,13 +267,9 @@ local groups = vim.tbl_extend("error", statusline_groups, {
     LspReferenceRead = { bg = colors.transparent_blue },
     LspReferenceText = {},
     LspReferenceWrite = { bg = colors.transparent_red },
-    LspSignatureActiveParameter = {
-        bold = true,
-        underline = true,
-        sp = colors.fg,
-    },
+    LspSignatureActiveParameter = { bold = true, underline = true, sp = colors.fg },
 
-    -- Completions:
+    -- Completions
     BlinkCmpKindClass = { link = "@type" },
     BlinkCmpKindColor = { link = "DevIconCss" },
     BlinkCmpKindConstant = { link = "@constant" },
@@ -326,44 +301,36 @@ local groups = vim.tbl_extend("error", statusline_groups, {
     BlinkCmpMenu = { bg = colors.bg },
     BlinkCmpMenuBorder = { bg = colors.bg },
 
-    -- Dap UI.
+    -- Dap UI
     DapStoppedLine = { default = true, link = "Visual" },
     NvimDapVirtualText = { fg = colors.lavender, underline = true },
 
-    -- Diffs.
+    -- Diffs
     DiffAdd = { fg = colors.green, bg = colors.transparent_green },
     DiffChange = { fg = colors.white, bg = colors.transparent_yellow },
     DiffDelete = { fg = colors.red, bg = colors.transparent_red },
-    DiffText = {
-        fg = colors.orange,
-        bg = colors.transparent_yellow,
-        bold = true,
-    },
+    DiffText = { fg = colors.orange, bg = colors.transparent_yellow, bold = true },
     DiffviewFolderSign = { fg = colors.cyan },
     DiffviewNonText = { fg = colors.lilac },
     diffAdded = { fg = colors.bright_green, bold = true },
     diffChanged = { fg = colors.bright_yellow, bold = true },
     diffRemoved = { fg = colors.bright_red, bold = true },
 
-    -- Command line.
+    -- Command line
     MoreMsg = { fg = colors.bright_white, bold = true },
     MsgArea = { fg = colors.cyan },
     MsgSeparator = { fg = colors.lilac },
 
-    -- Winbar styling.
+    -- Winbar
     WinBar = { fg = colors.fg, bg = colors.transparent_black },
     WinBarNC = { bg = colors.transparent_black },
-    WinBarDir = {
-        fg = colors.bright_magenta,
-        bg = colors.transparent_black,
-        italic = true,
-    },
+    WinBarDir = { fg = colors.bright_magenta, bg = colors.transparent_black, italic = true },
     WinBarSeparator = { fg = colors.green, bg = colors.transparent_black },
 
-    -- Quickfix window.
+    -- Quickfix
     QuickFixLine = { italic = true, bg = colors.transparent_red },
 
-    -- Gitsigns.
+    -- Gitsigns
     GitSignsAdd = { fg = colors.bright_green },
     GitSignsChange = { fg = colors.cyan },
     GitSignsCurrentLineBlame = { fg = colors.lavender },
@@ -372,36 +339,32 @@ local groups = vim.tbl_extend("error", statusline_groups, {
     GitSignsStagedChange = { fg = colors.orange },
     GitSignsStagedDelete = { fg = colors.orange },
 
-    -- Gitlinker.
+    -- Gitlinker
     NvimGitLinkerHighlightTextObject = { link = "Visual" },
 
-    -- Bufferline.
-    BufferLineBufferSelected = {
-        bg = colors.bg,
-        underline = true,
-        sp = colors.purple,
-    },
+    -- Bufferline
+    BufferLineBufferSelected = { bg = colors.bg, underline = true, sp = colors.purple },
     BufferLineFill = { bg = colors.bg },
     TabLine = { fg = colors.comment, bg = colors.bg },
     TabLineFill = { bg = colors.bg },
     TabLineSel = { bg = colors.purple },
 
-    -- When triggering flash, use a white font and make everything in the backdrop italic.
+    -- Flash
     FlashBackdrop = { italic = true },
     FlashPrompt = { link = "Normal" },
 
-    -- Make these titles more visible.
+    -- Mini
     MiniClueTitle = { bold = true, fg = colors.cyan },
     MiniFilesTitleFocused = { bold = true, fg = colors.cyan },
 
-    -- Nicer yanky highlights.
+    -- Yanky
     YankyPut = { link = "Visual" },
     YankyYanked = { link = "Visual" },
 
-    -- Highlight for the Treesitter sticky context.
+    -- Treesitter context
     TreesitterContextBottom = { underline = true, sp = colors.lilac },
 
-    -- Fzf overrides.
+    -- FzfLua
     FzfLuaBorder = { fg = colors.comment },
     FzfLuaHeaderBind = { fg = colors.lavender },
     FzfLuaHeaderText = { fg = colors.pink },
@@ -410,22 +373,18 @@ local groups = vim.tbl_extend("error", statusline_groups, {
     FzfLuaPreviewTitle = { fg = colors.fg },
     FzfLuaSearch = { bg = colors.transparent_red },
 
-    -- Nicer sign column highlights for grug-far.
+    -- Grug-far
     GrugFarResultsChangeIndicator = { link = "Changed" },
     GrugFarResultsRemoveIndicator = { link = "Removed" },
     GrugFarResultsAddIndicator = { link = "Added" },
 
-    -- Overseeer.
+    -- Overseer
     OverseerComponent = { link = "@keyword" },
 
-    -- Links.
-    HighlightUrl = {
-        underline = true,
-        fg = colors.neon_cyan,
-        sp = colors.neon_cyan,
-    },
+    -- Links
+    HighlightUrl = { underline = true, fg = colors.neon_cyan, sp = colors.neon_cyan },
 
-    -- CodeCompanion.
+    -- CodeCompanion
     CodeCompanionInlineDiffHint = { link = "LspCodeLens" },
 })
 

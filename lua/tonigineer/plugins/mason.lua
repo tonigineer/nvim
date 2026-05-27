@@ -6,6 +6,7 @@ return {
                 "bashls",
                 "clangd",
                 "hyprls",
+                "jsonls",
                 "lua_ls",
                 "pyright",
                 "qmlls",
