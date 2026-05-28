@@ -16,12 +16,5 @@ return {
                 width_preview = 25,
             },
         })
-
-        vim.api.nvim_create_autocmd("FileType", {
-            pattern = "minifiles",
-            callback = function(args)
-                vim.keymap.set("n", "<Esc>", MiniFiles.close, { buffer = args.buf, silent = true })
-            end,
-        })
     end,
 }

@@ -6,6 +6,8 @@ if vim.fn.exists("syntax_on") then vim.cmd.syntax("reset") end
 vim.o.termguicolors = true
 vim.g.colors_name = "miss-dracula"
 
+-- ──── Palette ─────────────────────────────────────────────────────────────────
+
 local colors = {
     bg = "#0E1419",
     black = "#000000",
@@ -43,7 +45,8 @@ local colors = {
     yellow = "#E8EDA2",
 }
 
--- Terminal colors
+-- ──── Terminal Colors ─────────────────────────────────────────────────────────
+
 for i = 0, 15 do
     local color_map = {
         [0] = colors.transparent_black,

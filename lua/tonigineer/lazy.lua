@@ -27,10 +27,17 @@ vim.g.mapleader = " "
 vim.g.maplocalleader = "\\"
 
 require("lazy").setup({
-    spec = "tonigineer.plugins",
+    spec = {
+        { import = "tonigineer.plugins" },
+    },
     change_detection = { notify = false },
     install = { colorscheme = { "rosepine" } },
     checker = { enabled = true },
+    performance = {
+        rtp = {
+            reset = false,
+        },
+    },
 }, {
     ui = {
         icons = vim.g.have_nerd_font and {} or {

@@ -2,20 +2,24 @@
 -- Default vim.opt that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/vim.opt.lua
 -- Add any additional vim.opt here
 
--- ———— Colorscheme ————————————————————————————————————————————————————————————
+-- ──── Colorscheme ─────────────────────────────────────────────────────────────
 
 -- vim.cmd.colorscheme("m3scheme")
 -- Note: Remember to uncomment the workaround in ./init.lua when switching
 vim.cmd.colorscheme("vague")
+
+-- Fix: vague theme doesn't define FloatBorder, causing two-tone float backgrounds.
+-- Link FloatBorder to NormalFloat so borders share the same background.
+vim.api.nvim_set_hl(0, "FloatBorder", { link = "NormalFloat" })
 -- vim.cmd.colorscheme("rose-pine-moon")
 
--- ———— Providers (disable unused ones for faster :checkhealth) ————————————————
+-- ──── Providers (disable unused ones for faster :checkhealth) ──────────────────
 
 vim.g.loaded_node_provider = 0
 vim.g.loaded_perl_provider = 0
 vim.g.loaded_ruby_provider = 0
 
--- ———— Context & Cursor ———————————————————————————————————————————————————————
+-- ──── Context & Cursor ────────────────────────────────────────────────────────
 
 vim.opt.number = true
 vim.opt.relativenumber = true
@@ -32,22 +36,22 @@ vim.opt.showcmd = false        -- Hide partial command in last line
 -- Highlight current line number
 vim.api.nvim_set_hl(0, "CursorLineNr", { link = "DiagnosticWarn", bold = true })
 
--- ———— Timing —————————————————————————————————————————————————————————————————
+-- ──── Timing ──────────────────────────────────────────────────────────────────
 
 vim.opt.updatetime = 300       -- Faster swap write & CursorHold trigger
 vim.opt.timeoutlen = 200       -- Time to wait for mapped sequence (ms)
 
--- ———— Wrapping & Movement ————————————————————————————————————————————————————
+-- ──── Wrapping & Movement ─────────────────────────────────────────────────────
 
 vim.opt.whichwrap:append("<,>,[,],h,l") -- Keys allowed to cross line boundaries
 vim.opt.linebreak = true
 
--- ———— Filetypes & Encoding ———————————————————————————————————————————————————
+-- ──── Filetypes & Encoding ────────────────────────────────────────────────────
 
 vim.opt.encoding = "utf8"
 vim.opt.confirm = true         -- Ask to save on quit with unsaved changes
 
--- ———— Interpreter & Shell ————————————————————————————————————————————————————
+-- ──── Interpreter & Shell ─────────────────────────────────────────────────────
 
 vim.g.python3_host_prog = "/usr/bin/python"
 vim.opt.shell = "/usr/bin/zsh"
@@ -60,37 +64,37 @@ vim.opt.shell = "/usr/bin/zsh"
 --    vim.opt.shell = os.getenv('SHELL')
 -- end
 
--- ———— Mouse & Clipboard ——————————————————————————————————————————————————————
+-- ──── Mouse & Clipboard ───────────────────────────────────────────────────────
 
 vim.opt.mouse = "a"
 vim.opt.clipboard:append("unnamedplus")
 
--- ———— Search —————————————————————————————————————————————————————————————————
+-- ──── Search ──────────────────────────────────────────────────────────────────
 
 vim.opt.ignorecase = true
 vim.opt.smartcase = true
 vim.opt.incsearch = true
 vim.opt.hlsearch = false
 
--- ———— Window Splits ——————————————————————————————————————————————————————————
+-- ──── Window Splits ───────────────────────────────────────────────────────────
 
 vim.opt.splitright = true      -- Horizontal splits go right
 vim.opt.splitbelow = true      -- Vertical splits go below
 
--- ———— Backup & Undo ——————————————————————————————————————————————————————————
+-- ──── Backup & Undo ────────────────────────────────────────────────────────────
 
 vim.opt.swapfile = false
 vim.opt.writebackup = false
 vim.opt.undofile = true        -- Persistent undo
 
--- ———— Appearance & Theme —————————————————————————————————————————————————————
+-- ──── Appearance & Theme ──────────────────────────────────────────────────────
 
 vim.g.have_nerd_font = true
 vim.opt.syntax = "ON"
 vim.opt.termguicolors = true
 vim.opt.guifont = "monospace:h17"
 
--- ———— Whitespace & Indentation ———————————————————————————————————————————————
+-- ──── Whitespace & Indentation ────────────────────────────────────────────────
 
 vim.opt.expandtab = true       -- Use spaces instead of tabs
 vim.opt.shiftwidth = 4         -- Indent width
@@ -98,7 +102,7 @@ vim.opt.softtabstop = 4
 vim.opt.tabstop = 4            -- Visual tab width
 vim.opt.iskeyword:append("-")  -- Treat words with `-` as single words
 
--- ———— Listchars (visible whitespace) —————————————————————————————————————————
+-- ──── Listchars (visible whitespace) ──────────────────────────────────────────
 
 vim.opt.list = true
 vim.opt.listchars:append("space:‧")
@@ -109,7 +113,7 @@ vim.opt.listchars:append("precedes:<")
 -- vim.opt.listchars:append("eol:¬")
 -- vim.opt.listchars:append("eol:↴")
 
--- ———— UI Helpers —————————————————————————————————————————————————————————————
+-- ──── UI Helpers ──────────────────────────────────────────────────────────────
 
 vim.opt.pumheight = 10         -- Popup menu max height
 vim.opt.fillchars:append({ eob = " " }) -- Remove `~` from empty lines

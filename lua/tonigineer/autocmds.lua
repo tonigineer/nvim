@@ -1,4 +1,9 @@
-vim.api.nvim_create_autocmd("FileType", {
+local augroup = vim.api.nvim_create_augroup
+local autocmd = vim.api.nvim_create_autocmd
+
+-- ──── UI HELPERS ──────────────────────────────────────────────────────────────
+
+autocmd("FileType", {
     pattern = {
         "help",
         "alpha",
@@ -19,8 +24,29 @@ vim.api.nvim_create_autocmd("FileType", {
     end,
 })
 
--- Restore cursor position when reopening files
-vim.api.nvim_create_autocmd("BufReadPost", {
+autocmd("FileType", {
+    pattern = "minifiles",
+    callback = function(args)
+        vim.keymap.set(
+            "n",
+            "<Esc>",
+            MiniFiles.close,
+            { buffer = args.buf, silent = true }
+        )
+    end,
+})
+
+-- ──── COLORSHEME WORKAROUND ───────────────────────────────────────────────────
+
+autocmd("User", {
+    pattern = "VeryLazy",
+    once = true,
+    command = "colorscheme vague",
+})
+
+-- ──── CURSOR RESTORATION ──────────────────────────────────────────────────────
+
+autocmd("BufReadPost", {
     callback = function()
         if vim.bo.filetype:match("commit") or vim.bo.filetype == "help" then
             return
@@ -31,4 +57,11 @@ vim.api.nvim_create_autocmd("BufReadPost", {
             pcall(vim.api.nvim_win_set_cursor, 0, mark)
         end
     end,
+})
+
+-- ──── LSP ATTACH ──────────────────────────────────────────────────────────────
+
+autocmd("LspAttach", {
+    group = augroup("tonigineer-lsp-attach", { clear = true }),
+    callback = require("tonigineer.remap").lsp_attach,
 })

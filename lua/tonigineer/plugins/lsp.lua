@@ -47,11 +47,6 @@ return {
             "saghen/blink.cmp",
         },
         config = function()
-            vim.api.nvim_create_autocmd("LspAttach", {
-                group = vim.api.nvim_create_augroup("tonigineer-lsp-attach", { clear = true }),
-                callback = require("tonigineer.remap").lsp_attach,
-            })
-
             local severity = vim.diagnostic.severity
             vim.diagnostic.config({
                 signs = {
@@ -63,6 +58,20 @@ return {
                     },
                 },
             })
+
+            local servers = {
+                "bashls",
+                "clangd",
+                "hyprls",
+                "jsonls",
+                "lua_ls",
+                "pyright",
+                "qmlls",
+                "rust_analyzer",
+            }
+            for _, server in ipairs(servers) do
+                vim.lsp.enable(server)
+            end
         end,
     },
 
@@ -73,26 +82,32 @@ return {
         keys = require("tonigineer.remap").conform,
         opts = {
             notify_on_error = false,
-            format_on_save = function(bufnr)
-                local disabled = { c = true, cpp = true }
-                if disabled[vim.bo[bufnr].filetype] then return nil end
-                return { timeout_ms = 500, lsp_format = "fallback" }
-            end,
+            format_on_save = false,
             formatters_by_ft = {
                 lua = { "stylua" },
                 python = { "isort", "black" },
-                javascript = { "prettierd", "prettier", stop_after_first = true },
+                javascript = {
+                    "prettierd",
+                    "prettier",
+                    stop_after_first = true,
+                },
                 markdown = { "prettierd" },
             },
             formatters = {
                 stylua = {
                     prepend_args = {
-                        "--indent-type", "Spaces",
-                        "--indent-width", "4",
-                        "--column-width", "80",
-                        "--quote-style", "ForceDouble",
-                        "--call-parentheses", "Always",
-                        "--collapse-simple-statement", "Always",
+                        "--indent-type",
+                        "Spaces",
+                        "--indent-width",
+                        "4",
+                        "--column-width",
+                        "80",
+                        "--quote-style",
+                        "ForceDouble",
+                        "--call-parentheses",
+                        "Always",
+                        "--collapse-simple-statement",
+                        "Always",
                     },
                 },
                 shfmt = {
@@ -111,7 +126,12 @@ return {
                 "L3MON4D3/LuaSnip",
                 version = "2.*",
                 build = (function()
-                    if vim.fn.has("win32") == 1 or vim.fn.executable("make") == 0 then return end
+                    if
+                        vim.fn.has("win32") == 1
+                        or vim.fn.executable("make") == 0
+                    then
+                        return
+                    end
                     return "make install_jsregexp"
                 end)(),
                 opts = {},
@@ -144,18 +164,41 @@ return {
     {
         "nvim-treesitter/nvim-treesitter",
         build = ":TSUpdate",
-        main = "nvim-treesitter.config",
-        opts = {
-            ensure_installed = {
-                "bash", "c", "diff", "html", "lua", "luadoc",
-                "markdown", "markdown_inline", "query", "vim", "vimdoc",
-            },
-            auto_install = true,
-            highlight = {
-                enable = true,
-                additional_vim_regex_highlighting = { "ruby" },
-            },
-            indent = { enable = true, disable = { "ruby" } },
-        },
+        config = function()
+            local ensure_installed = {
+                "bash",
+                "c",
+                "diff",
+                "html",
+                "lua",
+                "luadoc",
+                "markdown",
+                "markdown_inline",
+                "query",
+                "vim",
+                "vimdoc",
+            }
+
+            -- -- Block until hover-critical parsers exist so LSP hover never
+            -- -- triggers a "No parser for language markdown" error.
+            -- -- After first install this is a no-op.
+            -- for _, lang in ipairs({ "markdown", "markdown_inline" }) do
+            --     local paths = vim.api.nvim_get_runtime_file(
+            --         "parser/" .. lang .. ".so",
+            --         true
+            --     )
+            --     if #paths == 0 then pcall(vim.cmd, "TSInstallSync " .. lang) end
+            -- end
+
+            require("nvim-treesitter.config").setup({
+                ensure_installed = ensure_installed,
+                auto_install = true,
+                highlight = {
+                    enable = true,
+                    additional_vim_regex_highlighting = { "ruby" },
+                },
+                indent = { enable = true, disable = { "ruby" } },
+            })
+        end,
     },
 }

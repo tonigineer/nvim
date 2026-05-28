@@ -1,4 +1,4 @@
-return {
+vim.lsp.config("clangd", {
     cmd = {
         "clangd",
         "--clang-tidy",
@@ -9,4 +9,4 @@ return {
     },
     filetypes = { "c", "cpp" },
     root_markers = { ".clangd" },
-}
+})

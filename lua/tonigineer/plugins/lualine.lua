@@ -9,4 +9,11 @@ return {
             vim.o.laststatus = 0
         end
     end,
+    opts = {
+        options = {
+            theme = "auto",
+            globalstatus = true,
+            disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
+        },
+    },
 }
