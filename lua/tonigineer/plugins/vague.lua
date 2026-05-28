@@ -4,7 +4,19 @@ return {
     priority = 1000,
     config = function()
         require("vague").setup({
-            transparent = false,
+            on_highlights = function(hl, colors)
+                -- ——— Command line / message area —————————————————————————————————————
+                hl.MsgArea = { fg = colors.comment, }
+
+                -- ——— Git signs (add / change / delete) ———————————————————————————————
+                hl.GitSignsAdd = { fg = colors.plus }
+                hl.GitSignsChange = { fg = colors.delta }
+                hl.GitSignsChangedelete = { fg = colors.delta }
+                hl.GitSignsDelete = { fg = colors.error }
+                hl.GitSignsTopdelete = { fg = colors.error }
+                hl.GitSignsUntracked = { fg = colors.plus }
+            end,
+            transparent = true,
             bold = true,
             italic = true,
             style = {

@@ -5,11 +5,9 @@ return {
             ensure_installed = {
                 "bashls",
                 "clangd",
-                "hyprls",
                 "jsonls",
                 "lua_ls",
                 "pyright",
-                "qmlls",
                 "rust_analyzer",
             },
         },

@@ -1,20 +1,31 @@
 return {
+    -- ——— Indentation —————————————————————————————————————————————————————————
     "tpope/vim-sleuth",
 
+    -- ——— Git —————————————————————————————————————————————————————————————————
     {
         "lewis6991/gitsigns.nvim",
+        event = { "BufReadPre", "BufNewFile" },
         opts = {
             signs = {
-                add = { text = "⊕" },
-                change = { text = "◍" },
-                delete = { text = "⊖" },
-                topdelete = { text = "⊖" },
-                changedelete = { text = "◌" },
-                untracked = { text = "○" },
+                -- add = { text = "⊕" },
+                -- change = { text = "◍" },
+                -- delete = { text = "⊖" },
+                -- topdelete = { text = "⊖" },
+                -- changedelete = { text = "◌" },
+                -- untracked = { text = "○" },
+                add = { text = "▎" },
+                change = { text = "▎" },
+                delete = { text = "_" },
+                topdelete = { text = "‾" },
+                changedelete = { text = "~" },
+                untracked = { text = "▎" },
+
             },
         },
     },
 
+    -- ——— Which-key ———————————————————————————————————————————————————————————
     {
         "folke/which-key.nvim",
         event = "VimEnter",
@@ -60,6 +71,7 @@ return {
         },
     },
 
+    -- ——— Telescope ———————————————————————————————————————————————————————————
     {
         "nvim-telescope/telescope.nvim",
         event = "VimEnter",
@@ -68,15 +80,19 @@ return {
             {
                 "nvim-telescope/telescope-fzf-native.nvim",
                 build = "make",
-                cond = function() return vim.fn.executable("make") == 1 end,
+                cond = function()
+                    return vim.fn.executable("make") == 1
+                end,
             },
             "nvim-telescope/telescope-ui-select.nvim",
             { "nvim-tree/nvim-web-devicons", enabled = vim.g.have_nerd_font },
         },
         keys = require("tonigineer.remap").telescope,
         config = function()
-            local themes = require("telescope.themes")
             local telescope = require("telescope")
+            local themes = require("telescope.themes")
+
+            local fd = vim.fn.executable("fd") == 1 and "fd" or "fdfind"
 
             telescope.setup({
                 defaults = {
@@ -84,13 +100,20 @@ return {
                 },
                 pickers = {
                     find_files = {
-                        find_command = (function()
-                            local fd = vim.fn.executable("fd") == 1 and "fd" or "fdfind"
-                            return { fd, "--type", "f", "--hidden", "--follow", "--exclude", ".git" }
-                        end)(),
+                        find_command = {
+                            fd,
+                            "--type",
+                            "f",
+                            "--hidden",
+                            "--follow",
+                            "--exclude",
+                            ".git",
+                        },
                     },
                     live_grep = {
-                        additional_args = function() return { "--hidden", "--glob", "!.git/*" } end,
+                        additional_args = function()
+                            return { "--hidden", "--glob", "!.git/*" }
+                        end,
                     },
                 },
                 extensions = {
@@ -99,7 +122,11 @@ return {
             })
 
             vim.api.nvim_set_hl(0, "TelescopeNormal", { bg = "none" })
-            vim.api.nvim_set_hl(0, "TelescopeSelection", { bg = "none", fg = "#FFFFFF", underline = false })
+            vim.api.nvim_set_hl(0, "TelescopeSelection", {
+                bg = "none",
+                fg = "#FFFFFF",
+                underline = false,
+            })
 
             pcall(telescope.load_extension, "fzf")
             pcall(telescope.load_extension, "ui-select")

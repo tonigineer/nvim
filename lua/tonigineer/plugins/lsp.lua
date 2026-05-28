@@ -1,4 +1,5 @@
 return {
+    -- ——— Lua development —————————————————————————————————————————————————————
     {
         "folke/lazydev.nvim",
         ft = "lua",
@@ -9,39 +10,38 @@ return {
         },
     },
 
+    -- ——— Mason ———————————————————————————————————————————————————————————————
     {
-        "rachartier/tiny-inline-diagnostic.nvim",
-        event = "VeryLazy",
-        priority = 1000,
-        config = function()
-            require("tiny-inline-diagnostic").setup({
-                use_icons_from_diagnostic = true,
-                set_arrow_to_diag_color = true,
-                transparent_bg = true,
-                show_all_diags_on_cursorline = true,
-                enable_on_insert = true,
-                enable_on_select = true,
-                options = { show_source = { enabled = true } },
-                signs = {
-                    left = "",
-                    right = "",
-                    diag = "●",
-                    arrow = "    ",
-                    up_arrow = "    ",
-                    vertical = " │",
-                    vertical_end = " └",
-                },
-                blend = { factor = 0.22 },
-            })
-        end,
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        dependencies = { { "mason-org/mason.nvim", opts = {} } },
+        opts = {
+            ensure_installed = {
+                -- LSP servers
+                "lua-language-server",
+                "bash-language-server",
+                "json-lsp",
+                "pyright",
+                "clangd",
+                "rust-analyzer",
+
+                -- Formatters
+                "stylua",
+                "isort",
+                "black",
+                "prettierd",
+                "prettier",
+                "shfmt",
+
+                -- Linters
+                "shellcheck",
+            },
+        },
     },
 
+    -- ——— LSP —————————————————————————————————————————————————————————————————
     {
         "neovim/nvim-lspconfig",
         dependencies = {
-            { "williamboman/mason.nvim", opts = {} },
-            "williamboman/mason-lspconfig.nvim",
-            "WhoIsSethDaniel/mason-tool-installer.nvim",
             { "antosha417/nvim-lsp-file-operations", config = true },
             { "j-hui/fidget.nvim", opts = {} },
             "saghen/blink.cmp",
@@ -49,12 +49,13 @@ return {
         config = function()
             local severity = vim.diagnostic.severity
             vim.diagnostic.config({
+                virtual_text = false,
                 signs = {
                     text = {
-                        [severity.ERROR] = " ",
-                        [severity.WARN] = " ",
-                        [severity.HINT] = " ",
-                        [severity.INFO] = " ",
+                        [severity.ERROR] = " ",
+                        [severity.WARN] = " ",
+                        [severity.HINT] = " ",
+                        [severity.INFO] = " ",
                     },
                 },
             })
@@ -62,11 +63,9 @@ return {
             local servers = {
                 "bashls",
                 "clangd",
-                "hyprls",
                 "jsonls",
                 "lua_ls",
                 "pyright",
-                "qmlls",
                 "rust_analyzer",
             }
             for _, server in ipairs(servers) do
@@ -75,13 +74,37 @@ return {
         end,
     },
 
+    -- ——— Linting —————————————————————————————————————————————————————————————
+    {
+        "mfussenegger/nvim-lint",
+        event = { "BufReadPost", "BufNewFile", "BufWritePost" },
+        config = function()
+            local lint = require("lint")
+            lint.linters_by_ft = {
+                sh = { "shellcheck" },
+                bash = { "shellcheck" },
+            }
+
+            local group =
+                vim.api.nvim_create_augroup("nvim-lint", { clear = true })
+            vim.api.nvim_create_autocmd(
+                { "BufWritePost", "BufReadPost", "InsertLeave" },
+                {
+                    group = group,
+                    callback = function() lint.try_lint() end,
+                }
+            )
+        end,
+    },
+
+    -- ——— Formatting ——————————————————————————————————————————————————————————
     {
         "stevearc/conform.nvim",
         event = "BufWritePre",
         cmd = "ConformInfo",
         keys = require("tonigineer.remap").conform,
         opts = {
-            notify_on_error = false,
+            notify_on_error = true,
             format_on_save = false,
             formatters_by_ft = {
                 lua = { "stylua" },
@@ -117,6 +140,7 @@ return {
         },
     },
 
+    -- ——— Completion ——————————————————————————————————————————————————————————
     {
         "saghen/blink.cmp",
         event = "VimEnter",
@@ -140,9 +164,7 @@ return {
         },
         opts = {
             keymap = { preset = "super-tab" },
-            appearance = {
-                nerd_font_variant = "mono",
-            },
+            appearance = { nerd_font_variant = "mono" },
             completion = {
                 documentation = { auto_show = false, auto_show_delay_ms = 500 },
             },
@@ -161,11 +183,42 @@ return {
         },
     },
 
+    -- ——— Inline diagnostics ——————————————————————————————————————————————————
+    {
+        "rachartier/tiny-inline-diagnostic.nvim",
+        event = "VeryLazy",
+        priority = 1000,
+        config = function()
+            require("tiny-inline-diagnostic").setup({
+                use_icons_from_diagnostic = true,
+                set_arrow_to_diag_color = true,
+                transparent_bg = true,
+                show_all_diags_on_cursorline = true,
+                enable_on_insert = true,
+                enable_on_select = true,
+                options = { show_source = { enabled = true } },
+                signs = {
+                    left = "",
+                    right = "",
+                    diag = "●",
+                    arrow = "    ",
+                    up_arrow = "    ",
+                    vertical = " │",
+                    vertical_end = " └",
+                },
+                blend = { factor = 0.22 },
+            })
+        end,
+    },
+
+-- ——— Treesitter ——————————————————————————————————————————————————————————
     {
         "nvim-treesitter/nvim-treesitter",
+        lazy = false,
+        branch = "main",
         build = ":TSUpdate",
         config = function()
-            local ensure_installed = {
+            local parsers = {
                 "bash",
                 "c",
                 "diff",
@@ -179,25 +232,21 @@ return {
                 "vimdoc",
             }
 
-            -- -- Block until hover-critical parsers exist so LSP hover never
-            -- -- triggers a "No parser for language markdown" error.
-            -- -- After first install this is a no-op.
-            -- for _, lang in ipairs({ "markdown", "markdown_inline" }) do
-            --     local paths = vim.api.nvim_get_runtime_file(
-            --         "parser/" .. lang .. ".so",
-            --         true
-            --     )
-            --     if #paths == 0 then pcall(vim.cmd, "TSInstallSync " .. lang) end
-            -- end
+            require("nvim-treesitter").setup()
+            require("nvim-treesitter").install(parsers)
 
-            require("nvim-treesitter.config").setup({
-                ensure_installed = ensure_installed,
-                auto_install = true,
-                highlight = {
-                    enable = true,
-                    additional_vim_regex_highlighting = { "ruby" },
-                },
-                indent = { enable = true, disable = { "ruby" } },
+            local group =
+                vim.api.nvim_create_augroup("treesitter", { clear = true })
+            vim.api.nvim_create_autocmd("FileType", {
+                group = group,
+                callback = function(args)
+                    local buf = args.buf
+                    if not pcall(vim.treesitter.start, buf) then
+                        return
+                    end
+                    vim.bo[buf].indentexpr =
+                        "v:lua.require'nvim-treesitter'.indentexpr()"
+                end,
             })
         end,
     },

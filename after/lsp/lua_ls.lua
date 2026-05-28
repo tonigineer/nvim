@@ -1,4 +1,4 @@
-vim.lsp.config("lua_ls", {
+return{
     cmd = { "lua-language-server" },
     filetypes = { "lua" },
     root_markers = { ".luarc.json", ".luarc.jsonc" },
@@ -22,4 +22,5 @@ vim.lsp.config("lua_ls", {
             },
         },
     },
-})
+}
+

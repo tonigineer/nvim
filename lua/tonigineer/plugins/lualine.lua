@@ -1,3 +1,11 @@
+-- ——— LSP component ———————————————————————————————————————————————————————————
+local function lsp_clients()
+    local clients = vim.lsp.get_clients({ bufnr = 0 })
+    if #clients == 0 then return "No LSP" end
+    local names = vim.tbl_map(function(client) return client.name end, clients)
+    return table.concat(names, ", ")
+end
+
 return {
     "nvim-lualine/lualine.nvim",
     event = "VeryLazy",
@@ -13,7 +21,15 @@ return {
         options = {
             theme = "auto",
             globalstatus = true,
-            disabled_filetypes = { statusline = { "dashboard", "alpha", "starter" } },
+            disabled_filetypes = {
+                statusline = { "dashboard", "alpha", "starter" },
+            },
+        },
+        sections = {
+            lualine_c = {
+                "%=",
+                { lsp_clients, icon = " LSP:" },
+            },
         },
     },
 }
